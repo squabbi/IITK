@@ -21,7 +21,11 @@
         <activity
             android:name=".activity.NewPortalActivity"
             android:label="@string/title_activity_new_portal"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBy6GfIZT6S8OT5-0g-nGBfDqdMNzaym7M"/>
     </application>
 
 </manifest>
