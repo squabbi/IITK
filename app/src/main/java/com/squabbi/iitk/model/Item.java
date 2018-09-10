@@ -2,9 +2,11 @@ package com.squabbi.iitk.model;
 
 public class Item {
     private Rarity mRarity;
+    private Integer mLevel;
 
-    Item (Rarity rarity) {
+    Item (Rarity rarity, Integer level) {
         this.mRarity = rarity;
+        this.mLevel = level;
     }
 
     public enum Rarity {
@@ -13,5 +15,9 @@ public class Item {
 
     public Rarity getRarity() {
         return mRarity;
+    }
+
+    public Integer getLevel() {
+        return mLevel;
     }
 }
