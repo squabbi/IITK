@@ -9,7 +9,7 @@ public class Capsule extends Item {
     private List<Item> mItemLinkedList = new LinkedList<>();
 
     Capsule(CapsuleType capsuleType, String capsuleId, Rarity rarity) {
-        super(rarity);
+        super(rarity, 0);
         this.mCapsuleType = capsuleType;
     }
 
