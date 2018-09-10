@@ -15,10 +15,6 @@ public class Weapon extends Item {
         this.mLevel = level;
     }
 
-    Weapon () {
-
-    }
-
     public Integer getLevel() {
         return mLevel;
     }
