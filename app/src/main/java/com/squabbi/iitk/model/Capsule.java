@@ -5,9 +5,11 @@ import java.util.List;
 
 public class Capsule extends Item {
     private CapsuleType mCapsuleType;
+    private String mCapsuleId;
     private List<Item> mItemLinkedList = new LinkedList<>();
 
-    Capsule(CapsuleType capsuleType, Rarity rarity) {
+    Capsule(CapsuleType capsuleType, String capsuleId, Rarity rarity) {
+        super(rarity);
         this.mCapsuleType = capsuleType;
     }
 
