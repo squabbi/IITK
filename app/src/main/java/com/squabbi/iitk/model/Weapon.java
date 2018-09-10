@@ -1,4 +1,4 @@
-package com.squabbi.iitk.model.weapons;
+package com.squabbi.iitk.model;
 
 import com.squabbi.iitk.model.Item;
 
@@ -10,7 +10,8 @@ public class Weapon extends Item {
         BURSTER, ULTRA_STRIKE, FLIP_CARD
     }
 
-    Weapon (WeaponType weaponType, Integer level) {
+    Weapon (WeaponType weaponType, Rarity rarity, Integer level) {
+        super(rarity);
         this.mWeaponType = weaponType;
         this.mLevel = level;
     }
