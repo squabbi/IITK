@@ -8,4 +8,5 @@
     tools:context=".activity.NewPortalActivity"
     tools:showIn="@layout/activity_new_portal">
 
+
 </android.support.constraint.ConstraintLayout>
