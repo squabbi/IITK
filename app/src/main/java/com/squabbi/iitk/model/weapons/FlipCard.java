@@ -3,8 +3,9 @@ package com.squabbi.iitk.model.weapons;
 public class FlipCard extends Weapon {
     private FlipType mFlipType;
 
-    FlipCard(Type type, Integer level) {
+    FlipCard(Type type, Integer level, FlipType flipType) {
         super(type, level);
+        this.mFlipType = flipType;
     }
 
     public enum FlipType {
