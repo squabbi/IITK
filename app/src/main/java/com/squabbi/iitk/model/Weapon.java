@@ -1,7 +1,5 @@
 package com.squabbi.iitk.model;
 
-import com.squabbi.iitk.model.Item;
-
 public class Weapon extends Item {
     private Integer mLevel;
     private WeaponType mWeaponType;
