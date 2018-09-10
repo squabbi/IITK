@@ -4,14 +4,14 @@ import com.squabbi.iitk.model.Item;
 
 public class Weapon extends Item {
     private Integer mLevel;
-    private Type mType;
+    private WeaponType mWeaponType;
 
-    public enum Type {
+    public enum WeaponType {
         BURSTER, ULTRA_STRIKE, FLIP_CARD
     }
 
-    Weapon (Type type, Integer level) {
-        this.mType = type;
+    Weapon (WeaponType weaponType, Integer level) {
+        this.mWeaponType = weaponType;
         this.mLevel = level;
     }
 
@@ -19,7 +19,7 @@ public class Weapon extends Item {
         return mLevel;
     }
 
-    public Type getType() {
-        return mType;
+    public WeaponType getWeaponType() {
+        return mWeaponType;
     }
 }
