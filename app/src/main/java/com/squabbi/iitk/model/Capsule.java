@@ -3,11 +3,11 @@ package com.squabbi.iitk.model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Capsule {
+public class Capsule extends Item {
     private CapsuleType mCapsuleType;
     private List<Item> mItemLinkedList = new LinkedList<>();
 
-    Capsule(CapsuleType capsuleType) {
+    Capsule(CapsuleType capsuleType, Rarity rarity) {
         this.mCapsuleType = capsuleType;
     }
 
