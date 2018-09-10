@@ -1,10 +1,11 @@
-package com.squabbi.iitk.model.weapons;
+package com.squabbi.iitk.model;
 
 public class FlipCard extends Weapon {
     private FlipType mFlipType;
 
-    FlipCard(Type type, Integer level) {
-        super(type, level);
+    FlipCard(WeaponType weaponType, Rarity rarity, FlipType flipType) {
+        super(weaponType, rarity, 0);
+        this.mFlipType = flipType;
     }
 
     public enum FlipType {
