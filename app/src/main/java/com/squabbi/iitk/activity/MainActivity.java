@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.service.MyHoverMenuService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,5 +24,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void launchHoverService(View view) {
+        MyHoverMenuService.showFloatingMenu(this);
     }
 }
