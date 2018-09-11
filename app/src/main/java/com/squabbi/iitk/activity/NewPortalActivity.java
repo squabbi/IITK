@@ -7,13 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.github.abdularis.piv.VerticalScrollParallaxImageView;
@@ -21,14 +20,11 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-
-import com.squabbi.iitk.R;
-
-import java.util.List;
-
 import in.mayanknagwanshi.imagepicker.imageCompression.ImageCompressionListener;
 import in.mayanknagwanshi.imagepicker.imagePicker.ImagePicker;
 import me.tankery.permission.PermissionRequestActivity;
+
+import com.squabbi.iitk.R;
 
 public class NewPortalActivity extends AppCompatActivity {
     private static final int PLACE_PICKER_REQUEST = 1;
@@ -78,6 +74,10 @@ public class NewPortalActivity extends AppCompatActivity {
         PermissionRequestActivity.start(this, PERMISSION_CHECK_REQUEST, PERMISSIONS_REQUIRED, message, message);
     }
 
+    public void launchOcrActivity(View view) {
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_portal, menu);
@@ -106,6 +106,8 @@ public class NewPortalActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // TODO: Insert the location into the EditText
                 Place place = PlacePicker.getPlace(this, data);
+                EditText et = findViewById(R.id.portal_location_et);
+                et.setText(place.toString());
                 String toastMsg = String.format("Place: %s", place.getName());
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
             }
