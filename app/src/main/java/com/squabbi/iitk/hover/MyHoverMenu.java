@@ -26,6 +26,7 @@ import io.mattcarroll.hover.HoverMenu;
 public class MyHoverMenu extends HoverMenu {
 
     public static final String TIMER_ID = "timer";
+    public static final String LOCAL_PORTALS_ID = "local_portals";
 
     private Context mContext;
     private String mMenuId;
@@ -33,8 +34,9 @@ public class MyHoverMenu extends HoverMenu {
 
     MyHoverMenu(@NonNull Context context,
                 @NonNull String menuId,
-                @NonNull Map<String, Content> data) throws IOException {
+                @NonNull Map<String, Content> data) {
         this.mContext = context;
+        this.mMenuId = menuId;
 
         for (String tabId : data.keySet()) {
             mSections.add(new Section(
@@ -50,12 +52,13 @@ public class MyHoverMenu extends HoverMenu {
             case TIMER_ID: {
                 return createTabView(R.drawable.ic_timer_white_24dp);
             }
+            case LOCAL_PORTALS_ID: {
+                return createTabView(R.drawable.ic_my_location_white_24dp);
+            }
+            default: {
+                return createTabView(R.drawable.ic_error_outline_white_24dp);
+            }
         }
-
-        ImageView imageView = new ImageView(mContext);
-        imageView.setImageResource(R.drawable.tab_background);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        return imageView;
     }
 
     private View createTabView(@DrawableRes int tabBitmapRes) {
