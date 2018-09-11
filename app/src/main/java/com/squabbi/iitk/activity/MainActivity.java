@@ -20,8 +20,16 @@ import com.squabbi.iitk.service.MyHoverMenuService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * This sets the content of the main activity with a app bar, navigation drawer,
+ * and sets up the respective listeners and onOptionsItemSelected to handle the
+ * changes from the user interacting with the navigation drawer.
+ *
+ * This is where the fragments are changed programmatically.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    // Butter Knife binding for the navigation drawer and toolbar
     @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
     @BindView(R.id.nav_view) NavigationView mNavigationView;
     @BindView(R.id.main_activity_toolbar) Toolbar mToolbar;
