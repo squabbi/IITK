@@ -107,7 +107,8 @@ public class NewPortalActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 mPlace = PlacePicker.getPlace(this, data);
                 EditText et = findViewById(R.id.portal_location_et);
-                et.setText(String.valueOf(place.getLatLng()));
+                // Display friendly Place name
+                et.setText(String.valueOf(mPlace.getName()));
             }
         }
 
