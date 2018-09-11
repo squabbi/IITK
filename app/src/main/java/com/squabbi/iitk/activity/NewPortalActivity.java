@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.github.abdularis.piv.VerticalScrollParallaxImageView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -20,6 +21,8 @@ import com.squabbi.iitk.R;
 
 public class NewPortalActivity extends AppCompatActivity {
     public static int PLACE_PICKER_REQUEST = 1;
+    public static final int PLACE_PICKER_REQUEST = 1;
+    public static final int IMAGE_PICKER_REQUEST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
