@@ -10,4 +10,9 @@
 
     <string name="contentDesc_ocrButton">Launch OCR</string>
     <string name="contentDesc_locationButton">Launch Place Picker</string>
+
+    <string name="nav_portals">Portals</string>
+    <string name="nav_inventory">Inventory</string>
+    <string name="nav_field_ops">Field Ops</string>
+    <string name="nav_settings">Settings</string>
 </resources>
