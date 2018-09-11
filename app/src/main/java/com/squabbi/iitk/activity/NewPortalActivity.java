@@ -17,12 +17,17 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import pl.tajchert.nammu.Nammu;
+import pl.tajchert.nammu.PermissionCallback;
+import pl.tajchert.nammu.PermissionListener;
+
 import com.squabbi.iitk.R;
 
 public class NewPortalActivity extends AppCompatActivity {
-    public static int PLACE_PICKER_REQUEST = 1;
     public static final int PLACE_PICKER_REQUEST = 1;
     public static final int IMAGE_PICKER_REQUEST = 2;
+    public static final int PERMISSION_CAMERA_REQUEST = 11;
+    public static final int PERMISSION_EXTERNAL_STORAGE_REQUEST = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +36,15 @@ public class NewPortalActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        // Get a support ActionBar corresponding to this toolbar and
+        // enable the up button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                launchImagePicker(view);
             }
         });
     }
@@ -58,6 +61,10 @@ public class NewPortalActivity extends AppCompatActivity {
         }
     }
 
+    public void launchImagePicker(View view) {
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_portal, menu);
@@ -68,7 +75,7 @@ public class NewPortalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_done:
-                // User chose the "Settings" item, show the app settings UI...
+                // Complete the action and add the Portal to the Database
                 return true;
 
             default:
@@ -85,6 +92,12 @@ public class NewPortalActivity extends AppCompatActivity {
                 Place place = PlacePicker.getPlace(this, data);
                 String toastMsg = String.format("Place: %s", place.getName());
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+            }
+        }
+        if (requestCode == IMAGE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                VerticalScrollParallaxImageView vertParallaxIv = findViewById(R.id.vertParallaxImageView);
+                vertParallaxIv.setImageBitmap();
             }
         }
     }
