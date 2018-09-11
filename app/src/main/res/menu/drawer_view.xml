@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_portals"
+            android:title="@string/nav_portals" />
+
+        <item
+            android:id="@+id/nav_inventory"
+            android:title="@string/nav_inventory" />
+
+        <item
+            android:id="@+id/nav_field_ops"
+            android:title="@string/nav_field_ops" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:title="@string/nav_settings" />
+    </group>
+</menu>
