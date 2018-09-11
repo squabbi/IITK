@@ -21,6 +21,7 @@ public class HoverMenuFactory {
         // Create a map with keys and respective menus
         Map<String, Content> menuMap = new LinkedHashMap<>();
         menuMap.put(MyHoverMenu.TIMER_ID, new HoverTimerView(context, Bus.getInstance()));
+        menuMap.put(MyHoverMenu.LOCAL_PORTALS_ID, new HoverTimerView(context, Bus.getInstance()));
 
         return new MyHoverMenu(context, "iitk", menuMap);
     }
