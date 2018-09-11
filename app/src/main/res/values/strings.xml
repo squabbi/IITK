@@ -2,4 +2,5 @@
     <string name="app_name">IITK</string>
     <string name="title_activity_new_portal">New Portal</string>
     <string name="menu_done">Done</string>
+    <string name="permissions_camera">We need permission to write to external storage to save Portal photos and access to the camera in case you want to take a photo of the portal.</string>
 </resources>
