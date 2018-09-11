@@ -33,4 +33,5 @@
             android:value="AIzaSyBy6GfIZT6S8OT5-0g-nGBfDqdMNzaym7M"/>
     </application>
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest>
