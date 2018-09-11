@@ -1,5 +1,6 @@
 package com.squabbi.iitk.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,15 +18,17 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import pl.tajchert.nammu.Nammu;
-import pl.tajchert.nammu.PermissionCallback;
-import pl.tajchert.nammu.PermissionListener;
 
 import com.squabbi.iitk.R;
 
 public class NewPortalActivity extends AppCompatActivity {
-    public static final int PLACE_PICKER_REQUEST = 1;
-    public static final int IMAGE_PICKER_REQUEST = 2;
+    private static final int PLACE_PICKER_REQUEST = 1;
+    private static final int IMAGE_PICKER_REQUEST = 2;
+
+    private static final String[] PERMISSIONS_REQUIRED = new String[] {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +98,7 @@ public class NewPortalActivity extends AppCompatActivity {
         if (requestCode == IMAGE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 VerticalScrollParallaxImageView vertParallaxIv = findViewById(R.id.vertParallaxImageView);
-                vertParallaxIv.setImageBitmap();
+                //vertParallaxIv.setImageBitmap();
             }
         }
     }
