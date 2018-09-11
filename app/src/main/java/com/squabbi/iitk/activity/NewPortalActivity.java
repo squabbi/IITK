@@ -36,6 +36,7 @@ public class NewPortalActivity extends AppCompatActivity {
     };
 
     private ImagePicker mImagePicker = new ImagePicker();
+    private Place mPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,12 +105,9 @@ public class NewPortalActivity extends AppCompatActivity {
 
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                // TODO: Insert the location into the EditText
-                Place place = PlacePicker.getPlace(this, data);
+                mPlace = PlacePicker.getPlace(this, data);
                 EditText et = findViewById(R.id.portal_location_et);
-                et.setText(place.toString());
-                String toastMsg = String.format("Place: %s", place.getName());
-                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+                et.setText(String.valueOf(place.getLatLng()));
             }
         }
 
