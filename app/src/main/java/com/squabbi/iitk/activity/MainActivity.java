@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.SettingsActivity;
 import com.squabbi.iitk.fragment.InventoryFragment;
 import com.squabbi.iitk.fragment.PortalListFragment;
 import com.squabbi.iitk.model.Inventory;
@@ -59,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         // pass on the item to selectDrawerItem function
+                        if (item.getItemId() == R.id.nav_settings) {
+                            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                            startActivity(intent);
+                            return true;
+                        }
                         return selectDrawerItem(item);
                     }
                 }
