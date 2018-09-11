@@ -26,8 +26,6 @@ import com.squabbi.iitk.R;
 public class NewPortalActivity extends AppCompatActivity {
     public static final int PLACE_PICKER_REQUEST = 1;
     public static final int IMAGE_PICKER_REQUEST = 2;
-    public static final int PERMISSION_CAMERA_REQUEST = 11;
-    public static final int PERMISSION_EXTERNAL_STORAGE_REQUEST = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
