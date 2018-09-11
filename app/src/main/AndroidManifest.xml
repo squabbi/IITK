@@ -21,7 +21,12 @@
         <activity
             android:name=".activity.NewPortalActivity"
             android:label="@string/title_activity_new_portal"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.squabbi.iitk.activity.MainActivity" />
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
