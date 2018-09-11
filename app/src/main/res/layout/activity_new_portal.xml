@@ -25,14 +25,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/imageViewLinearLayout"
+        <com.github.abdularis.piv.VerticalScrollParallaxImageView
+            android:id="@+id/vertParallaxImageView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:layout_weight="0.4"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/imageViewLinearLayout"
+        app:layout_anchor="@id/vertParallaxImageView"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@android:drawable/ic_input_add"
         android:tint="@color/primaryTextColor"/>
