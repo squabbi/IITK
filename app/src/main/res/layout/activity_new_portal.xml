@@ -29,7 +29,8 @@
             android:id="@+id/vertParallaxImageView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.4"/>
+            android:layout_weight="0.4"
+            android:src="@drawable/aqua_static"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,15 +46,18 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/portal_name_et"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Portal name"
+                    android:hint="@string/hint_portal_name"
                     android:layout_weight="2"/>
 
                 <ImageButton
+                    android:contentDescription="@string/contentDesc_ocrButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_center_focus_weak_black_24dp"/>
+                    android:src="@drawable/ic_center_focus_weak_black_24dp"
+                    android:onClick="launchOcrActivity"/>
             </LinearLayout>
 
             <LinearLayout
@@ -62,18 +66,24 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/portal_location_et"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Location"
+                    android:hint="@string/hint_portal_location"
                     android:layout_weight="2"/>
 
                 <ImageButton
+                    android:contentDescription="@string/contentDesc_locationButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_location_on_black_24dp"
                     android:onClick="launchPlacePicker"/>
             </LinearLayout>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/hint_portal_notes"/>
         </LinearLayout>
     </LinearLayout>
 
