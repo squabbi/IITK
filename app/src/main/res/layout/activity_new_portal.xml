@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/vertParallaxImageView"
-        app:layout_anchorGravity="bottom|right|end"
+        app:layout_anchorGravity="bottom|left|end"
         android:src="@drawable/ic_image_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
