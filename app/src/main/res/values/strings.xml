@@ -6,11 +6,6 @@
     <string name="title_activity_login">Login to IITK</string>
     <string name="title_activity_settings">Settings</string>
 
-    <!-- Fragment titles -->
-    <string name="fragment_portals">Portals</string>
-    <string name="fragment_inventory">Inventory</string>
-    <string name="fragment_field_ops">Field Ops</string>
-
     <!-- Add portal strings -->
     <string name="menu_done">Done</string>
     <string name="permissions_camera">We need permission to write to external storage to save Portal photos and access to the camera in case you want to take a photo of the portal.</string>
