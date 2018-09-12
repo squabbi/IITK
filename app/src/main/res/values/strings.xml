@@ -4,6 +4,12 @@
     <!--  Activity title name strings -->
     <string name="title_activity_new_portal">New Portal</string>
     <string name="title_activity_login">Login to IITK</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Fragment titles -->
+    <string name="fragment_portals">Portals</string>
+    <string name="fragment_inventory">Inventory</string>
+    <string name="fragment_field_ops">Field Ops</string>
 
     <!-- Add portal strings -->
     <string name="menu_done">Done</string>
