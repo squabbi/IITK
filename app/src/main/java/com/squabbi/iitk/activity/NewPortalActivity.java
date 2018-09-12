@@ -30,7 +30,7 @@ import me.tankery.permission.PermissionRequestActivity;
 import com.squabbi.iitk.R;
 
 public class NewPortalActivity extends AppCompatActivity {
-    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.new_portal_toolbar) Toolbar mToolbar;
     private static final int PLACE_PICKER_REQUEST = 1;
     private static final int PERMISSION_CHECK_REQUEST = 2;
 
