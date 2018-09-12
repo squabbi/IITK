@@ -35,6 +35,7 @@
             android:value="AIzaSyBy6GfIZT6S8OT5-0g-nGBfDqdMNzaym7M" />
 
         <activity android:name=".activity.SettingsActivity" />
+
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
