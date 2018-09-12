@@ -42,7 +42,6 @@ public class InitWelcomeActivity extends AppCompatActivity {
     public void signIn() {
         // Launch LoginActivity
         startActivity(new Intent(this, LoginActivity.class));
-        finish();
     }
 
     private void startMainActivityAndFinish() {
