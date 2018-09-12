@@ -37,6 +37,12 @@
     <string name="button_sign_in">Sign-in</string>
     <string name="button_sign_up">Sign-up</string>
 
+    <string name="skip">Skip</string>
+
+    <!-- Welcome screen strings -->
+    <string name="welcome_blurb">Sign-in below to enable cross-platform syncing, and backups. Or skip to store data offline.</string>
+    <string name="welcome_title">Welcome to IITK!</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello I am a blank fragment</string>
 </resources>
