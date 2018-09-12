@@ -1,7 +1,9 @@
-package com.squabbi.iitk;
+package com.squabbi.iitk.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.squabbi.iitk.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
