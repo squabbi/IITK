@@ -8,6 +8,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -22,7 +23,6 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.SettingsActivity;
 import com.squabbi.iitk.fragment.InventoryFragment;
 import com.squabbi.iitk.fragment.PortalListFragment;
 import com.squabbi.iitk.model.Inventory;
@@ -31,12 +31,16 @@ import com.squabbi.iitk.service.MyHoverMenuService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
     @BindView(R.id.nav_view) NavigationView mNavigationView;
     @BindView(R.id.main_activity_toolbar) Toolbar mToolbar;
     private ActionBarDrawerToggle mDrawerToggle;
+
+    // Fragments
+    private InventoryFragment mInventoryFragment;
+    private PortalListFragment mPortalListFragment;
 
     // Firebase authentication
     private FirebaseAuth mAuth;
@@ -67,24 +71,17 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = setupDrawerToggle();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
+        // assign fragments
+        mInventoryFragment = new InventoryFragment();
+        mPortalListFragment = new PortalListFragment();
+
+
+
         // set checked on the default item
         // TODO: allow the user to determine which is the first fragment to be displayed
         mNavigationView.getMenu().getItem(1).setChecked(true);
 
-        mNavigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        // pass on the item to selectDrawerItem function
-                        if (item.getItemId() == R.id.nav_settings) {
-                            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                            startActivity(intent);
-                            return true;
-                        }
-                        return selectDrawerItem(item);
-                    }
-                }
-        );
+        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -154,5 +151,30 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration changes to the drawerToggle
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation drawer selections here
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.nav_portals:
+                updateFragment(mPortalListFragment);
+                setTitle(R.string.fragment_portals);
+                break;
+            case R.id.nav_inventory:
+                updateFragment(mInventoryFragment);
+                setTitle(R.string.fragment_inventory);
+        }
+
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void updateFragment(Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_fragment, fragment);
+        ft.commit();
     }
 }
