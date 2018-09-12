@@ -43,26 +43,22 @@
             android:inputType="textPassword"
             android:hint="@string/hint_password"/>
 
-        <LinearLayout
-            android:id="@+id/buttons_login_linlayout"
+        <Button
+            android:id="@+id/login_sign_in_btn"
+            android:layout_below="@id/password_et"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_sign_in"
+            style="?android:attr/buttonBarButtonStyle"/>
+
+        <Button
+            android:id="@+id/login_sign_up_btn"
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/password_et"
-            style="?android:attr/buttonBarStyle">
+            android:text="@string/button_sign_up"
+            style="?android:attr/buttonBarButtonStyle"/>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/button_sign_up"
-                style="?android:attr/buttonBarButtonStyle"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/button_sign_in"
-                style="?android:attr/buttonBarButtonStyle"/>
-        </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
