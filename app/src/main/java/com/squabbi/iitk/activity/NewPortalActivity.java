@@ -20,6 +20,9 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import in.mayanknagwanshi.imagepicker.imageCompression.ImageCompressionListener;
 import in.mayanknagwanshi.imagepicker.imagePicker.ImagePicker;
 import me.tankery.permission.PermissionRequestActivity;
@@ -27,6 +30,7 @@ import me.tankery.permission.PermissionRequestActivity;
 import com.squabbi.iitk.R;
 
 public class NewPortalActivity extends AppCompatActivity {
+    @BindView(R.id.toolbar) Toolbar mToolbar;
     private static final int PLACE_PICKER_REQUEST = 1;
     private static final int PERMISSION_CHECK_REQUEST = 2;
 
@@ -42,8 +46,9 @@ public class NewPortalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_portal);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
+
+        setSupportActionBar(mToolbar);
 
         // Get a support ActionBar corresponding to this toolbar and
         // enable the up button
