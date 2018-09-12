@@ -11,6 +11,7 @@
     <string name="contentDesc_ocrButton">Launch OCR</string>
     <string name="contentDesc_locationButton">Launch Place Picker</string>
 
+    <!-- Navigation drawer strings -->
     <string name="nav_portals">Portals</string>
     <string name="nav_inventory">Inventory</string>
     <string name="nav_field_ops">Field Ops</string>
@@ -19,6 +20,12 @@
     <!-- Toolbar menu icon animation strings -->
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- User authentication strings -->
+    <string name="hint_email">E-mail</string>
+    <string name="hint_password">Password</string>
+    <string name="button_sign_in">Sign-in</string>
+    <string name="button_sign_up">Sign-up</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello I am a blank fragment</string>

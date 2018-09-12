@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.SettingsActivity;
 import com.squabbi.iitk.fragment.InventoryFragment;
@@ -36,12 +38,26 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_activity_toolbar) Toolbar mToolbar;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    // Firebase authentication
+    private FirebaseAuth mAuth;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Check if the user is signed in (non-null) and update the UI accordingly
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //updateUI(currentUser);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        // Firebase auth
+        mAuth = FirebaseAuth.getInstance();
 
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
