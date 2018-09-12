@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView"
         android:layout_below="@+id/textView"
-        android:text="Sign-in below to enable syncing, cross platform. Or skip to store data offline." />
+        android:text="Sign-in below to enable cross-platform syncing, and backups. Or skip to store data offline." />
 
     <Button
         android:id="@+id/button"
