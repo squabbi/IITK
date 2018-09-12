@@ -7,7 +7,6 @@
     <string name="title_activity_settings">Settings</string>
 
     <!-- Add portal strings -->
-    <string name="menu_done">Done</string>
     <string name="permissions_camera">We need permission to write to external storage to save Portal photos and access to the camera in case you want to take a photo of the portal.</string>
     <string name="hint_portal_location">Location</string>
     <string name="hint_portal_name">Portal name</string>
@@ -33,6 +32,8 @@
     <string name="button_sign_up">Sign-up</string>
 
     <string name="skip">Skip</string>
+    <string name="done">Done</string>
+    <string name="close">Close</string>
 
     <!-- Welcome screen strings -->
     <string name="welcome_title">Welcome to IITK!</string>
