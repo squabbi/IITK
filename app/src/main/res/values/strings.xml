@@ -40,8 +40,16 @@
     <string name="skip">Skip</string>
 
     <!-- Welcome screen strings -->
-    <string name="welcome_blurb">Sign-in below to enable cross-platform syncing, and backups. Or skip to store data offline.</string>
     <string name="welcome_title">Welcome to IITK!</string>
+    <string name="welcome_blurb">Sign-in below to enable cross-platform syncing, and backups. Or skip to store data offline.</string>
+    <string name="welcome_agreement_blurb">By continuing using \'IITK\' (this app), you agree to the following terms:</string>
+    <string name="welcome_agreement">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquet nulla mi, sit amet tincidunt arcu congue id. Vivamus tempus sem quis lacus facilisis, ut faucibus nibh egestas. Suspendisse potenti. Cras sollicitudin diam venenatis ligula aliquam molestie. Pellentesque convallis ex et hendrerit hendrerit. Maecenas nibh metus, dictum ac tellus sed, molestie auctor eros. Sed tincidunt laoreet lobortis. Integer libero quam, dapibus sit amet nisi vel, vulputate convallis mauris. Cras rutrum mi nec erat porta efficitur eu non odio. In sem nibh, convallis non sollicitudin at, hendrerit quis neque. Etiam bibendum diam at sapien ullamcorper, vel molestie eros hendrerit. In non lobortis sem. Quisque non convallis libero. Nunc accumsan, enim vel congue malesuada, nisl ligula vulputate nibh, at consequat mauris ex ut sem.
+
+Etiam blandit hendrerit consectetur. Sed sit amet felis a sem malesuada eleifend. Proin ultrices neque non vehicula maximus. Maecenas eget metus vulputate, sagittis mauris in, vehicula sapien. Phasellus vel nibh velit. Maecenas non elementum neque, sed efficitur nulla. Nam et dui leo. Ut vitae volutpat orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu ultrices risus. Pellentesque augue tellus, tincidunt sit amet erat ac, tincidunt pellentesque mauris. Donec vulputate justo vel velit venenatis, cursus facilisis tortor rhoncus. Mauris iaculis efficitur nibh, sit amet auctor mi laoreet vitae. Proin finibus iaculis magna, eget mattis lectus mollis a.
+
+Nullam sed libero lacus. Integer hendrerit dapibus urna, et interdum orci dapibus sit amet. Morbi ac nibh fermentum, euismod ipsum sed, sagittis libero. Cras tempus tempus augue, quis facilisis erat pharetra sit amet. Integer commodo tristique leo a dignissim. Quisque molestie tempor lectus eu condimentum. Sed sed interdum urna. Pellentesque dolor velit, semper et ex a, congue molestie nulla. Pellentesque eget commodo metus. Ut tincidunt odio a enim ullamcorper, sit amet blandit orci commodo.
+    </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello I am a blank fragment</string>
