@@ -14,7 +14,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <RelativeLayout
-        android:padding="@dimen/activity_padding"
+        android:padding="@dimen/activity_welcome_padding"
         android:layout_below="@id/login_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
