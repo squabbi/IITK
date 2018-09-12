@@ -7,12 +7,14 @@
     tools:context=".activity.NewPortalActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/new_portal_appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:fitsSystemWindows="true">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/new_portal_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -23,6 +25,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical" >
 
         <com.github.abdularis.piv.VerticalScrollParallaxImageView
@@ -60,7 +63,7 @@
                         android:contentDescription="@string/contentDesc_ocrButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_center_focus_weak_black_24dp"
+                        android:src="@drawable/ic_ocr"
                         android:onClick="launchOcrActivity"/>
                 </LinearLayout>
 
@@ -80,7 +83,7 @@
                         android:contentDescription="@string/contentDesc_locationButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_location_on_black_24dp"
+                        android:src="@drawable/ic_location"
                         android:onClick="launchPlacePicker"/>
                 </LinearLayout>
 
@@ -100,6 +103,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/vertParallaxImageView"
         app:layout_anchorGravity="bottom|left|end"
-        android:src="@drawable/ic_image_black_24dp" />
+        android:src="@drawable/ic_image" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "30580375225",
+    "firebase_url": "https://ingress-integrated-toolkit.firebaseio.com",
+    "project_id": "ingress-integrated-toolkit",
+    "storage_bucket": "ingress-integrated-toolkit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30580375225:android:b58eed4c2533567a",
+        "android_client_info": {
+          "package_name": "com.squabbi.iitk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30580375225-62b94j5kv4nmo7in4s96r309ljpjj9b9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.squabbi.iitk",
+            "certificate_hash": "305821d59bf981012e691058c9cb7bb28b7cddbe"
+          }
+        },
+        {
+          "client_id": "30580375225-0kp412r79pvtq0imn8qlc4596q9g1b6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn8Y0c_5R7nkKIsJ7NLvDq--CGHFzNosA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30580375225-0kp412r79pvtq0imn8qlc4596q9g1b6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
