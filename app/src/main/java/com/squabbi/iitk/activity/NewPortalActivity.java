@@ -91,7 +91,10 @@ public class NewPortalActivity extends AppCompatActivity {
             case R.id.menu_done:
                 // Complete the action and add the Portal to the Database
                 return true;
-
+            case android.R.id.home:
+                // When the up button is pressed
+                finish();
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
