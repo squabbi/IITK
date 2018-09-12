@@ -41,6 +41,11 @@
         <activity android:name=".activity.SettingsActivity" />
         <activity
             android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme">
+
+        </activity>
     </application>
 
 </manifest>
