@@ -2,20 +2,14 @@ package com.squabbi.iitk.hover;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
-import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.hover.ui.HoverTabView;
-import com.squabbi.iitk.hover.ui.HoverTimerView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,13 +44,13 @@ public class MyHoverMenu extends HoverMenu {
     private View createTabView(@NonNull String sectionId) {
         switch (sectionId) {
             case TIMER_ID: {
-                return createTabView(R.drawable.ic_timer_white_24dp);
+                return createTabView(R.drawable.ic_timer_white);
             }
             case LOCAL_PORTALS_ID: {
-                return createTabView(R.drawable.ic_my_location_white_24dp);
+                return createTabView(R.drawable.ic_current_location_white);
             }
             default: {
-                return createTabView(R.drawable.ic_error_outline_white_24dp);
+                return createTabView(R.drawable.ic_error_white);
             }
         }
     }
