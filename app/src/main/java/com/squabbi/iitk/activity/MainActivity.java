@@ -75,68 +75,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mInventoryFragment = new InventoryFragment();
         mPortalListFragment = new PortalListFragment();
 
-
-
-        // set checked on the default item
-        // TODO: allow the user to determine which is the first fragment to be displayed
-        mNavigationView.getMenu().getItem(1).setChecked(true);
-
         mNavigationView.setNavigationItemSelectedListener(this);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
+        // Set the current fragment as the Portal list view
+//        updateFragment(mPortalListFragment);
+//        mNavigationView.setCheckedItem(R.id.nav_portals);
+//        setTitle(R.string.fragment_portals);
 
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
+        if (savedInstanceState == null) {
+            MenuItem item = mNavigationView.getMenu().getItem(0);
+            onNavigationItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
         return new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
-    }
-
-    private boolean selectDrawerItem(MenuItem item) {
-        // set item as selected to persist highlight
-        item.setChecked(true);
-        // close the drawer when the item is tapped
-        mDrawerLayout.closeDrawers();
-        // swap to the respective fragment
-        Fragment fragment = null;
-        Class fragmentClass;
-        switch (item.getItemId()) {
-            case R.id.nav_portals: {
-                fragmentClass = PortalListFragment.class;
-                break;
-            }
-            case R.id.nav_inventory: {
-                fragmentClass = InventoryFragment.class;
-                break;
-            }
-            default: {
-                fragmentClass = PortalListFragment.class;
-            }
-        }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.main_fragment, fragment).commit();
-
-        // set title of toolbar to menu item title
-        setTitle(item.getTitle());
-        // return a boolean
-        return true;
     }
 
     @Override
@@ -161,20 +114,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id) {
             case R.id.nav_portals:
                 updateFragment(mPortalListFragment);
-                setTitle(R.string.fragment_portals);
                 break;
             case R.id.nav_inventory:
                 updateFragment(mInventoryFragment);
-                setTitle(R.string.fragment_inventory);
+                break;
         }
 
+        setTitle(item.getTitle());
+        item.setChecked(true);
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
     private void updateFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_fragment, fragment);
+        ft.replace(R.id.main_frame, fragment);
         ft.commit();
     }
 }
