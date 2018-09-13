@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Snackbar.LENGTH_SHORT).show();
         }
 
-//        TextView textView = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_current_user_tv);
-//        textView.setText("hello");
+        TextView textView = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_current_user_tv);
+        textView.setText(mAuth.getCurrentUser().getUid());
 
         //updateUI(currentUser);
     }
