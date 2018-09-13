@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView.setNavigationItemSelectedListener(this);
 
         if (savedInstanceState == null) {
-            MenuItem item = mNavigationView.getMenu().getItem(0);
+            // TODO: allow the user to set default page
+            MenuItem item = mNavigationView.getMenu().getItem(1);
             onNavigationItemSelected(item);
         }
     }
