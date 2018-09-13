@@ -51,4 +51,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello I am a blank fragment</string>
+
+    <string name="default_web_client_id">44179671307-m1l7en1a4i1s8784mtejpfahfakc2b8g.apps.googleusercontent.com</string>
 </resources>
