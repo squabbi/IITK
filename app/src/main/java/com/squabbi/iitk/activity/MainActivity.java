@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,9 +17,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,7 +61,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         // Check if the user is signed in (non-null) and update the UI accordingly
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        // Print welcome message
+        if (currentUser != null) {
+            Snackbar.make(findViewById(R.id.main_linlayout),
+                    getString(R.string.main_welcome_back, currentUser.getDisplayName()),
+                    Snackbar.LENGTH_SHORT).show();
+        }
+
         //updateUI(currentUser);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+        return true;
     }
 
     @Override
@@ -89,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        updateFragment(mPortalListFragment);
 //        mNavigationView.setCheckedItem(R.id.nav_portals);
 //        setTitle(R.string.fragment_portals);
+
+        TextView textView = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_current_user_tv);
+        textView.setText("hello");
 
         if (savedInstanceState == null) {
             MenuItem item = mNavigationView.getMenu().getItem(0);
@@ -132,6 +151,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         item.setChecked(true);
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_open_intel:
+                openIntelMap(0);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openIntelMap(int intelType) {
+
     }
 
     private void updateFragment(Fragment fragment) {
