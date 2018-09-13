@@ -3,7 +3,7 @@ package com.squabbi.iitk.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +14,6 @@ import com.google.firebase.firestore.Query;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.LoginActivity;
 import com.squabbi.iitk.activity.NewPortalActivity;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 /**
