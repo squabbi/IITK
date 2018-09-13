@@ -37,6 +37,7 @@
     <string name="skip">Skip</string>
     <string name="done">Done</string>
     <string name="close">Close</string>
+    <string name="open_intel_map_here">Open Intel Map Here</string>
 
     <string name="google_signin_failed">Authentication with Google failed. Please try again.</string>
     <string name="google_signin_progress">Signing in with Google&#8230;</string>
