@@ -4,4 +4,10 @@
     <dimen name="activity_padding">8dp</dimen>
     <dimen name="activity_welcome_padding">40dp</dimen>
     <dimen name="login_button_margin">100dp</dimen>
+
+    <!-- Material elevation guidelines -->
+    <dimen name="elevation_snackbar">6dp</dimen>
+    <dimen name="elevation_bottom_appbar">8dp</dimen>
+    <dimen name="elevation_fab">12dp</dimen>
+    <dimen name="elevation_bottom_navigation">16dp</dimen>
 </resources>
