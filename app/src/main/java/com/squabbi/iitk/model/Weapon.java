@@ -1,6 +1,12 @@
 package com.squabbi.iitk.model;
 
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class Weapon extends Item {
+
+    public static final String FIELD_WEAPON_TYPE = "weaponType";
+
     private WeaponType mWeaponType;
 
     public enum WeaponType {
@@ -14,5 +20,9 @@ public class Weapon extends Item {
 
     public WeaponType getWeaponType() {
         return mWeaponType;
+    }
+
+    public void setWeaponType(WeaponType weaponType) {
+        mWeaponType = weaponType;
     }
 }
