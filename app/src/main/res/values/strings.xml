@@ -38,6 +38,9 @@
     <string name="done">Done</string>
     <string name="close">Close</string>
 
+    <string name="google_signin_failed">Authentication with Google failed. Please try again.</string>
+    <string name="google_signin_progress">Signing in with Google&#8230;</string>
+
     <!-- Welcome screen strings -->
     <string name="welcome_title">Welcome to IITK!</string>
     <string name="welcome_blurb">Sign-in below to enable cross-platform syncing, and backups. Or skip to store data offline.</string>
