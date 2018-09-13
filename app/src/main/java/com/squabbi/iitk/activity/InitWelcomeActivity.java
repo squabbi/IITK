@@ -42,9 +42,11 @@ public class InitWelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init_welcome);
 
-        // Check if the user has been past the welcome screen
-        // i.e. agreed to the terms and conditions
-        if (FastSave.getInstance().getBoolean(AGREEMENT_KEY)) {
+        // Get Firebase Auth instance
+        mAuth = FirebaseAuth.getInstance();
+
+        // Check if the user is logged in and has agreed
+        if (FastSave.getInstance().getBoolean(AGREEMENT_KEY) && mAuth.getCurrentUser() != null) {
             // Launch MainActivity
             startMainActivityAndFinish();
         }
@@ -59,16 +61,6 @@ public class InitWelcomeActivity extends AppCompatActivity {
 
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        // Get Firebase Auth instance
-        mAuth = FirebaseAuth.getInstance();
-    }
-
-    @OnClick(R.id.welcome_skip_btn)
-    public void skipLogin() {
-        // Save preference and show main activity
-        FastSave.getInstance().saveBoolean(AGREEMENT_KEY, true);
-        // Launch the main activity
-        startMainActivityAndFinish();
     }
 
     @Override
