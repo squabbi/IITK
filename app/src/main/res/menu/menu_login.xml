@@ -6,5 +6,5 @@
         android:title="@string/close"
         app:showAsAction="always"
         android:visible="true"
-        android:icon="@drawable/ic_close_white"/>
+        android:icon="@drawable/ic_my_location_black_24dp" />
 </menu>
