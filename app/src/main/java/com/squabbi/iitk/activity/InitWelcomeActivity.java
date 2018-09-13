@@ -32,9 +32,7 @@ public class InitWelcomeActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-    private AlertDialog mAlertDialog;
     private static final String TAG = "InitWelcomeActivity";
-    public static final String USER_EXTRA = "user";
     private static final String AGREEMENT_KEY = "agreement";
     private static final Integer RC_SIGN_IN = 1;
 
@@ -48,15 +46,10 @@ public class InitWelcomeActivity extends AppCompatActivity {
         // i.e. agreed to the terms and conditions
         if (FastSave.getInstance().getBoolean(AGREEMENT_KEY)) {
             // Launch MainActivity
-            startMainActivityAndFinish(null);
+            startMainActivityAndFinish();
         }
 
         ButterKnife.bind(this);
-
-        // Configure alert with AlertBuilder
-        mAlertDialog = new AlertDialog.Builder(this).create();
-        mAlertDialog.setCanceledOnTouchOutside(false);
-        mAlertDialog.setCancelable(false);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -75,7 +68,7 @@ public class InitWelcomeActivity extends AppCompatActivity {
         // Save preference and show main activity
         FastSave.getInstance().saveBoolean(AGREEMENT_KEY, true);
         // Launch the main activity
-        startMainActivityAndFinish(null);
+        startMainActivityAndFinish();
     }
 
     @Override
@@ -111,7 +104,7 @@ public class InitWelcomeActivity extends AppCompatActivity {
                     // Save agreement
                     FastSave.getInstance().saveBoolean(AGREEMENT_KEY, true);
                     // Sign in success, allow user to proceed
-                    startMainActivityAndFinish(mAuth.getCurrentUser());
+                    startMainActivityAndFinish();
                 } else {
                     // Sign in failed
                     Snackbar.make(findViewById(R.id.welcome_main_layout),
@@ -129,10 +122,8 @@ public class InitWelcomeActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void startMainActivityAndFinish(@Nullable FirebaseUser user) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(USER_EXTRA, user);
-        startActivity(intent);
+    private void startMainActivityAndFinish() {
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 }
