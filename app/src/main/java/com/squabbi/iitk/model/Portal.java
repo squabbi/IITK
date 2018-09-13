@@ -13,6 +13,7 @@ public class Portal {
     private GeoPoint mGeoPoint;
     //private Image mImage;
 
+    // Required by Firebase
     Portal() {}
 
     public Portal(String name, com.google.android.gms.maps.model.LatLng latLng, String notes) {
