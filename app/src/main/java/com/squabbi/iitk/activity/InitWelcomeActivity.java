@@ -108,6 +108,8 @@ public class InitWelcomeActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    // Save agreement
+                    FastSave.getInstance().saveBoolean(AGREEMENT_KEY, true);
                     // Sign in success, allow user to proceed
                     startMainActivityAndFinish(mAuth.getCurrentUser());
                 } else {
