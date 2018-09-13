@@ -1,11 +1,11 @@
 package com.squabbi.iitk.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.Fragment;
@@ -107,7 +107,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @OnClick(R.id.main_fab)
     public void onClick(View view) {
-
+        MenuItem item = mNavigationView.getCheckedItem();
+        switch (item.getItemId()) {
+            case  R.id.nav_portals:
+                startActivity(new Intent(this, NewPortalActivity.class));
+                break;
+            case R.id.nav_inventory:
+                // TODO: Add inventory item intent
+                break;
+        }
     }
 
     @Override
