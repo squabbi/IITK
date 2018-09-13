@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +29,7 @@ import com.squabbi.iitk.fragment.PortalListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * This sets the content of the main activity with a app bar, navigation drawer,
@@ -44,8 +47,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mDrawerToggle;
 
     // Fragments
-    private InventoryFragment mInventoryFragment;
     private PortalListFragment mPortalListFragment;
+    private InventoryFragment mInventoryFragment;
+
+    // Fragment tags
+    public static final String PORTAL_FRAGMENT_TAG = "portal";
+    public static final String INVENTORY_FRAGMENT_TAG = "inventory";
 
     // Firebase authentication
     private FirebaseAuth mAuth;
@@ -87,8 +94,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         // assign fragments
-        mInventoryFragment = new InventoryFragment();
         mPortalListFragment = new PortalListFragment();
+        mInventoryFragment = new InventoryFragment();
 
         mNavigationView.setNavigationItemSelectedListener(this);
 
@@ -100,6 +107,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ActionBarDrawerToggle setupDrawerToggle() {
         return new ActionBarDrawerToggle(this, mDrawerLayout, mBottomAppBar, R.string.drawer_open, R.string.drawer_close);
+    }
+
+    @OnClick(R.id.main_fab)
+    public void onClick(View view) {
+
     }
 
     @Override
