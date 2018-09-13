@@ -50,10 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private PortalListFragment mPortalListFragment;
     private InventoryFragment mInventoryFragment;
 
-    // Fragment tags
-    public static final String PORTAL_FRAGMENT_TAG = "portal";
-    public static final String INVENTORY_FRAGMENT_TAG = "inventory";
-
     // Firebase authentication
     private FirebaseAuth mAuth;
 
