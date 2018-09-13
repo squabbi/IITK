@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,10 +28,20 @@ import in.mayanknagwanshi.imagepicker.imageCompression.ImageCompressionListener;
 import in.mayanknagwanshi.imagepicker.imagePicker.ImagePicker;
 import me.tankery.permission.PermissionRequestActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.model.Portal;
 
 public class NewPortalActivity extends AppCompatActivity {
     @BindView(R.id.new_portal_toolbar) Toolbar mToolbar;
+    @BindView(R.id.portal_name_et) EditText mPortalNameEt;
+    @BindView(R.id.portal_notes_et) EditText mPortalNotesEt;
+
     private static final int PLACE_PICKER_REQUEST = 1;
     private static final int PERMISSION_CHECK_REQUEST = 2;
 
@@ -41,6 +52,10 @@ public class NewPortalActivity extends AppCompatActivity {
 
     private ImagePicker mImagePicker = new ImagePicker();
     private Place mPlace;
+
+    // Firebase
+    private FirebaseFirestore mFirestore;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +76,9 @@ public class NewPortalActivity extends AppCompatActivity {
                 launchImagePicker(view);
             }
         });
+
+        mFirestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public void launchPlacePicker(View view) {
@@ -84,6 +102,29 @@ public class NewPortalActivity extends AppCompatActivity {
 
     }
 
+    private boolean addPortal(String name, String notes) {
+        // Validate entries
+
+        // Make new portal object
+        Portal portal = new Portal(name, mPlace.getLatLng(), notes);
+        if (mAuth.getCurrentUser() != null) {
+            mFirestore.collection("agents").document(mAuth.getUid()).collection("portals").add(portal)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(NewPortalActivity.this, "Portal saved", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(NewPortalActivity.this, "Portal failed to save", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+        return false;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_portal, menu);
@@ -95,7 +136,7 @@ public class NewPortalActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_done:
                 // Complete the action and add the Portal to the Database
-                return true;
+                return addPortal(mPortalNameEt.getText().toString(), mPortalNotesEt.getText().toString());
             case android.R.id.home:
                 // When the up button is pressed
                 finish();
