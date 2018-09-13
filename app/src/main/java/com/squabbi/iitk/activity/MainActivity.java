@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
@@ -15,7 +15,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(mBottomAppBar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         mDrawerToggle = setupDrawerToggle();
         mDrawerLayout.addDrawerListener(mDrawerToggle);

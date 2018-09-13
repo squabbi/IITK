@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:navigationIcon="@drawable/ic_menu"
+            app:navigationIcon="@drawable/ic_menu_black_24dp"
             app:elevation="@dimen/elevation_bottom_appbar"
             app:fabCradleMargin="10dp"
             style="@style/Widget.MaterialComponents.BottomAppBar.Colored"/>
