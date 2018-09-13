@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.LoginActivity;
 import com.squabbi.iitk.activity.NewPortalActivity;
