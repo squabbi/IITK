@@ -3,6 +3,8 @@ package com.squabbi.iitk.activity;
 import android.content.res.Configuration;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.fragment.app.Fragment;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Butter Knife binding for the navigation drawer and toolbar
     @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
     @BindView(R.id.nav_view) NavigationView mNavigationView;
-    @BindView(R.id.main_activity_toolbar) Toolbar mToolbar;
+    @BindView(R.id.main_activity_appbar) BottomAppBar mBottomAppBar;
     private ActionBarDrawerToggle mDrawerToggle;
 
     // Fragments
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseUser currentUser = mAuth.getCurrentUser();
         // Print welcome message
         if (currentUser != null) {
-            Snackbar.make(findViewById(R.id.main_linlayout),
+            Snackbar.make(findViewById(R.id.main_cordlayout),
                     getString(R.string.main_welcome_back, currentUser.getDisplayName()),
                     Snackbar.LENGTH_SHORT).show();
         }
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Firebase auth
         mAuth = FirebaseAuth.getInstance();
 
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(mBottomAppBar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, mDrawerLayout, mBottomAppBar, R.string.drawer_open, R.string.drawer_close);
     }
 
     @Override
