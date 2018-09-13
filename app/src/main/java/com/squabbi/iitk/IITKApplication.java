@@ -4,7 +4,9 @@ import android.app.Application;
 
 import com.appizona.yehiahd.fastsave.FastSave;
 
-public class IITKApplication extends Application {
+import androidx.multidex.MultiDexApplication;
+
+public class IITKApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
