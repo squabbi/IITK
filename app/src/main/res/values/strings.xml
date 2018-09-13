@@ -53,7 +53,4 @@
 
     <!-- MainActivity strings -->
     <string name="main_welcome_back">Hello, %1$s. Welcome back!</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello I am a blank fragment</string>
 </resources>
