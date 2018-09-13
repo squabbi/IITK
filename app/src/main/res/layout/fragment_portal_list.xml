@@ -6,7 +6,6 @@
     tools:context=".fragment.PortalListFragment"
     android:orientation="vertical">
 
-
     <Button
         android:id="@+id/openPortal_btn"
         android:layout_width="wrap_content"
