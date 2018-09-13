@@ -47,7 +47,7 @@ public class MyHoverMenu extends HoverMenu {
                 return createTabView(R.drawable.ic_timer_white);
             }
             case LOCAL_PORTALS_ID: {
-                return createTabView(R.drawable.ic_current_location_white);
+                return createTabView(R.drawable.ic_my_location_black_24dp);
             }
             default: {
                 return createTabView(R.drawable.ic_error_white);

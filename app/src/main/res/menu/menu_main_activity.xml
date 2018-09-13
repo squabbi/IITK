@@ -5,6 +5,6 @@
         android:id="@+id/menu_open_intel"
         android:visible="true"
         android:title="@string/open_intel_map_here"
-        android:icon="@drawable/ic_current_location_white"
+        android:icon="@drawable/ic_my_location_black_24dp"
         app:showAsAction="always"/>
 </menu>
