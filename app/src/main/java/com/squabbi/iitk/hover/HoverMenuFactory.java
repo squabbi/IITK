@@ -1,11 +1,10 @@
 package com.squabbi.iitk.hover;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.squabbi.iitk.Bus;
 import com.squabbi.iitk.hover.ui.HoverTimerView;
-import com.squabbi.iitk.hover.MyHoverMenu;
 
 import org.greenrobot.eventbus.EventBus;
 
