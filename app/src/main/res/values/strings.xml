@@ -16,9 +16,7 @@
     <string name="contentDesc_locationButton">Launch Place Picker</string>
 
     <!-- Login screen strings -->
-    <string name="login_instructions">To access IITK\'s auto-backup, and cross-platform functionality, please log-in with your e-mail address and password combination.
-    \n\nIf you already have an account, please sign-in below.
-    \n\nYou may also sign-in with your Google account as well!</string>
+    <string name="login_instructions">To access IITK\'s auto-backup, and cross-platform functionality, please log-in with your Google account.</string>
 
     <!-- Navigation drawer strings -->
     <string name="nav_portals">Portals</string>
