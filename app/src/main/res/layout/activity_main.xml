@@ -13,8 +13,7 @@
         <FrameLayout
             android:id="@+id/main_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.squabbi.iitk.fragment.PortalListFragment"/>
+            android:layout_height="match_parent" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/main_activity_appbar"
@@ -32,10 +31,7 @@
             android:layout_height="wrap_content"
             app:elevation="@dimen/elevation_fab"
             app:layout_anchor="@id/main_activity_appbar"
-            app:srcCompat="@drawable/ic_add_black_24dp"
-            app:showMotionSpec="@anim/appear_grow"
-            app:hideMotionSpec="@anim/disappear_shrink"
-            app:pressedTranslationZ="@dimen/elevation_fab"/>
+            app:srcCompat="@drawable/ic_add_black_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
