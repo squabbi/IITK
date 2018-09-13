@@ -109,7 +109,7 @@ public class InitWelcomeActivity extends AppCompatActivity {
                     // Sign in failed
                     Snackbar.make(findViewById(R.id.welcome_main_layout),
                             R.string.google_signin_failed,
-                            Snackbar.LENGTH_SHORT).show();
+                            Snackbar.LENGTH_LONG).show();
                 }
             }
         });
