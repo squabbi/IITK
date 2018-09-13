@@ -56,15 +56,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         // Check if the user is signed in (non-null) and update the UI accordingly
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        // Print welcome message
-        if (currentUser != null) {
-            Snackbar.make(findViewById(R.id.main_cordlayout),
-                    getString(R.string.main_welcome_back, currentUser.getDisplayName()),
-                    Snackbar.LENGTH_SHORT).show();
-        }
 
         TextView textView = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_current_user_tv);
-        textView.setText(mAuth.getCurrentUser().getUid());
+        textView.setText(currentUser.getUid());
 
         //updateUI(currentUser);
     }
