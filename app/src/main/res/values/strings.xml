@@ -25,8 +25,17 @@
     <string name="locker_white">White Key Locker</string>
     <string name="locker_red">Red Key Locker</string>
     <string name="locker_yellow">Yellow Key Locker</string>
+    <string name="locker_anniversary">Anniversary Key Locker</string>
     <string name="cap_dupe">Quantum Capsule</string>
     <string name="cap_normal">Capsule</string>
+    <string-array name="lockers">
+        <item>Green Key Locker</item>
+        <item>Blue Key Locker</item>
+        <item>White Key Locker</item>
+        <item>Red Key Locker</item>
+        <item>Yellow Key Locker</item>
+        <item>Anniversary Key Locker</item>
+    </string-array>
 
     <!-- Login screen strings -->
     <string name="login_instructions">To access IITK\'s auto-backup, and cross-platform functionality, please log-in with your Google account.</string>
