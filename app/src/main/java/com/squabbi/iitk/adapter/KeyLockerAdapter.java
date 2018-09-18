@@ -14,7 +14,6 @@ import com.squabbi.iitk.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class KeyLockerAdapter extends BaseAdapter {
 
