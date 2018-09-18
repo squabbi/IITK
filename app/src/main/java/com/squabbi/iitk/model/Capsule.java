@@ -14,7 +14,7 @@ public class Capsule extends Item {
 
     private CapsuleType mCapsuleType;
     private String mCapsuleId;
-    private List<Item> mContents = new LinkedList<>();
+    private List<Item> mCapsuleContents = new LinkedList<>();
 
     Capsule() {}
 
@@ -36,6 +36,6 @@ public class Capsule extends Item {
     }
 
     public Integer numberOfItems() {
-        return mContents.size();
+        return mCapsuleContents.size();
     }
 }
