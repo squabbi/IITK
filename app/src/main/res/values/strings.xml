@@ -3,6 +3,7 @@
 
     <!--  Activity title name strings -->
     <string name="title_activity_new_portal">New Portal</string>
+    <string name="title_activity_new_inventory">New Inventory</string>
     <string name="title_activity_login">Login to IITK</string>
     <string name="title_activity_settings">Settings</string>
 
@@ -14,6 +15,18 @@
 
     <string name="contentDesc_ocrButton">Launch OCR</string>
     <string name="contentDesc_locationButton">Launch Place Picker</string>
+    
+    <!-- Add inventory strings -->
+    <string name="hint_inventory_name">Inventory Name</string>
+    <string name="select_icon">Select icon:</string>
+    <string name="new_inv_preselect_capsules">Select the number of capsules you have:</string>
+    <string name="locker_green">Green Key Locker</string>
+    <string name="locker_blue">Blue Key Locker</string>
+    <string name="locker_white">White Key Locker</string>
+    <string name="locker_red">Red Key Locker</string>
+    <string name="locker_yellow">Yellow Key Locker</string>
+    <string name="cap_dupe">Quantum Capsule</string>
+    <string name="cap_normal">Capsule</string>
 
     <!-- Login screen strings -->
     <string name="login_instructions">To access IITK\'s auto-backup, and cross-platform functionality, please log-in with your Google account.</string>
@@ -52,5 +65,4 @@
     </string>
 
     <!-- MainActivity strings -->
-    <string name="main_welcome_back">Hello, %1$s. Welcome back!</string>
 </resources>
