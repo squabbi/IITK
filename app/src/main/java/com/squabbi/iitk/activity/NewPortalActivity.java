@@ -126,7 +126,7 @@ public class NewPortalActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_add_portal, menu);
+        getMenuInflater().inflate(R.menu.menu_done_add, menu);
         return true;
     }
 
