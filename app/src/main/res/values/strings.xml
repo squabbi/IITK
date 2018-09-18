@@ -20,6 +20,7 @@
     <string name="hint_inventory_name">Inventory Name</string>
     <string name="select_colour">Select colour:</string>
     <string name="new_inv_preselect_capsules">Select the number of capsules you have:</string>
+    <string name="new_inv_preselect_lockers">Select which key lockers you have:</string>
     <string name="locker_green">Green Key Locker</string>
     <string name="locker_blue">Blue Key Locker</string>
     <string name="locker_white">White Key Locker</string>
