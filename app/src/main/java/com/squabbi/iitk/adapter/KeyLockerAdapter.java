@@ -5,6 +5,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class KeyLockerAdapter extends BaseAdapter {
+
+    private
+
     @Override
     public int getCount() {
         return 0;
