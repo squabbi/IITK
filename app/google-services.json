@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "30580375225-62b94j5kv4nmo7in4s96r309ljpjj9b9.apps.googleusercontent.com",
+          "client_id": "30580375225-i2q8eme3reoqsk7rqpgb8s9ltelio3a4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.squabbi.iitk",
-            "certificate_hash": "305821d59bf981012e691058c9cb7bb28b7cddbe"
+            "certificate_hash": "e57cfacaeabc99d54f0f9b6a8adb5b1b0c6c5e3d"
           }
         },
         {
