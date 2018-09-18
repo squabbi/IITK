@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, NewPortalActivity.class));
                 break;
             case R.id.nav_inventory:
-                // TODO: Add inventory item intent
+                startActivity(new Intent(this, NewInventoryActivity.class));
                 break;
         }
     }
