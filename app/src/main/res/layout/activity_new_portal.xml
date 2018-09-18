@@ -63,7 +63,7 @@
                         android:contentDescription="@string/contentDesc_ocrButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_ocr"
+                        app:srcCompat="@drawable/ic_ocr"
                         android:onClick="launchOcrActivity"/>
                 </LinearLayout>
 
@@ -83,7 +83,7 @@
                         android:contentDescription="@string/contentDesc_locationButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_location"
+                        app:srcCompat="@drawable/ic_location"
                         android:onClick="launchPlacePicker"/>
                 </LinearLayout>
 
