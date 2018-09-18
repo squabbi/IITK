@@ -14,6 +14,7 @@ import com.squabbi.iitk.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class KeyLockerAdapter extends BaseAdapter {
 
@@ -50,7 +51,7 @@ public class KeyLockerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        ViewHolder holder;
+        final ViewHolder holder;
         if (view != null) {
             holder = (ViewHolder) view.getTag();
         } else {
@@ -62,6 +63,12 @@ public class KeyLockerAdapter extends BaseAdapter {
         // Set the appropriate text and images for each key locker
         holder.mLockerTv.setText(mKeyLockerNames[position]);
         holder.mLockerImageView.setImageDrawable(mKeyLockerResourceIds.getDrawable(position));
+        holder.mLockerImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.mLockerCb.setChecked(!holder.mLockerCb.isChecked());
+            }
+        });
 
         return view;
     }
