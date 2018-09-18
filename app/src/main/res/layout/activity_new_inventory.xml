@@ -44,9 +44,12 @@
         </LinearLayout>
 
         <GridView
+            android:id="@+id/which_locker_gridview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            
-        </GridView>
+            android:layout_height="wrap_content"
+            android:columnWidth="30sp"
+            android:numColumns="6"
+            android:stretchMode="spacingWidthUniform"
+            android:gravity="center_vertical" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
