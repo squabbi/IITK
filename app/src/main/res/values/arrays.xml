@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="key_locker_images">
+        <item>@drawable/key_locker_green</item>
+        <item>@drawable/key_locker_blue</item>
+        <item>@drawable/key_locker_white</item>
+        <item>@drawable/key_locker_red</item>
+        <item>@drawable/key_locker_yellow</item>
+        <item>@drawable/key_locker_anniversary</item>
+    </array>
+</resources>
