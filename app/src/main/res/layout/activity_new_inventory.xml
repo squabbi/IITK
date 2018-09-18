@@ -44,11 +44,11 @@
         </LinearLayout>
 
         <GridView
-            android:id="@+id/which_locker_gridview"
+            android:id="@+id/lockers_gridview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnWidth="30sp"
-            android:numColumns="6"
+            android:columnWidth="96dp"
+            android:numColumns="auto_fit"
             android:stretchMode="spacingWidthUniform"
             android:gravity="center_vertical" />
     </LinearLayout>
