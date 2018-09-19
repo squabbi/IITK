@@ -4,28 +4,23 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingRight="@dimen/activity_padding">
-
-    <View
-        android:id="@+id/item_portal_colour"
-        android:layout_width="10dp"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@id/item_portal_linlayout"/>
+    android:padding="@dimen/activity_padding"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:id="@+id/item_portal_root_layout">
 
     <TextView
         android:id="@+id/item_portal_name"
         android:textSize="25sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/item_portal_colour"/>
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/item_portal_linlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/item_portal_name"
-        android:layout_toEndOf="@id/item_portal_colour">
+        android:layout_below="@id/item_portal_name">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -34,6 +29,7 @@
 
         <TextView
             android:id="@+id/item_portal_location"
+            android:textSize="15sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"/>
