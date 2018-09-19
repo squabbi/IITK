@@ -104,6 +104,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/vertParallaxImageView"
         app:layout_anchorGravity="bottom|left|end"
-        android:src="@drawable/ic_image" />
+        app:srcCompat="@drawable/ic_image" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
