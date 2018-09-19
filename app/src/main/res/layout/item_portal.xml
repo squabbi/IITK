@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="@dimen/activity_padding">
 
-</LinearLayout>
+    <View
+        android:id="@+id/item_portal_colour"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/item_portal_linlayout"/>
+
+    <TextView
+        android:id="@+id/item_portal_name"
+        android:textSize="25sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/item_portal_colour"/>
+
+    <LinearLayout
+        android:id="@+id/item_portal_linlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/item_portal_name"
+        android:layout_toEndOf="@id/item_portal_colour">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_location"/>
+
+        <TextView
+            android:id="@+id/item_portal_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+</RelativeLayout>
