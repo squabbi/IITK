@@ -34,14 +34,6 @@ public class Portal {
         this.mImageUrl = imageUrl;
     }
 
-//    public Image getImage() {
-//        return mImage;
-//    }
-//
-//    public void setImage(Image image) {
-//        mImage = image;
-//    }
-
     public String getName() {
         return mName;
     }
