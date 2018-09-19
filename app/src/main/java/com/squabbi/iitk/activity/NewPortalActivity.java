@@ -106,7 +106,7 @@ public class NewPortalActivity extends AppCompatActivity {
         // Validate entries
 
         // Make new portal object
-        Portal portal = new Portal(name, mPlace.getLatLng(), notes);
+        Portal portal = new Portal(name, mPlace.getLatLng(), notes, null);
         if (mAuth.getCurrentUser() != null) {
             mFirestore.collection(Constants.COLLECTION_AGENTS).document(mAuth.getUid()).collection(Constants.COLLECTION_PORTALS).add(portal)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
