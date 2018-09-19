@@ -1,7 +1,5 @@
 package com.squabbi.iitk.adapter;
 
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +44,6 @@ public class PortalAdapter extends PortalFirestoreAdapter<PortalAdapter.ViewHold
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.item_portal_colour)
-        View colourBarView;
-
         @BindView(R.id.item_portal_name)
         TextView nameTv;
 
@@ -64,7 +59,6 @@ public class PortalAdapter extends PortalFirestoreAdapter<PortalAdapter.ViewHold
 
             Portal portal = snapshot.toObject(Portal.class);
 
-            colourBarView.setBackgroundColor(Color.CYAN);
             nameTv.setText(portal.getName());
             locationTv.setText(portal.getGeoPoint().toString());
 
