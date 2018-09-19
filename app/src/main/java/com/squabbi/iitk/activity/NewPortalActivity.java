@@ -35,6 +35,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Portal;
+import com.squabbi.iitk.util.Constants;
 
 public class NewPortalActivity extends AppCompatActivity {
     @BindView(R.id.new_portal_toolbar) Toolbar mToolbar;
@@ -107,7 +108,7 @@ public class NewPortalActivity extends AppCompatActivity {
         // Make new portal object
         Portal portal = new Portal(name, mPlace.getLatLng(), notes);
         if (mAuth.getCurrentUser() != null) {
-            mFirestore.collection("agents").document(mAuth.getUid()).collection("portals").add(portal)
+            mFirestore.collection(Constants.COLLECTION_AGENTS).document(mAuth.getUid()).collection(Constants.COLLECTION_PORTALS).add(portal)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
