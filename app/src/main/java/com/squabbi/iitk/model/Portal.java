@@ -3,7 +3,8 @@ package com.squabbi.iitk.model;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.google.firebase.firestore.ServerTimestamp;
-import com.google.type.Date;
+
+import java.util.Date;
 
 @IgnoreExtraProperties
 public class Portal {
@@ -74,11 +75,11 @@ public class Portal {
         mImageUrl = imageUrl;
     }
 
+    @ServerTimestamp
     public Date getCreatedAt() {
         return mCreatedAt;
     }
 
-    @ServerTimestamp
     public void setCreatedAt(Date createdAt) {
         mCreatedAt = createdAt;
     }
