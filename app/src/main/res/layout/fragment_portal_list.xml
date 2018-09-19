@@ -4,18 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.PortalListFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/portal_view_root_layout">
 
-    <Button
-        android:id="@+id/openPortal_btn"
-        android:layout_width="wrap_content"
+    <!-- Place filter fragment here -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/portal_recycler"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Open portal activity"/>
-
-    <Button
-        android:id="@+id/openLogin_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Open login activity"/>
-
+        tools:listitem="@layout/item_portal"/>
 </LinearLayout>
