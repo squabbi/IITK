@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.PortalListFragment"
     android:orientation="vertical"
     android:id="@+id/portal_view_root_layout">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.squabbi.iitk.viewmodel.PortalListViewModel"/>
+    </data>
+
     <!-- Place filter fragment here -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/portal_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:adapter="@{viewModel.mAdapter}"
         tools:listitem="@layout/item_portal"/>
-</LinearLayout>
+</layout>

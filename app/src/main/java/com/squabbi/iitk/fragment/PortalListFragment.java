@@ -1,9 +1,12 @@
 package com.squabbi.iitk.fragment;
 
-
-import android.graphics.Color;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -12,6 +15,7 @@ import butterknife.ButterKnife;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.activity.MainActivity;
+import com.squabbi.iitk.activity.MainActivity_ViewBinding;
 import com.squabbi.iitk.adapter.PortalAdapter;
 import com.squabbi.iitk.util.Constants;
 
@@ -27,12 +33,17 @@ import com.squabbi.iitk.util.Constants;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PortalListFragment extends Fragment implements View.OnClickListener, PortalAdapter.OnPortalSelectedListener {
+public class PortalListFragment extends Fragment implements PortalAdapter.OnPortalSelectedListener {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
     private Query mQuery;
     private PortalAdapter mAdapter;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
     @BindView(R.id.portal_recycler)
     RecyclerView mPortalRecycler;
@@ -45,8 +56,6 @@ public class PortalListFragment extends Fragment implements View.OnClickListener
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
         mQuery = mFirestore.collection(Constants.COLLECTION_AGENTS).document(mAuth.getUid()).collection(Constants.COLLECTION_PORTALS);
-
-        mPortalRecycler.setBackgroundColor(Color.CYAN);
     }
 
     private void initRecycler() {
@@ -67,6 +76,7 @@ public class PortalListFragment extends Fragment implements View.OnClickListener
             }
         };
 
+        mPortalRecycler.addItemDecoration(new DividerItemDecoration(this.getContext(), LinearLayout.VERTICAL));
         mPortalRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mPortalRecycler.setAdapter(mAdapter);
     }
@@ -107,28 +117,10 @@ public class PortalListFragment extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_portal_list, container, false);
         ButterKnife.bind(this, view);
-//        mOpenPortal = view.findViewById(R.id.openPortal_btn);
-//        mOpenLogin = view.findViewById(R.id.openLogin_btn);
-//
-//        mOpenPortal.setOnClickListener(this);
-//        mOpenLogin.setOnClickListener(this);
-
-        FirebaseFirestore.setLoggingEnabled(true);
 
         initFirestore();
         initRecycler();
 
         return view;
-    }
-
-    @Override
-    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.openPortal_btn:
-//                startActivity(new Intent(getContext(), NewPortalActivity.class));
-//                break;
-//            case R.id.openLogin_btn:
-//                startActivity(new Intent(getContext(), LoginActivity.class));
-//        }
     }
 }
