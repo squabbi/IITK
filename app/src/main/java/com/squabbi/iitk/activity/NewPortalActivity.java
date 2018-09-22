@@ -22,6 +22,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
+import androidx.lifecycle.ViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.mayanknagwanshi.imagepicker.imageCompression.ImageCompressionListener;
@@ -35,6 +36,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Portal;
+import com.squabbi.iitk.util.Constants;
+import com.squabbi.iitk.util.PortalRepository;
+import com.squabbi.iitk.viewmodel.NewPortalViewModel;
 
 public class NewPortalActivity extends AppCompatActivity {
     @BindView(R.id.new_portal_toolbar) Toolbar mToolbar;
@@ -48,6 +52,8 @@ public class NewPortalActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
     };
+
+    private NewPortalViewModel mViewModel;
 
     private ImagePicker mImagePicker = new ImagePicker();
     private Place mPlace;
@@ -103,24 +109,10 @@ public class NewPortalActivity extends AppCompatActivity {
 
     private boolean addPortal(String name, String notes) {
         // Validate entries
-
+        new PortalRepository().addPortal(new Portal(name, mPlace.getLatLng(), notes, null));
         // Make new portal object
-        Portal portal = new Portal(name, mPlace.getLatLng(), notes);
-        if (mAuth.getCurrentUser() != null) {
-            mFirestore.collection("agents").document(mAuth.getUid()).collection("portals").add(portal)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(NewPortalActivity.this, "Portal saved", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(NewPortalActivity.this, "Portal failed to save", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
+        Portal portal = new Portal(name, mPlace.getLatLng(), notes, null);
+
         return false;
     }
 

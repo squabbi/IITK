@@ -1,6 +1,7 @@
 package com.squabbi.iitk.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -9,6 +10,7 @@ import android.widget.GridView;
 
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.adapter.KeyLockerAdapter;
+import com.squabbi.iitk.viewmodel.NewInventoryViewModel;
 
 public class NewInventoryActivity extends AppCompatActivity {
 
