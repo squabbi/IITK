@@ -53,8 +53,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     // Android Components implementation
-    def lifecycle_version = "2.0.0-beta01"
-    def room_version = "2.0.0-beta01"
+    def lifecycle_version = "2.0.0"
+    def room_version = "2.0.0-rc01"
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
