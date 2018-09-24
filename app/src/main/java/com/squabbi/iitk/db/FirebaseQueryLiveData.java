@@ -16,11 +16,10 @@ import javax.annotation.Nullable;
 
 import androidx.lifecycle.LiveData;
 
-public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> {
+public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> implements EventListener<QuerySnapshot> {
 
     private static final String TAG = "FirebaseQueryLiveData";
     private Query mQuery;
-    private final MyValueEventListener mListener = new MyValueEventListener();
     private ListenerRegistration mRegistration;
 
     public FirebaseQueryLiveData(Query query) {
@@ -33,7 +32,7 @@ public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> {
         
         Log.d(TAG, "onActive");
         if (mRegistration == null) {
-            mRegistration = mQuery.addSnapshotListener(mListener);
+            mRegistration = mQuery.addSnapshotListener(this);
         }
     }
 
@@ -47,15 +46,16 @@ public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> {
         }
     }
 
-    private class MyValueEventListener implements EventListener<QuerySnapshot> {
-        @Override
-        public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-            // Handle errors
-            if (e != null) {
-                return;
-            }
+    @Override
+    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+        // Handle errors
+        if (e != null) {
+            return;
+        }
 
-            setValue(queryDocumentSnapshots);
+        Log.d(TAG, "onEvent, query changed");
+        setValue(queryDocumentSnapshots);
+
 
 //            // Dispatch the event
 //            for (DocumentChange change : queryDocumentSnapshots.getDocumentChanges()) {
@@ -74,6 +74,5 @@ public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> {
 //                        break;
 //                }
 //            }
-        }
     }
 }
