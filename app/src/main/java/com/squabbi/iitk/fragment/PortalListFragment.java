@@ -2,6 +2,8 @@ package com.squabbi.iitk.fragment;
 
 import android.os.Bundle;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -39,6 +41,7 @@ import com.squabbi.iitk.viewmodel.PortalListViewModel;
  */
 public class PortalListFragment extends Fragment implements PortalAdapter.OnPortalSelectedListener {
 
+    private static final String TAG = "PortalListFragment";
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
     private Query mQuery;
@@ -55,6 +58,7 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
         liveData.observe(this, new Observer<QuerySnapshot>() {
             @Override
             public void onChanged(QuerySnapshot queryDocumentSnapshots) {
+                Log.d(TAG, "onChanged");
                 mAdapter.setData(queryDocumentSnapshots);
             }
         });
