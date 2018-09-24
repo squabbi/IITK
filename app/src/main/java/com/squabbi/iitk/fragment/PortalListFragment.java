@@ -6,6 +6,9 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,10 +26,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.MainActivity;
 import com.squabbi.iitk.adapter.PortalAdapter;
 import com.squabbi.iitk.util.Constants;
+import com.squabbi.iitk.viewmodel.PortalListViewModel;
 
 
 /**
@@ -42,6 +47,17 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // Register ViewModel
+        PortalListViewModel viewModel = ViewModelProviders.of(this).get(PortalListViewModel.class);
+        LiveData<QuerySnapshot> liveData = viewModel.getQuerySnapshotLiveData();
+
+        liveData.observe(this, new Observer<QuerySnapshot>() {
+            @Override
+            public void onChanged(QuerySnapshot queryDocumentSnapshots) {
+                mAdapter.setData(queryDocumentSnapshots);
+            }
+        });
     }
 
     @BindView(R.id.portal_recycler)
@@ -57,23 +73,9 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
         mQuery = mFirestore.collection(Constants.COLLECTION_AGENTS).document(mAuth.getUid()).collection(Constants.COLLECTION_PORTALS);
     }
 
-    private void initRecycler() {
-        mAdapter = new PortalAdapter(mQuery, this) {
-            @Override
-            protected void onDataChanged() {
-                // TODO: Implement view when the list is empty
-                super.onDataChanged();
-            }
 
-            @Override
-            protected void onError(FirebaseFirestoreException e) {
-                // Show a snackbar on errors
-                if (getView() != null) {
-                    Snackbar.make(getView().findViewById(R.id.portal_view_root_layout),
-                            "Error: check logs for info.", Snackbar.LENGTH_LONG).show();
-                }
-            }
-        };
+    private void initRecycler() {
+        mAdapter = new PortalAdapter(this);
 
         mPortalRecycler.addItemDecoration(new DividerItemDecoration(this.getContext(), LinearLayout.VERTICAL));
         mPortalRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -91,33 +93,12 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-        // Start listening
-        if (mAdapter != null) {
-            mAdapter.startListening();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // Stop listening
-        if (mAdapter != null) {
-            mAdapter.startListening();
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_portal_list, container, false);
         ButterKnife.bind(this, view);
 
-        initFirestore();
         initRecycler();
 
         return view;
