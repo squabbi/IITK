@@ -1,7 +1,7 @@
 package com.squabbi.iitk.viewmodel;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -16,12 +16,12 @@ import androidx.lifecycle.ViewModel;
 public class PortalListViewModel extends ViewModel {
 
     private static final FirebaseAuth FIREBASE_AUTH = FirebaseAuth.getInstance();
-    private static final CollectionReference AGENT_PORTAL_REF = FirebaseFirestore.getInstance()
+    private static final Query AGENT_PORTAL_REF = FirebaseFirestore.getInstance()
             .collection(Constants.COLLECTION_AGENTS)
             .document(FIREBASE_AUTH.getUid())
             .collection(Constants.COLLECTION_PORTALS);
 
-    private final FirebaseQueryLiveData mLiveData = new FirebaseQueryLiveData(AGENT_PORTAL_REF);
+    private FirebaseQueryLiveData mLiveData = new FirebaseQueryLiveData(AGENT_PORTAL_REF);
 
     @NonNull
     public LiveData<QuerySnapshot> getQuerySnapshotLiveData() {
