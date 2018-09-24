@@ -57,7 +57,6 @@ public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> {
 
             setValue(queryDocumentSnapshots);
 
-
 //            // Dispatch the event
 //            for (DocumentChange change : queryDocumentSnapshots.getDocumentChanges()) {
 //                // Snapshot of the changed document
