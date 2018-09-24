@@ -30,8 +30,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     // External implementations of libraries
-    implementation 'io.mattcarroll.hover:hover:0.9.8'
-    implementation 'org.greenrobot:eventbus:3.1.1'
+    //implementation 'io.mattcarroll.hover:hover:0.9.8'
+    //implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.github.abdularis:ParallaxImageView:1.1'
     implementation 'com.github.maayyaannkk:ImagePicker:1.0.1'
     implementation 'me.tankery.lib:permission-requester:1.1.0'
