@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModel;
 public class PortalListViewModel extends ViewModel {
 
     private static final FirebaseAuth FIREBASE_AUTH = FirebaseAuth.getInstance();
-    private static final Query AGENT_PORTAL_REF = FirebaseFirestore.getInstance()
+    private static Query AGENT_PORTAL_REF = FirebaseFirestore.getInstance()
             .collection(Constants.COLLECTION_AGENTS)
             .document(FIREBASE_AUTH.getUid())
             .collection(Constants.COLLECTION_PORTALS);
