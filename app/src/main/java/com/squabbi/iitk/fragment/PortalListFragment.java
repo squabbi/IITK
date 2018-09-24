@@ -67,13 +67,6 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
         // Required empty public constructor
     }
 
-    private void initFirestore() {
-        mAuth = FirebaseAuth.getInstance();
-        mFirestore = FirebaseFirestore.getInstance();
-        mQuery = mFirestore.collection(Constants.COLLECTION_AGENTS).document(mAuth.getUid()).collection(Constants.COLLECTION_PORTALS);
-    }
-
-
     private void initRecycler() {
         mAdapter = new PortalAdapter(this);
 
