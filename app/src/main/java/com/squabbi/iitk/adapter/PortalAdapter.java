@@ -40,23 +40,24 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
     }
 
     public void setData(QuerySnapshot querySnapshot) {
-        // Populate list of Documents
-        for (DocumentChange documentChange : querySnapshot.getDocumentChanges()) {
+        //if (mSnapshots != null) {
+            // Populate list of Documents
+            for (DocumentChange documentChange : querySnapshot.getDocumentChanges()) {
 
-            switch (documentChange.getType()) {
-                case ADDED:
-                    onDocumentAdded(documentChange);
-                    break;
-                case MODIFIED:
-                    onDocumentModified(documentChange);
-                    break;
-                case REMOVED:
-                    onDocumentRemoved(documentChange);
-                    break;
+                switch (documentChange.getType()) {
+                    case ADDED:
+                        onDocumentAdded(documentChange);
+                        break;
+                    case MODIFIED:
+                        onDocumentModified(documentChange);
+                        break;
+                    case REMOVED:
+                        onDocumentRemoved(documentChange);
+                        break;
+                }
             }
-        }
-
-        notifyDataSetChanged();
+        //}
+        //notifyDataSetChanged();
     }
 
     protected void onDocumentAdded(DocumentChange change) {
