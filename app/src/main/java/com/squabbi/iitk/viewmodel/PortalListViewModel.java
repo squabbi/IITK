@@ -7,15 +7,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squabbi.iitk.adapter.PortalAdapter;
 import com.squabbi.iitk.db.FirebaseQueryLiveData;
+import com.squabbi.iitk.model.Portal;
 import com.squabbi.iitk.util.Constants;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class PortalListViewModel extends ViewModel {
 
     private static final FirebaseAuth FIREBASE_AUTH = FirebaseAuth.getInstance();
+
     private static Query AGENT_PORTAL_REF = FirebaseFirestore.getInstance()
             .collection(Constants.COLLECTION_AGENTS)
             .document(FIREBASE_AUTH.getUid())

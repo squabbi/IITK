@@ -1,5 +1,6 @@
 package com.squabbi.iitk.db;
 
+import android.os.Handler;
 import android.util.Log;
 
 import com.google.firebase.firestore.DocumentChange;
@@ -21,6 +22,15 @@ public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> implements Ev
     private static final String TAG = "FirebaseQueryLiveData";
     private Query mQuery;
     private ListenerRegistration mRegistration;
+    private boolean mListenerPendingRemoval;
+    private final Handler mHandler = new Handler();
+    private final Runnable mRemoveListener = new Runnable() {
+        @Override
+        public void run() {
+            mRegistration.remove();
+            mListenerPendingRemoval = false;
+        }
+    };
 
     public FirebaseQueryLiveData(Query query) {
         this.mQuery = query;
@@ -28,10 +38,12 @@ public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> implements Ev
 
     @Override
     protected void onActive() {
-        super.onActive();
+        //super.onActive();
         
         Log.d(TAG, "onActive");
-        if (mRegistration == null) {
+        
+
+        if (mQuery != null && mRegistration == null) {
             mRegistration = mQuery.addSnapshotListener(this);
         }
     }
@@ -43,6 +55,7 @@ public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> implements Ev
         Log.d(TAG, "onInActive");
         if (mRegistration != null) {
             mRegistration.remove();
+            mRegistration = null;
         }
     }
 
