@@ -17,7 +17,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.github.abdularis.piv.VerticalScrollParallaxImageView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -27,8 +26,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import in.mayanknagwanshi.imagepicker.imageCompression.ImageCompressionListener;
-import in.mayanknagwanshi.imagepicker.imagePicker.ImagePicker;
 
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.viewmodel.NewPortalViewModel;
