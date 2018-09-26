@@ -1,38 +1,60 @@
 package com.squabbi.iitk.model;
 
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 @IgnoreExtraProperties
 public class Portal {
 
     private String mName;
     private String mNotes;
-    private GeoPoint mGeoPoint;
+    @Nullable
+    GeoPoint mGeoPoint;
     private String mFriendlyLocation;
-    private String mImageUrl;
+    private String mColour;
     @ServerTimestamp
     private Date mCreatedAt;
 
     // Required by Firebase
     Portal() {}
 
-    public Portal(String name, com.google.android.gms.maps.model.LatLng latLng, String notes, String imageUrl) {
-        this.mName = name;
-        //this.mImage = image;
-        this.mGeoPoint = new GeoPoint(latLng.latitude, latLng.longitude);
-        this.mNotes = notes;
-        this.mImageUrl = imageUrl;
-    }
+    /**
+     * Basic Portal object to represent an Ingress portal.
+     * @param name Name of the portal.
+     * @param place Place object from Google Maps SDK (Portal's location).
+     * @param notes Additional notes about the portal.
+     * @param colour Colour tag of the portal in hexadecimal.
+     */
+    public Portal(@Nonnull String name, @Nullable Place place,
+                  @Nullable String friendlyLocation, @Nonnull String notes, String colour) {
 
-    public Portal(String name, String location, String notes, String imageUrl) {
         this.mName = name;
-        this.mFriendlyLocation = location;
+
+        // Addresses
+        // Coordinates
+        if (place != null) {
+            // Place has been selected
+            // Extract LatLng from Place and create new GeoPoint
+            LatLng latLng = place.getLatLng();
+            this.mGeoPoint = new GeoPoint(latLng.latitude, latLng.longitude);
+            // Set friendly address from Places
+            this.mFriendlyLocation = place.getName().toString();
+        }
+        // If friendly location is not null or empty
+        if (friendlyLocation != null && !friendlyLocation.isEmpty()) {
+            this.mFriendlyLocation = friendlyLocation;
+        }
+
         this.mNotes = notes;
-        this.mImageUrl = imageUrl;
+        this.mColour = colour;
     }
 
     public String getName() {
@@ -67,12 +89,12 @@ public class Portal {
         mFriendlyLocation = friendlyLocation;
     }
 
-    public String getImageUrl() {
-        return mImageUrl;
+    public String getColour() {
+        return mColour;
     }
 
-    public void setImageUrl(String imageUrl) {
-        mImageUrl = imageUrl;
+    public void setColour(String colour) {
+        mColour = colour;
     }
 
     @ServerTimestamp
