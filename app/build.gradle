@@ -32,8 +32,6 @@ dependencies {
 
 
     // External implementations of libraries
-    implementation 'com.github.abdularis:ParallaxImageView:1.1'
-    implementation 'com.github.maayyaannkk:ImagePicker:1.0.1'
     implementation 'me.tankery.lib:permission-requester:1.1.0'
     implementation 'com.github.yehiahd:FastSave-Android:1.0.4'
     implementation 'com.google.android.gms:play-services-places:15.0.1'
