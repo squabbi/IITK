@@ -7,6 +7,9 @@
     <string name="title_activity_login">Login to IITK</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!-- Portal ViewHolder strings -->
+    <string name="portal_item_no_location">No location&#8230;</string>
+
     <!-- Add portal strings -->
     <string name="permissions_camera">We need permission to write to external storage to save Portal photos and access to the camera in case you want to take a photo of the portal.</string>
     <string name="hint_portal_location">Location</string>
@@ -46,10 +49,6 @@
     <string name="nav_inventory">Inventory</string>
     <string name="nav_field_ops">Field Ops</string>
     <string name="nav_settings">Settings</string>
-
-    <!-- Toolbar menu icon animation strings -->
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
 
     <!-- User authentication strings -->
     <string name="hint_email">E-mail</string>
