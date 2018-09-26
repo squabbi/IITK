@@ -2,6 +2,7 @@ package com.squabbi.iitk.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.mayanknagwanshi.imagepicker.imageCompression.ImageCompressionListener;
@@ -36,6 +39,11 @@ public class NewPortalActivity extends AppCompatActivity {
     @BindView(R.id.new_portal_toolbar) Toolbar mToolbar;
     @BindView(R.id.portal_name_et) EditText mPortalNameEt;
     @BindView(R.id.portal_notes_et) EditText mPortalNotesEt;
+    @BindView(R.id.portal_location_et) EditText mPortalLocationEt;
+
+    private NewPortalViewModel mViewModel;
+    private Place mPlace;
+    private String mColour;
 
     private static final int PLACE_PICKER_REQUEST = 1;
     private static final int PERMISSION_CHECK_REQUEST = 2;
@@ -45,16 +53,14 @@ public class NewPortalActivity extends AppCompatActivity {
             Manifest.permission.CAMERA
     };
 
-    private NewPortalViewModel mViewModel;
-
-    private ImagePicker mImagePicker = new ImagePicker();
-    private Place mPlace;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_portal);
         ButterKnife.bind(this);
+
+        // Set ViewModel
+        mViewModel = ViewModelProviders.of(this).get(NewPortalViewModel.class);
 
         setSupportActionBar(mToolbar);
 
@@ -94,15 +100,6 @@ public class NewPortalActivity extends AppCompatActivity {
 
     }
 
-    private boolean addPortal(String name, String notes) {
-        // Validate entries
-        //new PortalRepository().addPortal(new Portal(name, mPlace.getLatLng(), notes, null));
-        // Make new portal object
-        Portal portal = new Portal(name, mPlace.getLatLng(), notes, null);
-
-        return false;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_done_add, menu);
@@ -113,12 +110,31 @@ public class NewPortalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_done:
-                // Complete the action and add the Portal to the Database
+                // Complete the action and add the Portal to the Database.
+                // Get strings
+                String name = mPortalNameEt.getText().toString();
+                String notes = mPortalNotesEt.getText().toString();
+                Place place = mPlace;
+                String friendlyLocation = mPortalLocationEt.getText().toString();
+                String colour = mColour;
 
+                // Close the keyboard and submit strings to ViewModel.
+                closeKeyboard();
+
+                if (!mViewModel.addPortal(name, place, friendlyLocation, notes, colour)) {
+                    // If adding was not successful
+                }
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
+                // Invoke super for all other items.
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager iMm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            iMm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
