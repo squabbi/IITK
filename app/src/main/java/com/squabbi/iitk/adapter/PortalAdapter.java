@@ -26,53 +26,18 @@ import butterknife.ButterKnife;
 public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder> {
 
     private static List<DocumentSnapshot> mSnapshots = new ArrayList<>();
-    private List<Portal> mPortals = new ArrayList<>();
+    private OnPortalSelectedListener mListener;
 
     public interface OnPortalSelectedListener {
-
         void onPortalSelected(DocumentSnapshot portal);
-
     }
 
     public static void clearSnapshots() {
         mSnapshots.clear();
     }
 
-    private OnPortalSelectedListener mListener;
-
     public PortalAdapter(OnPortalSelectedListener listener) {
         mListener = listener;
-    }
-
-    public void setData(QuerySnapshot querySnapshot) {
-        if (mSnapshots != null) {
-            // Populate list of Documents
-            for (DocumentChange documentChange : querySnapshot.getDocumentChanges()) {
-
-                switch (documentChange.getType()) {
-                    case ADDED:
-                        onDocumentAdded(documentChange);
-                        break;
-                    case MODIFIED:
-                        onDocumentModified(documentChange);
-                        break;
-                    case REMOVED:
-                        onDocumentRemoved(documentChange);
-                        break;
-                }
-            }
-        }
-
-        notifyDataSetChanged();
-    }
-
-    public void setPortalData(List<Portal> portals) {
-        mPortals = portals;
-        notifyDataSetChanged();
-    }
-
-    public void setPortalDocData(List<DocumentSnapshot> documentSnapshots) {
-        mSnapshots = documentSnapshots;
     }
 
     public void setDocChangeData(List<DocumentChange> documentChanges) {
@@ -80,20 +45,16 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
         for (DocumentChange change : documentChanges) {
             switch (change.getType()) {
                 case ADDED:
-                    // TODO: handle document added
                     onDocumentAdded(change);
                     break;
                 case MODIFIED:
-                    // TODO: handle document modified
                     onDocumentModified(change);
                     break;
                 case REMOVED:
-                    // TODO: handle document removed
                     onDocumentRemoved(change);
                     break;
             }
         }
-
         notifyDataSetChanged();
     }
 
@@ -129,13 +90,11 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PortalAdapter.ViewHolder holder, int position) {
-        // Change this when you need to test different livedata
         holder.bind(mSnapshots.get(position), mListener);
     }
 
     @Override
     public int getItemCount() {
-        // Change this when you need to test different livedata
         return mSnapshots.size();
     }
 
