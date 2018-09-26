@@ -23,6 +23,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +41,7 @@ public class NewPortalActivity extends AppCompatActivity {
 
     private NewPortalViewModel mViewModel;
     private Place mPlace;
-    private String mColour;
+    private Integer mColour;
 
     private static final int PLACE_PICKER_REQUEST = 1;
 
@@ -52,6 +53,13 @@ public class NewPortalActivity extends AppCompatActivity {
 
         // Set ViewModel
         mViewModel = ViewModelProviders.of(this).get(NewPortalViewModel.class);
+        // Observe changes to ColourPicker LiveData
+        mViewModel.getColourLiveData().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer colour) {
+                mColour = colour;
+            }
+        });
 
         setSupportActionBar(mToolbar);
 
@@ -99,7 +107,7 @@ public class NewPortalActivity extends AppCompatActivity {
                 String notes = mPortalNotesEt.getText().toString();
                 Place place = mPlace;
                 String friendlyLocation = mPortalLocationEt.getText().toString();
-                String colour = mColour;
+                Integer colour = mColour;
 
                 // Close the keyboard and submit strings to ViewModel.
                 closeKeyboard();
