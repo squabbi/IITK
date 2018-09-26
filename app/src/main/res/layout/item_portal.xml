@@ -1,37 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/activity_padding"
-    android:background="?attr/selectableItemBackground"
     android:clickable="true"
-    android:id="@+id/item_portal_root_layout">
+    android:focusable="true"
+    android:padding="@dimen/activity_padding"
+    android:layout_marginTop="@dimen/activity_padding"
+    android:layout_marginLeft="@dimen/activity_padding"
+    android:layout_marginRight="@dimen/activity_padding"
+    android:id="@+id/item_portal_card_layout">
 
-    <TextView
-        android:id="@+id/item_portal_name"
-        android:textSize="25sp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/item_portal_linlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/item_portal_name">
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <View
+            android:id="@+id/portal_item_colour_view"
+            android:layout_width="10dp"
+            android:background="@color/primaryColor"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_location"/>
+            android:layout_alignBottom="@id/item_portal_linlayout"
+            android:layout_marginEnd="8dp"/>
 
         <TextView
-            android:id="@+id/item_portal_location"
-            android:textSize="15sp"
-            android:layout_width="0dp"
+            android:id="@+id/item_portal_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-</RelativeLayout>
+            android:layout_toEndOf="@id/portal_item_colour_view"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingTop="@dimen/activity_padding"
+            android:paddingBottom="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding"/>
+
+        <LinearLayout
+            android:id="@+id/item_portal_linlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/item_portal_name"
+            android:layout_toEndOf="@id/portal_item_colour_view"
+            android:paddingBottom="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_location"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/item_portal_location"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

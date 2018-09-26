@@ -36,7 +36,7 @@ public class InventoryFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
-        Query query = mFirestore.collection(Constants.COLLECTION_AGENTS).document(mAuth.getUid()).collection(Constants.COLLECTION_PORTALS);
+        //Query query = mFirestore.collection(Constants.COLLECTION_AGENTS).document(mAuth.getUid()).collection(Constants.COLLECTION_PORTALS);
 
 
         // Inflate the layout for this fragment

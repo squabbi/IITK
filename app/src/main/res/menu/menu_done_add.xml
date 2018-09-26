@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.squabbi.iitk.activity.NewPortalActivity">
+
     <item
         android:id="@+id/menu_done"
         android:title="@string/done"

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.squabbi.iitk.viewmodel.PortalListViewModel"/>
+            type="com.squabbi.iitk.viewmodel.MainActivityViewModel"/>
     </data>
 
     <LinearLayout

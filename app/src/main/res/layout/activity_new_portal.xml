@@ -28,12 +28,10 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical" >
 
-        <com.github.abdularis.piv.VerticalScrollParallaxImageView
-            android:id="@+id/vertParallaxImageView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:src="@drawable/aqua_static"/>
+        <View
+            android:id="@+id/colour_bar_view"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -64,7 +62,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_ocr"
-                        android:onClick="launchOcrActivity"/>
+                        android:onClick="launchOcrActivity"
+                        tools:ignore="OnClick" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -102,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/vertParallaxImageView"
+        app:layout_anchor="@id/colour_bar_view"
         app:layout_anchorGravity="bottom|left|end"
         app:srcCompat="@drawable/ic_image" />
 

@@ -1,66 +1,54 @@
 package com.squabbi.iitk.activity;
 
-import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.github.abdularis.piv.VerticalScrollParallaxImageView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import in.mayanknagwanshi.imagepicker.imageCompression.ImageCompressionListener;
-import in.mayanknagwanshi.imagepicker.imagePicker.ImagePicker;
-import me.tankery.permission.PermissionRequestActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.kunzisoft.androidclearchroma.listener.OnColorSelectedListener;
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.model.Portal;
-import com.squabbi.iitk.util.Constants;
-import com.squabbi.iitk.util.PortalRepository;
 import com.squabbi.iitk.viewmodel.NewPortalViewModel;
 
-public class NewPortalActivity extends AppCompatActivity {
+public class NewPortalActivity extends AppCompatActivity implements OnColorSelectedListener {
+
     @BindView(R.id.new_portal_toolbar) Toolbar mToolbar;
     @BindView(R.id.portal_name_et) EditText mPortalNameEt;
     @BindView(R.id.portal_notes_et) EditText mPortalNotesEt;
-
-    private static final int PLACE_PICKER_REQUEST = 1;
-    private static final int PERMISSION_CHECK_REQUEST = 2;
-
-    private static final String[] PERMISSIONS_REQUIRED = new String[] {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-    };
+    @BindView(R.id.portal_location_et) EditText mPortalLocationEt;
+    @BindView(R.id.colour_bar_view) View mColourBarView;
 
     private NewPortalViewModel mViewModel;
-
-    private ImagePicker mImagePicker = new ImagePicker();
     private Place mPlace;
+    private Integer mColour;
 
-    // Firebase
-    private FirebaseFirestore mFirestore;
-    private FirebaseAuth mAuth;
+    private static final String TAG = "NewPortalActivity";
+    private static final String TAG_CHROMA_DIALOG = "TAG_CHROMA_DIALOG";
+    private static final int PLACE_PICKER_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,22 +56,34 @@ public class NewPortalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_portal);
         ButterKnife.bind(this);
 
+        // Set ViewModel
+        mViewModel = ViewModelProviders.of(this).get(NewPortalViewModel.class);
+        // Observe changes to ColourPicker LiveData
+        mViewModel.getColourLiveData().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer colour) {
+                mColour = colour;
+                mColourBarView.setBackground(new ColorDrawable(colour));
+            }
+        });
+
         setSupportActionBar(mToolbar);
 
         // Get a support ActionBar corresponding to this toolbar and
-        // enable the up button
+        // enable the close button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchImagePicker(view);
+                mViewModel.getChromaDialogBuilder()
+                        .create()
+                        .show(getSupportFragmentManager(), TAG_CHROMA_DIALOG);
             }
         });
 
-        mFirestore = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
     }
 
     public void launchPlacePicker(View view) {
@@ -98,23 +98,6 @@ public class NewPortalActivity extends AppCompatActivity {
         }
     }
 
-    public void launchImagePicker(View view) {
-        final String message = getString(R.string.permissions_camera);
-        PermissionRequestActivity.start(this, PERMISSION_CHECK_REQUEST, PERMISSIONS_REQUIRED, message, message);
-    }
-
-    public void launchOcrActivity(View view) {
-
-    }
-
-    private boolean addPortal(String name, String notes) {
-        // Validate entries
-        new PortalRepository().addPortal(new Portal(name, mPlace.getLatLng(), notes, null));
-        // Make new portal object
-        Portal portal = new Portal(name, mPlace.getLatLng(), notes, null);
-
-        return false;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,16 +109,31 @@ public class NewPortalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_done:
-                // Complete the action and add the Portal to the Database
-                return addPortal(mPortalNameEt.getText().toString(), mPortalNotesEt.getText().toString());
-            case android.R.id.home:
-                // When the up button is pressed
-                finish();
-                return true;
+                // Complete the action and add the Portal to the Database.
+                // Get strings
+                String name = mPortalNameEt.getText().toString();
+                String notes = mPortalNotesEt.getText().toString();
+                Place place = mPlace;
+                String friendlyLocation = mPortalLocationEt.getText().toString();
+                Integer colour = mColour;
+
+                // Close the keyboard and submit strings to ViewModel.
+                closeKeyboard();
+
+                if (!mViewModel.addPortal(name, place, friendlyLocation, notes, colour)) {
+                    // If adding was not successful
+                }
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
+                // Invoke super for all other items.
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager iMm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            iMm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
@@ -151,40 +149,16 @@ public class NewPortalActivity extends AppCompatActivity {
                 et.setText(String.valueOf(mPlace.getName()));
             }
         }
+    }
 
-        if (requestCode == PERMISSION_CHECK_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                // Launch image picker once permissions are granted
-                mImagePicker.withActivity(this).start();
-            } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_LONG).show();
-            }
-        }
+    @Override
+    public void onPositiveButtonClick(int color) {
+        // Set the LiveData
+        mViewModel.setColourLiveData(color);
+    }
 
-        if (requestCode == ImagePicker.SELECT_IMAGE && resultCode == Activity.RESULT_OK) {
-            //Add compression listener if withCompression is set to true
-            mImagePicker.addOnCompressListener(new ImageCompressionListener() {
-                @Override
-                public void onStart() {
-
-                }
-
-                @Override
-                public void onCompressed(String filePath) { // filePath of the compressed image
-                    // Convert image to Bitmap
-                    Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-                    // Set the image into the ParallaxImageView
-                    VerticalScrollParallaxImageView portalVertParallaxIv = findViewById(R.id.vertParallaxImageView);
-                    portalVertParallaxIv.setImageBitmap(selectedImage);
-                }
-            });
-
-            String filePath = mImagePicker.getImageFilePath(data);
-            if (filePath != null) {
-                Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-                VerticalScrollParallaxImageView portalVertParallaxIv = findViewById(R.id.vertParallaxImageView);
-                portalVertParallaxIv.setImageBitmap(selectedImage);
-            }
-        }
+    @Override
+    public void onNegativeButtonClick(int color) {
+        // Do nothing.
     }
 }
