@@ -5,12 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
+
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Portal;
 
@@ -18,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,21 +36,25 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
         mListener = listener;
     }
 
-    public void setDocChangeData(List<DocumentChange> documentChanges) {
+    public void setDocChangeData(List<DocumentSnapshot> documentChanges) {
         // Dispatch the event
-        for (DocumentChange change : documentChanges) {
-            switch (change.getType()) {
-                case ADDED:
-                    onDocumentAdded(change);
-                    break;
-                case MODIFIED:
-                    onDocumentModified(change);
-                    break;
-                case REMOVED:
-                    onDocumentRemoved(change);
-                    break;
-            }
-        }
+//        for (DocumentChange change : documentChanges) {
+//            switch (change.getType()) {
+//                case ADDED:
+//                    onDocumentAdded(change);
+//                    break;
+//                case MODIFIED:
+//                    onDocumentModified(change);
+//                    break;
+//                case REMOVED:
+//                    onDocumentRemoved(change);
+//                    break;
+//            }
+//        }
+
+        mSnapshots.clear();
+
+        mSnapshots.addAll(documentChanges);
         notifyDataSetChanged();
     }
 
