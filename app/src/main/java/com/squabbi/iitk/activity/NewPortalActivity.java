@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,19 +30,24 @@ import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import com.kunzisoft.androidclearchroma.listener.OnColorSelectedListener;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.viewmodel.NewPortalViewModel;
 
-public class NewPortalActivity extends AppCompatActivity {
+public class NewPortalActivity extends AppCompatActivity implements OnColorSelectedListener {
+
     @BindView(R.id.new_portal_toolbar) Toolbar mToolbar;
     @BindView(R.id.portal_name_et) EditText mPortalNameEt;
     @BindView(R.id.portal_notes_et) EditText mPortalNotesEt;
     @BindView(R.id.portal_location_et) EditText mPortalLocationEt;
+    @BindView(R.id.colour_bar_view) View mColourBarView;
 
     private NewPortalViewModel mViewModel;
     private Place mPlace;
     private Integer mColour;
 
+    private static final String TAG = "NewPortalActivity";
+    private static final String TAG_CHROMA_DIALOG = "TAG_CHROMA_DIALOG";
     private static final int PLACE_PICKER_REQUEST = 1;
 
     @Override
@@ -55,6 +63,7 @@ public class NewPortalActivity extends AppCompatActivity {
             @Override
             public void onChanged(Integer colour) {
                 mColour = colour;
+                mColourBarView.setBackground(new ColorDrawable(colour));
             }
         });
 
@@ -69,7 +78,9 @@ public class NewPortalActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mViewModel.getChromaDialogBuilder()
+                        .create()
+                        .show(getSupportFragmentManager(), TAG_CHROMA_DIALOG);
             }
         });
 
@@ -138,5 +149,16 @@ public class NewPortalActivity extends AppCompatActivity {
                 et.setText(String.valueOf(mPlace.getName()));
             }
         }
+    }
+
+    @Override
+    public void onPositiveButtonClick(int color) {
+        // Set the LiveData
+        mViewModel.setColourLiveData(color);
+    }
+
+    @Override
+    public void onNegativeButtonClick(int color) {
+        // Do nothing.
     }
 }
