@@ -3,7 +3,6 @@ package com.squabbi.iitk.db;
 import android.util.Log;
 
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -11,7 +10,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squabbi.iitk.adapter.PortalAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -20,7 +18,7 @@ import androidx.lifecycle.LiveData;
 
 public class FirebaseDocChangeLiveData extends LiveData<List<DocumentChange>> implements EventListener<QuerySnapshot> {
 
-    private static final String TAG = "FirebasePortalLiveData";
+    private static final String TAG = "FirebaseDocChangeLvDta";
     private Query mQuery;
     private ListenerRegistration mRegistration;
 
@@ -60,7 +58,6 @@ public class FirebaseDocChangeLiveData extends LiveData<List<DocumentChange>> im
             return;
         }
 
-        // TODO: Make a list of DocumentChanges ??
         setValue(documentSnapshots.getDocumentChanges());
     }
 }
