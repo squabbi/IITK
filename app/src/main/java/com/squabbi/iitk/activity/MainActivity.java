@@ -27,7 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.fragment.InventoryFragment;
 import com.squabbi.iitk.fragment.PortalListFragment;
+import com.squabbi.iitk.viewmodel.MainActivityViewModel;
 
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.nav_view) NavigationView mNavigationView;
     @BindView(R.id.main_activity_appbar) BottomAppBar mBottomAppBar;
     private ActionBarDrawerToggle mDrawerToggle;
+    private MainActivityViewModel mMainActivityViewModel;
 
     // Fragments
     private PortalListFragment mPortalListFragment;
@@ -74,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        // Setup and reference ViewModel
+        mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         setSupportActionBar(mBottomAppBar);
         ActionBar actionBar = getSupportActionBar();
@@ -165,5 +171,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_frame, fragment);
         ft.commit();
+    }
+
+    public MainActivityViewModel getMainActivityViewModel() {
+        return getMainActivityViewModel();
     }
 }
