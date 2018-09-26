@@ -51,21 +51,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private PortalListFragment mPortalListFragment;
     private InventoryFragment mInventoryFragment;
 
-    // Firebase authentication
-    private FirebaseAuth mAuth;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Check if the user is signed in (non-null) and update the UI accordingly
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        TextView textView = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_current_user_tv);
-        textView.setText(currentUser.getUid());
-
-        //updateUI(currentUser);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_activity, menu);
@@ -89,9 +74,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        // Firebase auth
-        mAuth = FirebaseAuth.getInstance();
 
         setSupportActionBar(mBottomAppBar);
         ActionBar actionBar = getSupportActionBar();
