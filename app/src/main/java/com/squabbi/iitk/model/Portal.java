@@ -17,7 +17,7 @@ public class Portal {
     private String mName;
     private String mNotes;
     @Nullable
-    GeoPoint mGeoPoint;
+    private GeoPoint mGeoPoint;
     private String mFriendlyLocation;
     private Integer mColour;
     @ServerTimestamp
