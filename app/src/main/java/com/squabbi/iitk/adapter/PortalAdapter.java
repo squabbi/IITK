@@ -9,6 +9,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import com.google.firebase.firestore.GeoPoint;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Portal;
 
@@ -35,7 +36,21 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
     @Override
     protected void onBindViewHolder(@NonNull PortalHolder portalHolder, int i, @NonNull Portal portal) {
         portalHolder.nameTv.setText(portal.getName());
-        portalHolder.locationTv.setText(portal.getGeoPoint().toString());
+
+        // Check location details
+        GeoPoint geoPoint = portal.getGeoPoint();
+        String friendlyLocation = portal.getFriendlyLocation();
+
+        if (geoPoint != null) {
+            // Set LatLng to location TextView
+            portalHolder.locationTv.setText(portal.getGeoPoint().toString());
+        } else if (friendlyLocation != null && !friendlyLocation.isEmpty()) {
+            // Always try to default to friendly location
+            portalHolder.locationTv.setText(portal.getFriendlyLocation());
+        } else {
+            // Both geoPoint and friendlyLocation is null or empty
+            portalHolder.locationTv.setText("No location...");
+        }
     }
 
     @NonNull
@@ -53,6 +68,8 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
 
         @BindView(R.id.item_portal_location)
         TextView locationTv;
+
+        @BindView()
 
         public PortalHolder(@NonNull View itemView) {
             super(itemView);
