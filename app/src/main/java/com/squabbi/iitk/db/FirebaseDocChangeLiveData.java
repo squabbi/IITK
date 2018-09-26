@@ -16,6 +16,11 @@ import javax.annotation.Nullable;
 
 import androidx.lifecycle.LiveData;
 
+/**
+ * Extension class of LiveData<T> which listens to changes of the Query passed in, and returns document changes.
+ * This class is exclusive for Portal List as we have implemented an onInactive method to clear the list of
+ * DocumentChanges in the PortalAdapter.
+ */
 public class FirebaseDocChangeLiveData extends LiveData<List<DocumentChange>> implements EventListener<QuerySnapshot> {
 
     private static final String TAG = "FirebaseDocChangeLvDta";
@@ -58,6 +63,7 @@ public class FirebaseDocChangeLiveData extends LiveData<List<DocumentChange>> im
             return;
         }
 
+        // Set the value of LiveData
         setValue(documentSnapshots.getDocumentChanges());
     }
 }
