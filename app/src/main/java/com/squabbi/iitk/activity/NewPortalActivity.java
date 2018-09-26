@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,22 +22,14 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
-import androidx.lifecycle.ViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.mayanknagwanshi.imagepicker.imageCompression.ImageCompressionListener;
 import in.mayanknagwanshi.imagepicker.imagePicker.ImagePicker;
 import me.tankery.permission.PermissionRequestActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Portal;
-import com.squabbi.iitk.util.Constants;
-import com.squabbi.iitk.util.PortalRepository;
 import com.squabbi.iitk.viewmodel.NewPortalViewModel;
 
 public class NewPortalActivity extends AppCompatActivity {
@@ -58,10 +50,6 @@ public class NewPortalActivity extends AppCompatActivity {
     private ImagePicker mImagePicker = new ImagePicker();
     private Place mPlace;
 
-    // Firebase
-    private FirebaseFirestore mFirestore;
-    private FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +59,9 @@ public class NewPortalActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         // Get a support ActionBar corresponding to this toolbar and
-        // enable the up button
+        // enable the close button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,8 +71,6 @@ public class NewPortalActivity extends AppCompatActivity {
             }
         });
 
-        mFirestore = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
     }
 
     public void launchPlacePicker(View view) {
@@ -109,7 +96,7 @@ public class NewPortalActivity extends AppCompatActivity {
 
     private boolean addPortal(String name, String notes) {
         // Validate entries
-        new PortalRepository().addPortal(new Portal(name, mPlace.getLatLng(), notes, null));
+        //new PortalRepository().addPortal(new Portal(name, mPlace.getLatLng(), notes, null));
         // Make new portal object
         Portal portal = new Portal(name, mPlace.getLatLng(), notes, null);
 
@@ -127,11 +114,7 @@ public class NewPortalActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_done:
                 // Complete the action and add the Portal to the Database
-                return addPortal(mPortalNameEt.getText().toString(), mPortalNotesEt.getText().toString());
-            case android.R.id.home:
-                // When the up button is pressed
-                finish();
-                return true;
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
