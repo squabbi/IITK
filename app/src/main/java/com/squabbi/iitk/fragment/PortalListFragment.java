@@ -2,14 +2,8 @@ package com.squabbi.iitk.fragment;
 
 import android.os.Bundle;
 
-import android.util.Log;
-
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -24,19 +18,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.activity.MainActivity;
 import com.squabbi.iitk.adapter.PortalAdapter;
-import com.squabbi.iitk.model.Portal;
-import com.squabbi.iitk.util.Constants;
-import com.squabbi.iitk.viewmodel.PortalListViewModel;
+import com.squabbi.iitk.viewmodel.MainActivityViewModel;
 
 import java.util.List;
 
@@ -47,7 +32,7 @@ import java.util.List;
 public class PortalListFragment extends Fragment implements PortalAdapter.OnPortalSelectedListener {
 
     private static final String TAG = "PortalListFragment";
-    private PortalListViewModel mViewModel;
+    private MainActivityViewModel mViewModel;
     private PortalAdapter mAdapter;
 
     @Override
@@ -56,7 +41,7 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
 
         // Moved ViewModel stuff from here to onStart
         // Register ViewModel
-        mViewModel = ViewModelProviders.of(getActivity()).get(PortalListViewModel.class);
+        mViewModel = ViewModelProviders.of(getActivity()).get(MainActivityViewModel.class);
     }
 
     @BindView(R.id.portal_recycler)

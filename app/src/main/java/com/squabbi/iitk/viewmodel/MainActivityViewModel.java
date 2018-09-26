@@ -18,9 +18,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class PortalListViewModel extends ViewModel {
+public class MainActivityViewModel extends ViewModel {
 
-    private static final String TAG = "PortalListViewModel";
+    private static final String TAG = "MainActivityViewModel";
 
     private static final FirebaseAuth FIREBASE_AUTH = FirebaseAuth.getInstance();
 
