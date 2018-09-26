@@ -1,9 +1,15 @@
 package com.squabbi.iitk.util;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.squabbi.iitk.model.Portal;
+
+import androidx.annotation.NonNull;
 
 public class FirebaseRepository {
 
@@ -45,5 +51,9 @@ public class FirebaseRepository {
         // TODO: Apply different cases to allow people to filter portals
         // Example query for A-Z portal names
         return mPortalCollectionReference.orderBy("name", Query.Direction.ASCENDING);
+    }
+
+    public boolean addPortal(Portal portal) {
+        return mPortalCollectionReference.add(portal).isSuccessful();
     }
 }
