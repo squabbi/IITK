@@ -5,12 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
+
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Portal;
 
@@ -18,46 +15,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder> {
 
-    private ArrayList<DocumentSnapshot> mSnapshots = new ArrayList<>();
+    private static List<DocumentSnapshot> mSnapshots = new ArrayList<>();
+    private OnPortalSelectedListener mListener;
 
     public interface OnPortalSelectedListener {
-
         void onPortalSelected(DocumentSnapshot portal);
-
     }
 
-    private OnPortalSelectedListener mListener;
+    public static void clearSnapshots() {
+        mSnapshots.clear();
+    }
 
     public PortalAdapter(OnPortalSelectedListener listener) {
         mListener = listener;
     }
 
-    public void setData(QuerySnapshot querySnapshot) {
-        //if (mSnapshots != null) {
-            // Populate list of Documents
-            for (DocumentChange documentChange : querySnapshot.getDocumentChanges()) {
+    public void setDocChangeData(List<DocumentSnapshot> documentChanges) {
+        // Dispatch the event
+//        for (DocumentChange change : documentChanges) {
+//            switch (change.getType()) {
+//                case ADDED:
+//                    onDocumentAdded(change);
+//                    break;
+//                case MODIFIED:
+//                    onDocumentModified(change);
+//                    break;
+//                case REMOVED:
+//                    onDocumentRemoved(change);
+//                    break;
+//            }
+//        }
 
-                switch (documentChange.getType()) {
-                    case ADDED:
-                        onDocumentAdded(documentChange);
-                        break;
-                    case MODIFIED:
-                        onDocumentModified(documentChange);
-                        break;
-                    case REMOVED:
-                        onDocumentRemoved(documentChange);
-                        break;
-                }
-            }
-        //}
-        //notifyDataSetChanged();
+        mSnapshots.clear();
+
+        mSnapshots.addAll(documentChanges);
+        notifyDataSetChanged();
     }
 
     protected void onDocumentAdded(DocumentChange change) {
@@ -113,19 +111,20 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(final DocumentSnapshot snapshot, final OnPortalSelectedListener listener) {
+        // Change this when you need to test different livedata
+        public void bind(final DocumentSnapshot portal, final OnPortalSelectedListener listener) {
+            // Create portal object
+            Portal _portal = portal.toObject(Portal.class);
 
-            Portal portal = snapshot.toObject(Portal.class);
-
-            nameTv.setText(portal.getName());
-            locationTv.setText(portal.getGeoPoint().toString());
+            nameTv.setText(_portal.getName());
+            locationTv.setText(_portal.getGeoPoint().toString());
 
             // Click listener
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.onPortalSelected(snapshot);
+                        listener.onPortalSelected(portal);
                     }
                 }
             });

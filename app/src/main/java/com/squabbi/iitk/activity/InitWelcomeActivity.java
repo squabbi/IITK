@@ -39,6 +39,7 @@ public class InitWelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init_welcome);
+        ButterKnife.bind(this);
 
         // Get Firebase Auth instance
         mAuth = FirebaseAuth.getInstance();
@@ -48,8 +49,6 @@ public class InitWelcomeActivity extends AppCompatActivity {
             // Launch MainActivity
             startMainActivityAndFinish();
         }
-
-        ButterKnife.bind(this);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
