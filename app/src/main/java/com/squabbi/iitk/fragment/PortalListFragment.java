@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -46,27 +47,16 @@ import java.util.List;
 public class PortalListFragment extends Fragment implements PortalAdapter.OnPortalSelectedListener {
 
     private static final String TAG = "PortalListFragment";
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore mFirestore;
-    private Query mQuery;
+    private PortalListViewModel mViewModel;
     private PortalAdapter mAdapter;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Moved ViewModel stuff from here to onStart
         // Register ViewModel
-        PortalListViewModel viewModel = ViewModelProviders.of(this).get(PortalListViewModel.class);
-
-        // Observe LiveData
-        LiveData<List<Portal>> portalLiveData = viewModel.getPortalLiveData();
-        portalLiveData.observe(this, new Observer<List<Portal>>() {
-            @Override
-            public void onChanged(List<Portal> portals) {
-                Log.d(TAG, "live data changed, should not do this unless it actually did");
-                mAdapter.setPortalData(portals);
-            }
-        });
+        mViewModel = ViewModelProviders.of(getActivity()).get(PortalListViewModel.class);
     }
 
     @BindView(R.id.portal_recycler)
@@ -85,22 +75,13 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
         mPortalRecycler.setAdapter(mAdapter);
     }
 
-//    @Override
-//    public void onPortalSelected(DocumentSnapshot portal) {
-//        // TODO: Go into the details page for the selected portal
-//        // Show a snackbar on errors
-//        if (getView() != null) {
-//            Snackbar.make(getView().findViewById(R.id.portal_view_root_layout),
-//                    "Tapped on: " + portal.getId(), Snackbar.LENGTH_LONG).show();
-//        }
-//    }
-
-
     @Override
-    public void onPortalSelected(Portal portal) {
+    public void onPortalSelected(DocumentSnapshot portal) {
+        // TODO: Go into the details page for the selected portal
+        // Show a snackbar on errors
         if (getView() != null) {
             Snackbar.make(getView().findViewById(R.id.portal_view_root_layout),
-                    "Tapped on: " + portal.getName(), Snackbar.LENGTH_LONG).show();
+                    "Tapped on: " + portal.getId(), Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -114,5 +95,23 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
         initRecycler();
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        mViewModel.getPortalDocumentChange().observe(this, new Observer<List<DocumentSnapshot>>() {
+            @Override
+            public void onChanged(List<DocumentSnapshot> documentSnapshots) {
+                mAdapter.setDocChangeData(documentSnapshots);
+            }
+        });
+    }
+
+    @Override
+    public void onStop() {
+        //PortalAdapter.clearSnapshots();
+        super.onStop();
     }
 }
