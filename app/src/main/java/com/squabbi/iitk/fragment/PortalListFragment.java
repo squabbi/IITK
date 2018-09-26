@@ -48,7 +48,7 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
         mAdapter = new PortalAdapter(mViewModel.getBaseFirestoreRecyclerBuilder()
             .setLifecycleOwner(this).build());
 
-        mPortalRecycler.addItemDecoration(new DividerItemDecoration(this.getContext(), LinearLayout.VERTICAL));
+        //mPortalRecycler.addItemDecoration(new DividerItemDecoration(this.getContext(), LinearLayout.VERTICAL));
         mPortalRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mPortalRecycler.setHasFixedSize(true);
 
@@ -79,16 +79,4 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
 
         return view;
     }
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        mAdapter.startListening();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        mAdapter.stopListening();
-//    }
 }
