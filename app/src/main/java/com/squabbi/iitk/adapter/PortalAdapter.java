@@ -25,13 +25,17 @@ import butterknife.ButterKnife;
 
 public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder> {
 
-    private ArrayList<DocumentSnapshot> mSnapshots = new ArrayList<>();
+    private static List<DocumentSnapshot> mSnapshots = new ArrayList<>();
     private List<Portal> mPortals = new ArrayList<>();
 
     public interface OnPortalSelectedListener {
 
-        void onPortalSelected(Portal portal);
+        void onPortalSelected(DocumentSnapshot portal);
 
+    }
+
+    public static void clearSnapshots() {
+        mSnapshots.clear();
     }
 
     private OnPortalSelectedListener mListener;
@@ -58,11 +62,38 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
                 }
             }
         }
+
         notifyDataSetChanged();
     }
 
     public void setPortalData(List<Portal> portals) {
         mPortals = portals;
+        notifyDataSetChanged();
+    }
+
+    public void setPortalDocData(List<DocumentSnapshot> documentSnapshots) {
+        mSnapshots = documentSnapshots;
+    }
+
+    public void setDocChangeData(List<DocumentChange> documentChanges) {
+        // Dispatch the event
+        for (DocumentChange change : documentChanges) {
+            switch (change.getType()) {
+                case ADDED:
+                    // TODO: handle document added
+                    onDocumentAdded(change);
+                    break;
+                case MODIFIED:
+                    // TODO: handle document modified
+                    onDocumentModified(change);
+                    break;
+                case REMOVED:
+                    // TODO: handle document removed
+                    onDocumentRemoved(change);
+                    break;
+            }
+        }
+
         notifyDataSetChanged();
     }
 
@@ -98,12 +129,14 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PortalAdapter.ViewHolder holder, int position) {
-        holder.bind(mPortals.get(position), mListener);
+        // Change this when you need to test different livedata
+        holder.bind(mSnapshots.get(position), mListener);
     }
 
     @Override
     public int getItemCount() {
-        return mPortals.size();
+        // Change this when you need to test different livedata
+        return mSnapshots.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -119,9 +152,13 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(final Portal portal, final OnPortalSelectedListener listener) {
-            nameTv.setText(portal.getName());
-            locationTv.setText(portal.getGeoPoint().toString());
+        // Change this when you need to test different livedata
+        public void bind(final DocumentSnapshot portal, final OnPortalSelectedListener listener) {
+            // Create portal object
+            Portal _portal = portal.toObject(Portal.class);
+
+            nameTv.setText(_portal.getName());
+            locationTv.setText(_portal.getGeoPoint().toString());
 
             // Click listener
             itemView.setOnClickListener(new View.OnClickListener() {
