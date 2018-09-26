@@ -73,6 +73,7 @@ public class InitWelcomeActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             }
             catch (ApiException e) {
+                // TODO: Catch int exceptions, i.e. 7 is no internet I think
                 e.printStackTrace();
             }
         }
