@@ -25,7 +25,7 @@ public class NewPortalViewModel extends ViewModel {
 
     public NewPortalViewModel() {
         // Set default colour
-        setColourLiveData(Color.GRAY);
+        setColourLiveData(Color.WHITE);
     }
 
     public boolean addPortal(String name, Place place, String friendlyLocation,
