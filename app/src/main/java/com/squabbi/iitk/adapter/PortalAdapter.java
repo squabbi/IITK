@@ -1,5 +1,7 @@
 package com.squabbi.iitk.adapter;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +53,15 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
             // Both geoPoint and friendlyLocation is null or empty
             portalHolder.locationTv.setText("No location...");
         }
+
+        // Set colour bar
+        Integer colour = portal.getColour();
+        if (colour != null) {
+            portalHolder.colourView.setBackground(new ColorDrawable(colour));
+        } else {
+            // Apply default grey colour
+            portalHolder.colourView.setBackground(new ColorDrawable(Color.GRAY));
+        }
     }
 
     @NonNull
@@ -69,7 +80,8 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
         @BindView(R.id.item_portal_location)
         TextView locationTv;
 
-        @BindView()
+        @BindView(R.id.portal_item_colour_view)
+        View colourView;
 
         public PortalHolder(@NonNull View itemView) {
             super(itemView);
