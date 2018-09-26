@@ -2,7 +2,9 @@ package com.squabbi.iitk.db;
 
 import android.util.Log;
 
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -21,7 +23,7 @@ import androidx.lifecycle.LiveData;
  * This class is exclusive for Portal List as we have implemented an onInactive method to clear the list of
  * DocumentChanges in the PortalAdapter.
  */
-public class FirebaseDocChangeLiveData extends LiveData<List<DocumentChange>> implements EventListener<QuerySnapshot> {
+public class FirebaseDocChangeLiveData extends LiveData<List<DocumentSnapshot>> implements EventListener<QuerySnapshot> {
 
     private static final String TAG = "FirebaseDocChangeLvDta";
     private Query mQuery;
@@ -52,11 +54,11 @@ public class FirebaseDocChangeLiveData extends LiveData<List<DocumentChange>> im
         }
 
         // Clear array list
-        PortalAdapter.clearSnapshots();
+        //PortalAdapter.clearSnapshots();
     }
 
     @Override
-    public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+    public void onEvent(@Nullable QuerySnapshot querySnapshot, @Nullable FirebaseFirestoreException e) {
         if (e != null) {
             // TODO: Handle errors
             Log.w(TAG, "onEvent:error", e);
@@ -64,6 +66,8 @@ public class FirebaseDocChangeLiveData extends LiveData<List<DocumentChange>> im
         }
 
         // Set the value of LiveData
-        setValue(documentSnapshots.getDocumentChanges());
+        //setValue(querySnapshot.getDocumentChanges());
+        // Temporary, send all documents, not just changes.
+        setValue(querySnapshot.getDocuments());
     }
 }
