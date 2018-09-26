@@ -10,82 +10,83 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squabbi.iitk.model.Portal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
 import androidx.lifecycle.LiveData;
 
-public class FirebaseQueryLiveData extends LiveData<QuerySnapshot> implements EventListener<QuerySnapshot> {
+public class FirebaseQueryLiveData extends LiveData<List<Portal>> implements EventListener<QuerySnapshot> {
 
     private static final String TAG = "FirebaseQueryLiveData";
     private Query mQuery;
     private ListenerRegistration mRegistration;
-    private boolean mListenerPendingRemoval;
-    private final Handler mHandler = new Handler();
-    private final Runnable mRemoveListener = new Runnable() {
-        @Override
-        public void run() {
-            mRegistration.remove();
-            mListenerPendingRemoval = false;
-        }
-    };
 
+    private List<Portal> mPortals = new ArrayList<>();
+
+    // Constructor
     public FirebaseQueryLiveData(Query query) {
         this.mQuery = query;
     }
 
     @Override
     protected void onActive() {
-        //super.onActive();
-        
         Log.d(TAG, "onActive");
-        
 
         if (mQuery != null && mRegistration == null) {
+            // Listen to changes to the Query
             mRegistration = mQuery.addSnapshotListener(this);
         }
     }
 
     @Override
     protected void onInactive() {
-        super.onInactive();
+        Log.d(TAG, "onInactive");
 
-        Log.d(TAG, "onInActive");
         if (mRegistration != null) {
             mRegistration.remove();
             mRegistration = null;
         }
+
+        // Clear array list
+        mPortals.clear();
     }
 
     @Override
-    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-        // Handle errors
+    public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
         if (e != null) {
-            return;
+            // TODO: Handle errors
         }
 
-        Log.d(TAG, "onEvent, query changed");
-        setValue(queryDocumentSnapshots);
+        setValue(toPortals(snapshot));
+    }
 
+    private List<Portal> toPortals(QuerySnapshot snapshot) {
+        for (DocumentChange documentChange : snapshot.getDocumentChanges()) {
 
-//            // Dispatch the event
-//            for (DocumentChange change : queryDocumentSnapshots.getDocumentChanges()) {
-//                // Snapshot of the changed document
-//                DocumentSnapshot snapshot = change.getDocument();
-//
-//                switch (change.getType()) {
-//                    case ADDED:
-//                        onDocumentAdded(change);
-//                        break;
-//                    case MODIFIED:
-//                        onDocumentModified(change);
-//                        break;
-//                    case REMOVED:
-//                        onDocumentRemoved(change);
-//                        break;
-//                }
-//            }
+            switch (documentChange.getType()) {
+                case ADDED:
+                    mPortals.add(documentChange.getNewIndex(), documentChange.getDocument().toObject(Portal.class));
+                    break;
+                case MODIFIED:
+                    if (documentChange.getOldIndex() == documentChange.getNewIndex()) {
+                        // Item changed but remained in the same position
+                        mPortals.set(documentChange.getOldIndex(), documentChange.getDocument().toObject(Portal.class));
+                    } else {
+                        // Item changed and changed position
+                        mPortals.remove(documentChange.getOldIndex());
+                        mPortals.add(documentChange.getNewIndex(), documentChange.getDocument().toObject(Portal.class));
+                    }
+                    break;
+                case REMOVED:
+                    mPortals.remove(documentChange.getOldIndex());
+                    break;
+            }
+        }
+
+        return mPortals;
     }
 }
