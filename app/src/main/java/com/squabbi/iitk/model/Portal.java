@@ -19,7 +19,7 @@ public class Portal {
     @Nullable
     GeoPoint mGeoPoint;
     private String mFriendlyLocation;
-    private String mColour;
+    private Integer mColour;
     @ServerTimestamp
     private Date mCreatedAt;
 
@@ -34,7 +34,7 @@ public class Portal {
      * @param colour Colour tag of the portal in hexadecimal.
      */
     public Portal(@Nonnull String name, @Nullable Place place,
-                  @Nullable String friendlyLocation, @Nonnull String notes, String colour) {
+                  @Nullable String friendlyLocation, @Nonnull String notes, Integer colour) {
 
         this.mName = name;
 
@@ -89,11 +89,11 @@ public class Portal {
         mFriendlyLocation = friendlyLocation;
     }
 
-    public String getColour() {
+    public Integer getColour() {
         return mColour;
     }
 
-    public void setColour(String colour) {
+    public void setColour(Integer colour) {
         mColour = colour;
     }
 
