@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -32,8 +33,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.MainActivity;
 import com.squabbi.iitk.adapter.PortalAdapter;
+import com.squabbi.iitk.model.Portal;
 import com.squabbi.iitk.util.Constants;
 import com.squabbi.iitk.viewmodel.PortalListViewModel;
+
+import java.util.List;
 
 
 /**
@@ -53,13 +57,14 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
 
         // Register ViewModel
         PortalListViewModel viewModel = ViewModelProviders.of(this).get(PortalListViewModel.class);
-        LiveData<QuerySnapshot> liveData = viewModel.getQuerySnapshotLiveData();
 
-        liveData.observe(this, new Observer<QuerySnapshot>() {
+        // Observe LiveData
+        LiveData<List<Portal>> portalLiveData = viewModel.getPortalLiveData();
+        portalLiveData.observe(this, new Observer<List<Portal>>() {
             @Override
-            public void onChanged(QuerySnapshot queryDocumentSnapshots) {
-                Log.d(TAG, "onChanged");
-                mAdapter.setData(queryDocumentSnapshots);
+            public void onChanged(List<Portal> portals) {
+                Log.d(TAG, "live data changed, should not do this unless it actually did");
+                mAdapter.setPortalData(portals);
             }
         });
     }
@@ -76,16 +81,26 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
 
         mPortalRecycler.addItemDecoration(new DividerItemDecoration(this.getContext(), LinearLayout.VERTICAL));
         mPortalRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        mPortalRecycler.setHasFixedSize(true);
         mPortalRecycler.setAdapter(mAdapter);
     }
 
+//    @Override
+//    public void onPortalSelected(DocumentSnapshot portal) {
+//        // TODO: Go into the details page for the selected portal
+//        // Show a snackbar on errors
+//        if (getView() != null) {
+//            Snackbar.make(getView().findViewById(R.id.portal_view_root_layout),
+//                    "Tapped on: " + portal.getId(), Snackbar.LENGTH_LONG).show();
+//        }
+//    }
+
+
     @Override
-    public void onPortalSelected(DocumentSnapshot portal) {
-        // TODO: Go into the details page for the selected portal
-        // Show a snackbar on errors
+    public void onPortalSelected(Portal portal) {
         if (getView() != null) {
             Snackbar.make(getView().findViewById(R.id.portal_view_root_layout),
-                    "Tapped on: " + portal.getId(), Snackbar.LENGTH_LONG).show();
+                    "Tapped on: " + portal.getName(), Snackbar.LENGTH_LONG).show();
         }
     }
 
