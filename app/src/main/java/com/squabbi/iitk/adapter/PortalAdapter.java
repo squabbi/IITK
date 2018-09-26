@@ -26,10 +26,11 @@ import butterknife.ButterKnife;
 public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder> {
 
     private ArrayList<DocumentSnapshot> mSnapshots = new ArrayList<>();
+    private List<Portal> mPortals = new ArrayList<>();
 
     public interface OnPortalSelectedListener {
 
-        void onPortalSelected(DocumentSnapshot portal);
+        void onPortalSelected(Portal portal);
 
     }
 
@@ -40,7 +41,7 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
     }
 
     public void setData(QuerySnapshot querySnapshot) {
-        //if (mSnapshots != null) {
+        if (mSnapshots != null) {
             // Populate list of Documents
             for (DocumentChange documentChange : querySnapshot.getDocumentChanges()) {
 
@@ -56,8 +57,13 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
                         break;
                 }
             }
-        //}
-        //notifyDataSetChanged();
+        }
+        notifyDataSetChanged();
+    }
+
+    public void setPortalData(List<Portal> portals) {
+        mPortals = portals;
+        notifyDataSetChanged();
     }
 
     protected void onDocumentAdded(DocumentChange change) {
@@ -92,12 +98,12 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PortalAdapter.ViewHolder holder, int position) {
-        holder.bind(mSnapshots.get(position), mListener);
+        holder.bind(mPortals.get(position), mListener);
     }
 
     @Override
     public int getItemCount() {
-        return mSnapshots.size();
+        return mPortals.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -113,10 +119,7 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(final DocumentSnapshot snapshot, final OnPortalSelectedListener listener) {
-
-            Portal portal = snapshot.toObject(Portal.class);
-
+        public void bind(final Portal portal, final OnPortalSelectedListener listener) {
             nameTv.setText(portal.getName());
             locationTv.setText(portal.getGeoPoint().toString());
 
@@ -125,7 +128,7 @@ public class PortalAdapter extends RecyclerView.Adapter<PortalAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.onPortalSelected(snapshot);
+                        listener.onPortalSelected(portal);
                     }
                 }
             });
