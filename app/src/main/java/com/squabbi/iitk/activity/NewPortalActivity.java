@@ -1,6 +1,5 @@
 package com.squabbi.iitk.activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,10 +28,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.mayanknagwanshi.imagepicker.imageCompression.ImageCompressionListener;
 import in.mayanknagwanshi.imagepicker.imagePicker.ImagePicker;
-import me.tankery.permission.PermissionRequestActivity;
 
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.model.Portal;
 import com.squabbi.iitk.viewmodel.NewPortalViewModel;
 
 public class NewPortalActivity extends AppCompatActivity {
@@ -46,12 +43,6 @@ public class NewPortalActivity extends AppCompatActivity {
     private String mColour;
 
     private static final int PLACE_PICKER_REQUEST = 1;
-    private static final int PERMISSION_CHECK_REQUEST = 2;
-
-    private static final String[] PERMISSIONS_REQUIRED = new String[] {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +64,7 @@ public class NewPortalActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchImagePicker(view);
+
             }
         });
 
@@ -91,14 +82,6 @@ public class NewPortalActivity extends AppCompatActivity {
         }
     }
 
-    public void launchImagePicker(View view) {
-        final String message = getString(R.string.permissions_camera);
-        PermissionRequestActivity.start(this, PERMISSION_CHECK_REQUEST, PERMISSIONS_REQUIRED, message, message);
-    }
-
-    public void launchOcrActivity(View view) {
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -148,41 +131,6 @@ public class NewPortalActivity extends AppCompatActivity {
                 EditText et = findViewById(R.id.portal_location_et);
                 // Display friendly Place name
                 et.setText(String.valueOf(mPlace.getName()));
-            }
-        }
-
-        if (requestCode == PERMISSION_CHECK_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                // Launch image picker once permissions are granted
-                mImagePicker.withActivity(this).start();
-            } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_LONG).show();
-            }
-        }
-
-        if (requestCode == ImagePicker.SELECT_IMAGE && resultCode == Activity.RESULT_OK) {
-            //Add compression listener if withCompression is set to true
-            mImagePicker.addOnCompressListener(new ImageCompressionListener() {
-                @Override
-                public void onStart() {
-
-                }
-
-                @Override
-                public void onCompressed(String filePath) { // filePath of the compressed image
-                    // Convert image to Bitmap
-                    Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-                    // Set the image into the ParallaxImageView
-                    VerticalScrollParallaxImageView portalVertParallaxIv = findViewById(R.id.vertParallaxImageView);
-                    portalVertParallaxIv.setImageBitmap(selectedImage);
-                }
-            });
-
-            String filePath = mImagePicker.getImageFilePath(data);
-            if (filePath != null) {
-                Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-                VerticalScrollParallaxImageView portalVertParallaxIv = findViewById(R.id.vertParallaxImageView);
-                portalVertParallaxIv.setImageBitmap(selectedImage);
             }
         }
     }
