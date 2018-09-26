@@ -1,7 +1,5 @@
 package com.squabbi.iitk.adapter;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +36,7 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
 
     @Override
     protected void onBindViewHolder(@NonNull PortalHolder portalHolder, int i, @NonNull Portal portal) {
-        portalHolder.nameTv.setText(portal.getName());
+        portalHolder.mNameTv.setText(portal.getName());
 
         // Check location details
         GeoPoint geoPoint = portal.getGeoPoint();
@@ -45,23 +44,17 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
 
         if (geoPoint != null) {
             // Set LatLng to location TextView
-            portalHolder.locationTv.setText(portal.getGeoPoint().toString());
+            portalHolder.mLocationTv.setText(portal.getGeoPoint().toString());
         } else if (friendlyLocation != null && !friendlyLocation.isEmpty()) {
             // Always try to default to friendly location
-            portalHolder.locationTv.setText(portal.getFriendlyLocation());
+            portalHolder.mLocationTv.setText(portal.getFriendlyLocation());
         } else {
             // Both geoPoint and friendlyLocation is null or empty
-            portalHolder.locationTv.setText("No location...");
+            portalHolder.mLocationTv.setText(R.string.portal_item_no_location);
         }
 
-        // Set colour bar
-        Integer colour = portal.getColour();
-        if (colour != null) {
-            portalHolder.colourView.setBackground(new ColorDrawable(colour));
-        } else {
-            // Apply default grey colour
-            portalHolder.colourView.setBackground(new ColorDrawable(Color.GRAY));
-        }
+        // Set background colour from Portal
+        portalHolder.mCardView.setCardBackgroundColor(portal.getColour());
     }
 
     @NonNull
@@ -75,13 +68,13 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
     static class PortalHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_portal_name)
-        TextView nameTv;
+        TextView mNameTv;
 
         @BindView(R.id.item_portal_location)
-        TextView locationTv;
+        TextView mLocationTv;
 
-        @BindView(R.id.portal_item_colour_view)
-        View colourView;
+        @BindView(R.id.item_portal_card_layout)
+        CardView mCardView;
 
         public PortalHolder(@NonNull View itemView) {
             super(itemView);
