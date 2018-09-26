@@ -1,10 +1,8 @@
 package com.squabbi.iitk.db;
 
-import android.os.Handler;
 import android.util.Log;
 
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -19,6 +17,11 @@ import javax.annotation.Nullable;
 
 import androidx.lifecycle.LiveData;
 
+/**
+ * LiveData extension that returns a LiveData object of a list of Portals from a Firebase Firestore instance.
+ * Currently, this class is no-longer used, as the LiveData will be processed by the Adapter, and the
+ * DocumentChanges passed down.
+ */
 public class FirebaseQueryLiveData extends LiveData<List<Portal>> implements EventListener<QuerySnapshot> {
 
     private static final String TAG = "FirebaseQueryLiveData";
@@ -62,6 +65,7 @@ public class FirebaseQueryLiveData extends LiveData<List<Portal>> implements Eve
         }
 
         setValue(toPortals(snapshot));
+        // TODO: Make a list of DocumentChanges ??
     }
 
     private List<Portal> toPortals(QuerySnapshot snapshot) {
