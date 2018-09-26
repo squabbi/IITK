@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
-        mDrawerToggle = setupDrawerToggle();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         // assign fragments
@@ -102,10 +101,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this, mDrawerLayout, mBottomAppBar, R.string.drawer_open, R.string.drawer_close);
-    }
-
     @OnClick(R.id.main_fab)
     public void onClick(View view) {
         MenuItem item = mNavigationView.getCheckedItem();
@@ -117,13 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, NewInventoryActivity.class));
                 break;
         }
-    }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync toggle state after onRestoreInstanceState has occurred
-        mDrawerToggle.syncState();
     }
 
     @Override
