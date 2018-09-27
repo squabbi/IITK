@@ -1,4 +1,4 @@
-package com.squabbi.iitk.viewmodel;
+package com.squabbi.iitk.activity.ui.mainlistview;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.squabbi.iitk.model.Portal;

@@ -1,10 +1,7 @@
-package com.squabbi.iitk.activity;
+package com.squabbi.iitk.activity.ui.newportal;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -12,7 +9,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +29,6 @@ import butterknife.ButterKnife;
 
 import com.kunzisoft.androidclearchroma.listener.OnColorSelectedListener;
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.viewmodel.NewPortalViewModel;
 
 public class NewPortalActivity extends AppCompatActivity implements OnColorSelectedListener {
 
@@ -64,7 +59,8 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
             @Override
             public void onChanged(Integer colour) {
                 mColour = colour;
-                mColourBarView.setBackground(new ColorDrawable(colour));
+                ColorDrawable colorDrawable = new ColorDrawable(colour);
+                mColourBarView.setBackground(colorDrawable);
             }
         });
 

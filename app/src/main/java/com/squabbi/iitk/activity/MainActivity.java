@@ -1,7 +1,7 @@
 package com.squabbi.iitk.activity;
 
 import android.content.Intent;
-import android.content.res.Configuration;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -12,19 +12,18 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.adapter.PortalAdapter;
-import com.squabbi.iitk.fragment.InventoryFragment;
-import com.squabbi.iitk.fragment.PortalListFragment;
-import com.squabbi.iitk.viewmodel.MainActivityViewModel;
+import com.squabbi.iitk.activity.ui.mainlistview.InventoryFragment;
+import com.squabbi.iitk.activity.ui.mainlistview.PortalListFragment;
+import com.squabbi.iitk.activity.ui.mainlistview.MainActivityViewModel;
+import com.squabbi.iitk.activity.ui.newinventory.NewInventoryActivity;
+import com.squabbi.iitk.activity.ui.newportal.NewPortalActivity;
 
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;

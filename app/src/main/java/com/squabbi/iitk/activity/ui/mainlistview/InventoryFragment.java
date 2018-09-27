@@ -1,4 +1,4 @@
-package com.squabbi.iitk.fragment;
+package com.squabbi.iitk.activity.ui.mainlistview;
 
 
 import android.os.Bundle;

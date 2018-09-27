@@ -1,4 +1,4 @@
-package com.squabbi.iitk.viewmodel;
+package com.squabbi.iitk.activity.ui.newportal;
 
 import android.graphics.Color;
 

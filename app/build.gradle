@@ -30,7 +30,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-
     // External implementations of libraries
     implementation 'com.github.Kunzisoft:AndroidClearChroma:2.0'
     implementation 'me.tankery.lib:permission-requester:1.1.0'
@@ -55,19 +54,12 @@ dependencies {
 
     // Android Components implementation
     def lifecycle_version = "2.0.0"
-    def room_version = "2.0.0-rc01"
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
-
-    // Room
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    // Test helpers
-    testImplementation "androidx.room:room-testing:$room_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
