@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -25,7 +26,7 @@ import com.squabbi.iitk.viewmodel.MainActivityViewModel;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PortalListFragment extends Fragment implements PortalAdapter.OnPortalSelectedListener {
+public class PortalListFragment extends Fragment {
 
     private static final String TAG = "PortalListFragment";
     private MainActivityViewModel mViewModel;
@@ -33,11 +34,6 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
 
     @BindView(R.id.portal_recycler)
     RecyclerView mPortalRecycler;
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
     public PortalListFragment() {
         // Required empty public constructor
@@ -48,21 +44,17 @@ public class PortalListFragment extends Fragment implements PortalAdapter.OnPort
         mAdapter = new PortalAdapter(mViewModel.getBaseFirestoreRecyclerBuilder()
             .setLifecycleOwner(this).build());
 
-        //mPortalRecycler.addItemDecoration(new DividerItemDecoration(this.getContext(), LinearLayout.VERTICAL));
+        mAdapter.setOnItemClickListener(new PortalAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Toast.makeText(getActivity(), "Selected :: " + documentSnapshot.getId(), Toast.LENGTH_LONG).show();
+            }
+        });
+
         mPortalRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mPortalRecycler.setHasFixedSize(true);
 
         mPortalRecycler.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onPortalSelected(DocumentSnapshot portal) {
-        // TODO: Go into the details page for the selected portal
-        // Show a snackbar on errors
-        if (getView() != null) {
-            Snackbar.make(getView().findViewById(R.id.portal_view_root_layout),
-                    "Tapped on: " + portal.getId(), Snackbar.LENGTH_SHORT).show();
-        }
     }
 
     @Override
