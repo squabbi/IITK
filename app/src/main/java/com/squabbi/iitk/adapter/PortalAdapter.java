@@ -1,5 +1,6 @@
 package com.squabbi.iitk.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,9 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
             portalHolder.mLocationTv.setText(R.string.portal_item_no_location);
         }
 
-        // Set background colour from Portal
-        portalHolder.mCardView.setCardBackgroundColor(portal.getColour());
+        // Set background colour from Portal if it's not null.
+        if (portal.getColour() != null) portalHolder.mCardView.setCardBackgroundColor(portal.getColour());
+        else portalHolder.mCardView.setCardBackgroundColor(Color.GRAY);
     }
 
     @NonNull
