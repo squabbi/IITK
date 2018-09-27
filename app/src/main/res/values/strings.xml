@@ -18,6 +18,8 @@
 
     <string name="contentDesc_ocrButton">Launch OCR</string>
     <string name="contentDesc_locationButton">Launch Place Picker</string>
+
+    <string name="toast_addPortal_failed">Failed to add portal. Please try again.</string>
     
     <!-- Add inventory strings -->
     <string name="hint_inventory_name">Inventory Name</string>
