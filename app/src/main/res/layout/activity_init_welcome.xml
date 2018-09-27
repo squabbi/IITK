@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.InitWelcomeActivity"
+    tools:context=".activity.WelcomeActivity"
     android:orientation="vertical"
     android:padding="@dimen/activity_welcome_padding"
     android:id="@+id/welcome_main_layout">
