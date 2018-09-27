@@ -36,12 +36,7 @@
             android:value="AIzaSyCn8Y0c_5R7nkKIsJ7NLvDq--CGHFzNosA" />
 
         <activity android:name=".activity.SettingsActivity" />
-        <activity
-            android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".activity.InitWelcomeActivity">
+        <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
