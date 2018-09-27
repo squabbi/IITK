@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,7 +73,7 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
         // Get a support ActionBar corresponding to this toolbar and
         // enable the close button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_outline_close_24px);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -109,24 +110,23 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_done:
-                // Complete the action and add the Portal to the Database.
-                // Get strings
-                String name = mPortalNameEt.getText().toString();
-                String notes = mPortalNotesEt.getText().toString();
-                Place place = mPlace;
-                String friendlyLocation = mPortalLocationEt.getText().toString();
-                Integer colour = mColour;
-
                 // Close the keyboard and submit strings to ViewModel.
                 closeKeyboard();
-
-                if (!mViewModel.addPortal(name, place, friendlyLocation, notes, colour)) {
-                    // If adding was not successful
+                // Add portal
+                if (!addPortal()) {
+                    // If there was an issue adding the portal. Don't leave the screen.
+                    Toast toast = Toast.makeText(this, R.string.toast_addPortal_failed, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP, 0,0);
+                    toast.show();
+                    break;
+                } else {
+                    // Finish activity
+                    finish();
                 }
-            default:
-                // Invoke super for all other items.
-                return super.onOptionsItemSelected(item);
+                return true;
         }
+        // Invoke super for all other items.
+        return super.onOptionsItemSelected(item);
     }
 
     private void closeKeyboard() {
@@ -135,6 +135,18 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
             InputMethodManager iMm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             iMm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    private boolean addPortal() {
+        // Complete the action and add the Portal to the Database.
+        // Get strings
+        String name = mPortalNameEt.getText().toString();
+        String notes = mPortalNotesEt.getText().toString();
+        Place place = mPlace;
+        String friendlyLocation = mPortalLocationEt.getText().toString();
+        Integer colour = mColour;
+
+        return mViewModel.addPortal(name, place, friendlyLocation, notes, colour);
     }
 
     @Override
