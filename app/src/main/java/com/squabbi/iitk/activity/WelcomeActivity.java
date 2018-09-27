@@ -26,11 +26,11 @@ import com.squabbi.iitk.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class InitWelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-    private static final String TAG = "InitWelcomeActivity";
+    private static final String TAG = "WelcomeActivity";
     private static final String AGREEMENT_KEY = "agreement";
     private static final Integer RC_SIGN_IN = 1;
 
