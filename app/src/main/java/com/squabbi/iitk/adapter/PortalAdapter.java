@@ -25,6 +25,8 @@ import butterknife.ButterKnife;
 
 public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapter.PortalHolder> {
 
+    private OnItemClickListener mListener;
+
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
      * FirestoreRecyclerOptions} for configuration options.
@@ -67,7 +69,7 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
         return new PortalHolder(itemView);
     }
 
-    static class PortalHolder extends RecyclerView.ViewHolder {
+    class PortalHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_portal_name)
         TextView mNameTv;
@@ -81,14 +83,28 @@ public class PortalAdapter extends FirestoreRecyclerAdapter<Portal, PortalAdapte
         public PortalHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            // OnClickListener for each item
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    // Ensure selected position exists and there is a listener
+                    if (position != RecyclerView.NO_POSITION && mListener != null) {
+                        mListener.onItemClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
         }
     }
 
-    private static List<DocumentSnapshot> mSnapshots = new ArrayList<>();
-    private OnPortalSelectedListener mListener;
+    public interface OnItemClickListener {
 
-    public interface OnPortalSelectedListener {
-        void onPortalSelected(DocumentSnapshot portal);
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener;
+    }
 }
