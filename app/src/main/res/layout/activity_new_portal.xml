@@ -61,7 +61,7 @@
                         android:contentDescription="@string/contentDesc_ocrButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_ocr"
+                        app:srcCompat="@drawable/ic_outline_camera_enhance_24px"
                         android:onClick="launchOcrActivity"
                         tools:ignore="OnClick" />
                 </LinearLayout>
@@ -82,7 +82,7 @@
                         android:contentDescription="@string/contentDesc_locationButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_location"
+                        app:srcCompat="@drawable/ic_outline_my_location_24px"
                         android:onClick="launchPlacePicker"/>
                 </LinearLayout>
 
@@ -103,6 +103,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/colour_bar_view"
         app:layout_anchorGravity="bottom|left|end"
-        app:srcCompat="@drawable/ic_image" />
+        app:srcCompat="@drawable/ic_outline_color_lens_24px" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

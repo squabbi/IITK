@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             app:elevation="@dimen/elevation_fab"
             app:layout_anchor="@id/main_activity_appbar"
-            app:srcCompat="@drawable/ic_add_black_24dp" />
+            app:srcCompat="@drawable/ic_outline_add_24px" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView

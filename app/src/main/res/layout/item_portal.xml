@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -13,9 +14,11 @@
     android:id="@+id/item_portal_card_layout">
 
     <RelativeLayout
+        android:background="@color/primaryTintColor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/activity_padding">
 
         <TextView
             android:id="@+id/item_portal_name"
@@ -42,7 +45,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_location"
+                app:srcCompat="@drawable/ic_outline_location_on_24px"
                 android:layout_gravity="center_vertical"/>
 
             <TextView
