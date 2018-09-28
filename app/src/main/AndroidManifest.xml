@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".activity.PortalViewActivity"></activity>
+        <activity android:name=".activity.PortalViewActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".activity.ui.newinventory.NewInventoryActivity" />
         <activity
             android:name=".activity.MainActivity"
@@ -33,10 +34,6 @@
 
         <service android:name=".service.MyHoverMenuService" />
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCn8Y0c_5R7nkKIsJ7NLvDq--CGHFzNosA" />
-
         <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
@@ -45,6 +42,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCn8Y0c_5R7nkKIsJ7NLvDq--CGHFzNosA" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>
