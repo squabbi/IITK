@@ -5,6 +5,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.squabbi.iitk.model.Portal;
@@ -16,10 +17,11 @@ public class FirebaseRepository {
     private static FirebaseRepository sFirebaseRepository;
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
+    private Boolean mResult;
 
     // Constants and finals for various collections
-    private static final String COLLECTION_PORTALS= "portals";
-    private static final String COLLECTION_AGENTS = "agents";
+    public static final String COLLECTION_PORTALS= "portals";
+    public static final String COLLECTION_AGENTS = "agents";
     private CollectionReference mPortalCollectionReference;
 
     public static FirebaseRepository getInstance() {
@@ -53,7 +55,38 @@ public class FirebaseRepository {
         return mPortalCollectionReference.orderBy("name", Query.Direction.ASCENDING);
     }
 
+    public DocumentSnapshot getDocumentObject(String documentPath) {
+        return mFirestore.document(documentPath).get().getResult();
+    }
+
+    public DocumentReference getDocumentRefObject(String documentPath) {
+        return mFirestore.document(documentPath);
+    }
+
     public boolean addPortal(Portal portal) {
-        return mPortalCollectionReference.add(portal).isSuccessful();
+        clearResult();
+        mPortalCollectionReference.add(portal).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+                if (task.isSuccessful()) {
+                    setResult(true);
+                } else {
+                    setResult(false);
+                }
+            }
+        });
+        return getResult();
+    }
+
+    private void setResult(boolean result) {
+        this.mResult = result;
+    }
+
+    private boolean getResult() {
+        return mResult;
+    }
+
+    private void clearResult() {
+        mResult = null;
     }
 }
