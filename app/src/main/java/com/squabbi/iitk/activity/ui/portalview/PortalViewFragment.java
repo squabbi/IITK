@@ -1,9 +1,12 @@
 package com.squabbi.iitk.activity.ui.portalview;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +15,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,6 +28,9 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.GeoPoint;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.databinding.FragmentPortalViewBinding;
@@ -32,8 +42,25 @@ public class PortalViewFragment extends Fragment {
     @BindView(R.id.portalview_mapview)
     MapView mMapView;
 
+    @BindView(R.id.portalview_toolbar)
+    Toolbar mToolbar;
+
+    @BindView(R.id.portalview_collapsingtoolbar)
+    CollapsingToolbarLayout mToolbarLayout;
+
+    @BindView(R.id.portalview_appbar)
+    AppBarLayout mAppBarLayout;
+
+    @BindView(R.id.portalview_fab)
+    FloatingActionButton mActionButton;
+
     public static PortalViewFragment newInstance() {
         return new PortalViewFragment();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_portalview, menu);
     }
 
     @Nullable
@@ -43,6 +70,14 @@ public class PortalViewFragment extends Fragment {
 
         FragmentPortalViewBinding binding = FragmentPortalViewBinding.inflate(inflater, container, false);
         ButterKnife.bind(this, binding.getRoot());
+
+        // Set up action bar within the fragment.
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_outline_close_24px);
+        setHasOptionsMenu(true); // Enables the overflow menu.
+
+        mToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
 
         mMapView.onCreate(savedInstanceState);
 
@@ -70,13 +105,38 @@ public class PortalViewFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mViewModel = ViewModelProviders.of(getActivity()).get(PortalViewViewModel.class);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // Close the activity
+                getActivity().finish();
+                break;
+
+            case R.id.menu_portal_edit:
+                // TODO: Open edit fragment
+                break;
+
+            case R.id.menu_portal_share:
+                // TODO: Implement share
+                break;
+
+            case R.id.menu_portal_delete:
+                String name = mViewModel.getPortalName().getValue();
+                mViewModel.deletePortal(mViewModel.getPortalDocumentPath());
+                // Close activity
+                getActivity().finish();
+                // Show toast
+                Toast.makeText(getContext(), getString(R.string.detail_portal_delete_toast, name), Toast.LENGTH_SHORT)
+                    .show();
+                break;
+        }
+
+        return true;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel = ViewModelProviders.of(getActivity()).get(PortalViewViewModel.class);
     }
 }
