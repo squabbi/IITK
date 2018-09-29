@@ -1,13 +1,10 @@
 package com.squabbi.iitk.activity.ui.portalview;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.squabbi.iitk.model.Portal;
 import com.squabbi.iitk.util.FirebaseRepository;
 
@@ -30,6 +27,7 @@ public class PortalViewViewModel extends ViewModel {
     private MutableLiveData<String> mPortalDateCreated = new MutableLiveData<>();
 
     private String mDocumentPath;
+    private ListenerRegistration mRegistration;
 
     // Constructor
     public PortalViewViewModel(final String documentPath) {
@@ -37,9 +35,15 @@ public class PortalViewViewModel extends ViewModel {
         this.mDocumentPath = documentPath;
 
         // Create Portal object for ID, listen for changes to the document
-        mRepository.getDocumentRefObject(mDocumentPath).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        mRegistration = mRepository.getDocumentRefObject(mDocumentPath).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    // A Firebase error occurred
+                    e.printStackTrace();
+                    return;
+                }
+
                 if (documentSnapshot != null) {
                     Portal portal = documentSnapshot.toObject(Portal.class);
 
@@ -70,4 +74,13 @@ public class PortalViewViewModel extends ViewModel {
     }
 
     public LiveData<String> getCreatedDate() { return mPortalDateCreated; }
+
+    public String getPortalDocumentPath() { return mDocumentPath; }
+
+    public void deletePortal(String documentPath) {
+
+        // Remove listener before removing the document to prevent null pointers
+        mRegistration.remove();
+        mRepository.deleteDocument(documentPath);
+    }
 }
