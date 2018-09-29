@@ -54,12 +54,14 @@ public class PortalViewViewModel extends ViewModel {
             if (documentSnapshot != null) {
                 Portal portal = documentSnapshot.toObject(Portal.class);
 
-                mPortalName.setValue(portal.getName());
-                mPortalFriendlyLocation.setValue(portal.getFriendlyLocation());
-                mPortalNotes.setValue(portal.getNotes());
-                mPortalGeoPoint.setValue(portal.getGeoPoint());
-                mPortalDateCreated.setValue(portal.getCreatedAt().toString());
-                mPortalColourDrawableLiveData.setValue(new ColorDrawable(portal.getColour()));
+                if (portal != null) {
+                    mPortalName.setValue(portal.getName());
+                    mPortalFriendlyLocation.setValue(portal.getFriendlyLocation());
+                    mPortalNotes.setValue(portal.getNotes());
+                    mPortalGeoPoint.setValue(portal.getGeoPoint());
+                    mPortalDateCreated.setValue(portal.getCreatedAt().toString());
+                    mPortalColourDrawableLiveData.setValue(new ColorDrawable(portal.getColour()));
+                }
             }
         }
     }
@@ -90,8 +92,9 @@ public class PortalViewViewModel extends ViewModel {
 
     public void deletePortal(String documentPath) {
 
-        // Remove listener before removing the document to prevent null pointers
+        // Remove listener before removing the document
         mRegistration.remove();
+        // Remove document reference
         mRepository.deleteDocument(documentPath);
     }
 }
