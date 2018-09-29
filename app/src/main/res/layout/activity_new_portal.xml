@@ -131,7 +131,7 @@
                         <!-- Portal friendly location name -->
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/portal_location"
+                            android:id="@+id/portal_friendly_location_inputlayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -150,7 +150,7 @@
                             android:id="@+id/portal_notes_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:lines="8"
+                            android:lines="6"
                             android:hint="@string/hint_portal_notes"/>
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
