@@ -7,6 +7,9 @@
     <string name="title_activity_login">Login to IITK</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!-- Transition name strings -->
+    <string name="trans_fab">transition_fab</string>
+
     <!-- Portal ViewHolder strings -->
     <string name="portal_item_no_location">No location&#8230;</string>
 
