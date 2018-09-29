@@ -63,19 +63,8 @@ public class FirebaseRepository {
         return mFirestore.document(documentPath);
     }
 
-    public boolean addPortal(Portal portal) {
-        clearResult();
-        mPortalCollectionReference.add(portal).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
-                if (task.isSuccessful()) {
-                    setResult(true);
-                } else {
-                    setResult(false);
-                }
-            }
-        });
-        return getResult();
+    public void addPortal(Portal portal) {
+        mPortalCollectionReference.add(portal);
     }
 
     public void deleteDocument(String documentPath) {
