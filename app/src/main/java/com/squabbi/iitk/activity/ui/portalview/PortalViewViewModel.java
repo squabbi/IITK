@@ -1,5 +1,7 @@
 package com.squabbi.iitk.activity.ui.portalview;
 
+import android.graphics.drawable.ColorDrawable;
+
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -25,9 +27,11 @@ public class PortalViewViewModel extends ViewModel {
     private MutableLiveData<String> mPortalNotes = new MutableLiveData<>();
     private MutableLiveData<GeoPoint> mPortalGeoPoint = new MutableLiveData<>();
     private MutableLiveData<String> mPortalDateCreated = new MutableLiveData<>();
+    private MutableLiveData<ColorDrawable> mPortalColourDrawableLiveData = new MutableLiveData<>();
 
     private String mDocumentPath;
     private ListenerRegistration mRegistration;
+    private DocumentListener mListener = new DocumentListener();
 
     // Constructor
     public PortalViewViewModel(final String documentPath) {
@@ -35,26 +39,29 @@ public class PortalViewViewModel extends ViewModel {
         this.mDocumentPath = documentPath;
 
         // Create Portal object for ID, listen for changes to the document
-        mRegistration = mRepository.getDocumentRefObject(mDocumentPath).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    // A Firebase error occurred
-                    e.printStackTrace();
-                    return;
-                }
+        mRegistration = mRepository.getDocumentRefObject(mDocumentPath).addSnapshotListener(mListener);
+    }
 
-                if (documentSnapshot != null) {
-                    Portal portal = documentSnapshot.toObject(Portal.class);
-
-                    mPortalName.setValue(portal.getName());
-                    mPortalFriendlyLocation.setValue(portal.getFriendlyLocation());
-                    mPortalNotes.setValue(portal.getNotes());
-                    mPortalGeoPoint.setValue(portal.getGeoPoint());
-                    mPortalDateCreated.setValue(portal.getCreatedAt().toString());
-                }
+    private class DocumentListener implements EventListener<DocumentSnapshot> {
+        @Override
+        public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+            if (e != null) {
+                // A Firebase error occurred
+                e.printStackTrace();
+                return;
             }
-        });
+
+            if (documentSnapshot != null) {
+                Portal portal = documentSnapshot.toObject(Portal.class);
+
+                mPortalName.setValue(portal.getName());
+                mPortalFriendlyLocation.setValue(portal.getFriendlyLocation());
+                mPortalNotes.setValue(portal.getNotes());
+                mPortalGeoPoint.setValue(portal.getGeoPoint());
+                mPortalDateCreated.setValue(portal.getCreatedAt().toString());
+                mPortalColourDrawableLiveData.setValue(new ColorDrawable(portal.getColour()));
+            }
+        }
     }
 
     public LiveData<String> getPortalName() {
@@ -76,6 +83,10 @@ public class PortalViewViewModel extends ViewModel {
     public LiveData<String> getCreatedDate() { return mPortalDateCreated; }
 
     public String getPortalDocumentPath() { return mDocumentPath; }
+
+    public LiveData<ColorDrawable> getPortalColour() {
+        return mPortalColourDrawableLiveData;
+    }
 
     public void deletePortal(String documentPath) {
 
