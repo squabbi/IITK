@@ -29,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
+                android:fitsSystemWindows="true"
                 app:expandedTitleGravity="top"
                 app:expandedTitleMarginStart="@dimen/activity_padding"
                 app:expandedTitleMarginTop="@dimen/activity_padding"
@@ -39,6 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/portal_view_toolbar"
                     app:layout_collapseMode="parallax"
+                    android:elevation="@dimen/elevation_bottom_appbar"
                     app:mapType="normal"
                     app:liteMode="true"/>
 
