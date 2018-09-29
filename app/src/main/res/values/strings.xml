@@ -12,9 +12,10 @@
 
     <!-- Add portal strings -->
     <string name="permissions_camera">We need permission to write to external storage to save Portal photos and access to the camera in case you want to take a photo of the portal.</string>
-    <string name="hint_portal_location">Location</string>
-    <string name="hint_portal_name">Portal name</string>
+    <string name="hint_portal_location">Friendly Location</string>
+    <string name="hint_portal_name">Name</string>
     <string name="hint_portal_notes">Notes</string>
+    <string name="new_portal_location_label">Location:</string>
 
     <string name="contentDesc_ocrButton">Launch OCR</string>
     <string name="contentDesc_locationButton">Launch Place Picker</string>
