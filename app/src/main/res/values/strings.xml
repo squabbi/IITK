@@ -27,6 +27,11 @@
     <string name="detail_portal_notes">Notes:</string>
     <string name="detail_portal_date_created">Date created:</string>
 
+    <!--Portal Detail menu items-->
+    <string name="menu_portal_delete">Delete</string>
+    <string name="menu_portal_edit">Edit</string>
+    <string name="menu_portal_share">Share&#8230;</string>
+
     <!-- Add inventory strings -->
     <string name="hint_inventory_name">Inventory Name</string>
     <string name="select_colour">Select colour:</string>
