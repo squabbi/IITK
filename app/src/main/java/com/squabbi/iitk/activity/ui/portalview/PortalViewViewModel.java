@@ -1,5 +1,6 @@
 package com.squabbi.iitk.activity.ui.portalview;
 
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -7,6 +8,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Portal;
 import com.squabbi.iitk.util.FirebaseRepository;
 
@@ -59,7 +61,14 @@ public class PortalViewViewModel extends ViewModel {
                     mPortalFriendlyLocation.setValue(portal.getFriendlyLocation());
                     mPortalNotes.setValue(portal.getNotes());
                     mPortalGeoPoint.setValue(portal.getGeoPoint());
-                    mPortalDateCreated.setValue(portal.getCreatedAt().toString());
+
+                    // For when Portals aren't registered on Firebase before opening
+                    if (portal.getCreatedAt() != null) {
+                        mPortalDateCreated.setValue(portal.getCreatedAt().toString());
+                    } else {
+                        mPortalDateCreated.setValue(Resources.getSystem().getString(R.string.detail_portal_createddate_unvailable));
+                    }
+
                     mPortalColourDrawableLiveData.setValue(new ColorDrawable(portal.getColour()));
                 }
             }
