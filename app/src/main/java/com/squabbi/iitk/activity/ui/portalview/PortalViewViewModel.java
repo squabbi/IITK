@@ -27,6 +27,7 @@ public class PortalViewViewModel extends ViewModel {
     private MutableLiveData<String> mPortalFriendlyLocation = new MutableLiveData<>();
     private MutableLiveData<String> mPortalNotes = new MutableLiveData<>();
     private MutableLiveData<GeoPoint> mPortalGeoPoint = new MutableLiveData<>();
+    private MutableLiveData<String> mPortalDateCreated = new MutableLiveData<>();
 
     private String mDocumentPath;
 
@@ -46,6 +47,7 @@ public class PortalViewViewModel extends ViewModel {
                     mPortalFriendlyLocation.setValue(portal.getFriendlyLocation());
                     mPortalNotes.setValue(portal.getNotes());
                     mPortalGeoPoint.setValue(portal.getGeoPoint());
+                    mPortalDateCreated.setValue(portal.getCreatedAt().toString());
                 }
             }
         });
@@ -66,4 +68,6 @@ public class PortalViewViewModel extends ViewModel {
     public LiveData<GeoPoint> getPortaGeoPoint() {
         return mPortalGeoPoint;
     }
+
+    public LiveData<String> getCreatedDate() { return mPortalDateCreated; }
 }
