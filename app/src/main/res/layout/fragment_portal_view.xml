@@ -70,7 +70,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="@dimen/colour_bar"
+                    android:elevation="@dimen/elevation_snackbar"
                     android:background="@{viewmodel.portalColour}"/>
 
                 <LinearLayout
