@@ -1,5 +1,6 @@
 package com.squabbi.iitk.activity.ui.mainlistview;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.activity.PortalViewActivity;
 import com.squabbi.iitk.adapter.PortalAdapter;
 
 /**
@@ -24,6 +26,8 @@ import com.squabbi.iitk.adapter.PortalAdapter;
 public class PortalListFragment extends Fragment {
 
     private static final String TAG = "PortalListFragment";
+    public static final String PORTAL_ID_KEY = "portal_id";
+
     private MainActivityViewModel mViewModel;
     private PortalAdapter mAdapter;
 
@@ -42,7 +46,8 @@ public class PortalListFragment extends Fragment {
         mAdapter.setOnItemClickListener(new PortalAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                Toast.makeText(getActivity(), "Selected :: " + documentSnapshot.getId(), Toast.LENGTH_LONG).show();
+                // Show new activity of Portal Details
+                openPortalDetail(documentSnapshot);
             }
         });
 
@@ -50,6 +55,12 @@ public class PortalListFragment extends Fragment {
         mPortalRecycler.setHasFixedSize(true);
 
         mPortalRecycler.setAdapter(mAdapter);
+    }
+
+    private void openPortalDetail(DocumentSnapshot documentSnapshot) {
+        Intent intent = new Intent(getContext(), PortalViewActivity.class);
+        intent.putExtra(PORTAL_ID_KEY, documentSnapshot.getReference().getPath());
+        startActivity(intent);
     }
 
     @Override
