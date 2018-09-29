@@ -52,8 +52,16 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
     @BindView(R.id.portal_notes_et)
     EditText mPortalNotesEt;
 
+    @BindView(R.id.portal_friendly_location_inputlayout)
+    TextInputLayout mFriendlyLocationInputLayout;
+
     @BindView(R.id.portal_friendly_location_et)
-    EditText mPortalFriendlyLocation;
+    EditText mPortalFriendlyLocationEt;
+
+    @OnTextChanged(value = R.id.portal_name_et, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    void friendlyLocationTextEntered() {
+        mFriendlyLocationInputLayout.setErrorEnabled(false);
+    }
 
     @BindView(R.id.colour_bar_view)
     View mColourBarView;
@@ -155,14 +163,23 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
     }
 
     private boolean validateText() {
+        boolean passingStatus = true;
+
         // Check for empty name
         if (isEmpty(mPortalNameEt)) {
-            mNameInputLayout.setError("Portal name cannot be empty");
+            mNameInputLayout.setError(getString(R.string.inputlayout_error_emptyname));
             mNameInputLayout.setErrorEnabled(true);
-            return false;
+            passingStatus = false;
         }
 
-        return false;
+        // Check for empty friendly location
+        if (isEmpty(mPortalFriendlyLocationEt)) {
+            mFriendlyLocationInputLayout.setError(getString(R.string.inputlayout_error_emptyfriendlylocation));
+            mFriendlyLocationInputLayout.setErrorEnabled(true);
+            passingStatus = false;
+        }
+
+        return passingStatus;
     }
 
     private void addPortal() {
@@ -171,7 +188,7 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
         String name = mPortalNameEt.getText().toString();
         String notes = mPortalNotesEt.getText().toString();
         Place place = mPlace;
-        String friendlyLocation = mPortalFriendlyLocation.getText().toString();
+        String friendlyLocation = mPortalFriendlyLocationEt.getText().toString();
         Integer colour = mColour;
 
         mViewModel.addPortal(name, place, friendlyLocation, notes, colour);
@@ -185,8 +202,8 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
             if (resultCode == RESULT_OK) {
                 mPlace = PlacePicker.getPlace(this, data);
                 // Display friendly Place name only if it is empty
-                if (isEmpty(mPortalFriendlyLocation)) {
-                    mPortalFriendlyLocation.setText(String.valueOf(mPlace.getName()));
+                if (isEmpty(mPortalFriendlyLocationEt)) {
+                    mPortalFriendlyLocationEt.setText(String.valueOf(mPlace.getName()));
                 }
                 mViewModel.setPortalLocationLiveData(mPlace.getLatLng().toString());
             }
