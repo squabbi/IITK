@@ -4,7 +4,7 @@
     <dimen name="activity_padding">8dp</dimen>
     <dimen name="activity_welcome_padding">40dp</dimen>
     <dimen name="login_button_margin">100dp</dimen>
-    <dimen name="portal_view_toolbar">200dp</dimen>
+    <dimen name="portal_view_toolbar">128dp</dimen>
 
     <!-- Material elevation guidelines -->
     <dimen name="elevation_snackbar">6dp</dimen>
