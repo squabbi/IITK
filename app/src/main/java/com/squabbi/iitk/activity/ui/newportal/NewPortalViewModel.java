@@ -21,19 +21,20 @@ public class NewPortalViewModel extends ViewModel {
     private static final String TAG = "NewPortalViewModel";
 
     private FirebaseRepository mFirebaseRepository = FirebaseRepository.getInstance();
-    private MutableLiveData<Integer> mColourLiveData;
+    private MutableLiveData<Integer> mColourLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> mPortalLocationLiveData = new MutableLiveData<>();
 
     public NewPortalViewModel() {
         // Set default colour
         setColourLiveData(Color.WHITE);
     }
 
-    public boolean addPortal(String name, Place place, String friendlyLocation,
+    public void addPortal(String name, Place place, String friendlyLocation,
                              String notes, Integer colour) {
 
         // Create new Portal object
         Portal portal = new Portal(name, place, friendlyLocation, notes, colour);
-        return mFirebaseRepository.addPortal(portal);
+        mFirebaseRepository.addPortal(portal);
     }
 
     public ChromaDialog.Builder getChromaDialogBuilder() {
@@ -44,16 +45,18 @@ public class NewPortalViewModel extends ViewModel {
     }
 
     public LiveData<Integer> getColourLiveData() {
-        if (mColourLiveData == null) {
-            mColourLiveData = new MutableLiveData<>();
-        }
         return mColourLiveData;
     }
 
     public void setColourLiveData(Integer colour) {
-        if (mColourLiveData == null) {
-            mColourLiveData = new MutableLiveData<>();
-        }
         mColourLiveData.setValue(colour);
+    }
+
+    public MutableLiveData<String> getPortalLocationLiveData() {
+        return mPortalLocationLiveData;
+    }
+
+    public void setPortalLocationLiveData(String portalLocation) {
+        mPortalLocationLiveData.setValue(portalLocation);
     }
 }
