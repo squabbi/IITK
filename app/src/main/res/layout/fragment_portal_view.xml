@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/portal_view_toolbar"
                     app:layout_collapseMode="parallax"
-                    android:elevation="@dimen/elevation_bottom_appbar"
+                    android:fitsSystemWindows="true"
                     app:mapType="normal"
                     app:liteMode="true"/>
 
@@ -49,6 +49,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
+                    app:title="@string/detail_portal_appbar_title"
+                    android:layout_gravity="top"
                     app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -123,10 +125,11 @@
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/portalview_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            app:layout_anchor="@id/portalview_collapsingtoolbar"
+            app:layout_anchor="@id/portalview_appbar"
             app:layout_anchorGravity="end|bottom|right"
             android:src="@drawable/ic_outline_edit_24px"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
