@@ -26,6 +26,9 @@
     <string name="detail_portal_location">Location:</string>
     <string name="detail_portal_notes">Notes:</string>
     <string name="detail_portal_date_created">Date created:</string>
+    <string name="detail_portal_appbar_title">Portal Details</string>
+
+    <string name="detail_portal_delete_toast">Deleted Portal: %1$s.</string>
 
     <!--Portal Detail menu items-->
     <string name="menu_portal_delete">Delete</string>
