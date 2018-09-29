@@ -85,17 +85,27 @@ public class PortalViewFragment extends Fragment {
         mViewModel.getPortaGeoPoint().observe(this, new Observer<GeoPoint>() {
             @Override
             public void onChanged(final GeoPoint geoPoint) {
-                final LatLng location = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
 
-                // Save the map marker
-                mMapView.getMapAsync(new OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(GoogleMap googleMap) {
-                        googleMap.addMarker(new MarkerOptions().position(location).title(mViewModel.getPortalName().getValue()));
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
-                        mMapView.onResume();
-                    }
-                });
+                // Check in case Portal does not have a location attached
+                if (geoPoint != null) {
+                    final LatLng location = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
+
+                    // Set MapView as visible
+                    mMapView.setVisibility(View.VISIBLE);
+
+                    // Save the map marker
+                    mMapView.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(GoogleMap googleMap) {
+                            googleMap.addMarker(new MarkerOptions().position(location).title(mViewModel.getPortalName().getValue()));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+                            mMapView.onResume();
+                        }
+                    });
+                } else {
+                    // When geoPoint is null, make the map invisible
+                    mMapView.setVisibility(View.GONE);
+                }
             }
         });
 
