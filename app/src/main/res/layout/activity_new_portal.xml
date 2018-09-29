@@ -1,110 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".activity.ui.newportal.NewPortalActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/new_portal_appbarlayout"
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.squabbi.iitk.activity.ui.newportal.NewPortalViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/new_portal_toolbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/new_portal_appbarlayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:fitsSystemWindows="true">
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:orientation="vertical" >
-
-        <View
-            android:id="@+id/colour_bar_view"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:elevation="@dimen/elevation_bottom_navigation"/>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.6"
-            android:paddingTop="@dimen/fab_top_margin"
-            android:paddingLeft="@dimen/activity_padding"
-            android:paddingRight="@dimen/activity_padding">
-
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/new_portal_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+        </com.google.android.material.appbar.AppBarLayout>
 
-                    <EditText
-                        android:id="@+id/portal_name_et"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:hint="@string/hint_portal_name"
-                        android:inputType="textPersonName" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:orientation="vertical" >
 
-                    <ImageButton
-                        android:contentDescription="@string/contentDesc_ocrButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_outline_camera_enhance_24px"
-                        android:onClick="launchOcrActivity"
-                        tools:ignore="OnClick" />
-                </LinearLayout>
+            <View
+                android:id="@+id/colour_bar_view"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:elevation="@dimen/elevation_bottom_navigation"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.6"
+                android:paddingTop="@dimen/fab_top_margin"
+                android:paddingLeft="@dimen/activity_padding"
+                android:paddingRight="@dimen/activity_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/portal_location_et"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_portal_location"
-                        android:layout_weight="2"/>
+                        android:orientation="vertical"
+                        android:padding="@dimen/activity_padding">
 
-                    <ImageButton
-                        android:contentDescription="@string/contentDesc_locationButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_outline_my_location_24px"
-                        android:onClick="launchPlacePicker"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <!-- Portal name -->
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/portal_name_inputlayout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2">
+
+                                <EditText
+                                    android:id="@+id/portal_name_et"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/hint_portal_name"
+                                    android:inputType="textPersonName|textCapSentences" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <ImageButton
+                                android:contentDescription="@string/contentDesc_ocrButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_outline_camera_enhance_24px"
+                                android:onClick="launchOcrActivity"
+                                tools:ignore="OnClick" />
+                        </LinearLayout>
+
+                        <!-- Portal location using Maps SDK -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2">
+
+                                <TextView
+                                    android:id="@+id/location_label_textview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/new_portal_location_label"
+                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/location_label_textview"
+                                    android:maxLines="1"
+                                    android:ellipsize="end"
+                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                                    android:text="@{viewmodel.portalLocationLiveData}"/>
+                            </RelativeLayout>
+
+                            <ImageButton
+                                android:contentDescription="@string/contentDesc_locationButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_outline_my_location_24px"
+                                android:onClick="launchPlacePicker"/>
+                        </LinearLayout>
+
+                        <!-- Portal friendly location name -->
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/portal_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/portal_friendly_location_et"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/hint_portal_location" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/portal_notes_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lines="8"
+                            android:hint="@string/hint_portal_notes"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
                 </LinearLayout>
+            </ScrollView>
 
-                <EditText
-                    android:id="@+id/portal_notes_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/hint_portal_notes"/>
-            </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
 
-    </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/new_portal_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:layout_anchor="@id/colour_bar_view"
+            app:layout_anchorGravity="bottom|left|end"
+            app:srcCompat="@drawable/ic_outline_color_lens_24px" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/colour_bar_view"
-        app:layout_anchorGravity="bottom|left|end"
-        app:srcCompat="@drawable/ic_outline_color_lens_24px" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
