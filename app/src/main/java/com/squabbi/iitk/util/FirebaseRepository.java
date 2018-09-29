@@ -78,6 +78,10 @@ public class FirebaseRepository {
         return getResult();
     }
 
+    public void deleteDocument(String documentPath) {
+        mFirestore.document(documentPath).delete();
+    }
+
     private void setResult(boolean result) {
         this.mResult = result;
     }
