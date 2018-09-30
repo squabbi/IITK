@@ -7,6 +7,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
 import com.squabbi.iitk.model.Portal;
 
@@ -37,6 +38,13 @@ public class FirebaseRepository {
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
 
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+
+        mFirestore.setFirestoreSettings(settings);
+
+        // Load up collection reference of all portals
         mPortalCollectionReference = mFirestore.collection(COLLECTION_AGENTS)
                 .document(mAuth.getUid()).collection(COLLECTION_PORTALS);
     }
