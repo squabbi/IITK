@@ -28,6 +28,7 @@ public class PortalViewViewModel extends ViewModel {
     private MutableLiveData<String> mPortalFriendlyLocation = new MutableLiveData<>();
     private MutableLiveData<String> mPortalNotes = new MutableLiveData<>();
     private MutableLiveData<GeoPoint> mPortalGeoPoint = new MutableLiveData<>();
+    private MutableLiveData<String> mPortalGeoPointString = new MutableLiveData<>();
     private MutableLiveData<String> mPortalDateCreated = new MutableLiveData<>();
     private MutableLiveData<ColorDrawable> mPortalColourDrawableLiveData = new MutableLiveData<>();
 
@@ -62,6 +63,10 @@ public class PortalViewViewModel extends ViewModel {
                     mPortalNotes.setValue(portal.getNotes());
                     mPortalGeoPoint.setValue(portal.getGeoPoint());
 
+                    if (portal.getGeoPoint() != null) {
+                        mPortalGeoPointString.setValue(portal.getGeoPoint().toString());
+                    }
+
                     // For when Portals aren't registered on Firebase before opening
                     if (portal.getCreatedAt() != null) {
                         mPortalDateCreated.setValue(portal.getCreatedAt().toString());
@@ -87,9 +92,11 @@ public class PortalViewViewModel extends ViewModel {
         return mPortalNotes;
     }
 
-    public LiveData<GeoPoint> getPortaGeoPoint() {
+    public LiveData<GeoPoint> getPortalGeoPoint() {
         return mPortalGeoPoint;
     }
+
+    public LiveData<String> getPortalGeoPointString() { return mPortalGeoPointString; }
 
     public LiveData<String> getCreatedDate() { return mPortalDateCreated; }
 
