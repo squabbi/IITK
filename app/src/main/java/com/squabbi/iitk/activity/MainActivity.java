@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.Fragment;
@@ -40,9 +41,15 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     // Butter Knife binding for the navigation drawer and toolbar
-    @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
-    @BindView(R.id.nav_view) NavigationView mNavigationView;
-    @BindView(R.id.main_activity_appbar) BottomAppBar mBottomAppBar;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
+
+    @BindView(R.id.main_activity_appbar)
+    BottomAppBar mBottomAppBar;
+
     private MainActivityViewModel mMainActivityViewModel;
 
     // Fragments
@@ -81,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
-        // assign fragments
+        // Assign Fragments.
         mPortalListFragment = new PortalListFragment();
         mInventoryFragment = new InventoryFragment();
 
