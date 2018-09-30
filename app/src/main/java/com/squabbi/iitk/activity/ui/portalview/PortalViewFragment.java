@@ -3,6 +3,7 @@ package com.squabbi.iitk.activity.ui.portalview;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -13,7 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
+import android.transition.TransitionInflater;
+import android.transition.TransitionSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +42,7 @@ import com.squabbi.iitk.databinding.FragmentPortalViewBinding;
 public class PortalViewFragment extends Fragment {
 
     private PortalViewViewModel mViewModel;
+    private OnEditSelected mOnEditSelected;
 
     @BindView(R.id.portalview_mapview)
     MapView mMapView;
@@ -56,6 +61,14 @@ public class PortalViewFragment extends Fragment {
 
     public static PortalViewFragment newInstance() {
         return new PortalViewFragment();
+    }
+
+    public interface OnEditSelected {
+        void onEditSelected();
+    }
+
+    public void setOnEditSelected(OnEditSelected onEditSelected) {
+        this.mOnEditSelected = onEditSelected;
     }
 
     @Override
@@ -82,7 +95,7 @@ public class PortalViewFragment extends Fragment {
         mMapView.onCreate(savedInstanceState);
 
         // Set observers
-        mViewModel.getPortaGeoPoint().observe(this, new Observer<GeoPoint>() {
+        mViewModel.getPortalGeoPoint().observe(this, new Observer<GeoPoint>() {
             @Override
             public void onChanged(final GeoPoint geoPoint) {
 
@@ -124,6 +137,7 @@ public class PortalViewFragment extends Fragment {
 
             case R.id.menu_portal_edit:
                 // TODO: Open edit fragment
+                mOnEditSelected.onEditSelected();
                 break;
 
             case R.id.menu_portal_share:
@@ -142,6 +156,30 @@ public class PortalViewFragment extends Fragment {
         }
 
         return true;
+    }
+
+    @OnClick(R.id.portalview_fab)
+    void fabOnClick() {
+        // Open fragment transaction for edit view
+        performTransition();
+    }
+
+    private void performTransition()
+    {
+        // Create new instance of edit fragment
+        PortalViewEditFragment editFragment = PortalViewEditFragment.newInstance();
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+        TransitionSet transitionSet = new TransitionSet();
+        transitionSet.addTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
+        transitionSet.setDuration(1000);
+        transitionSet.setStartDelay(300);
+        editFragment.setSharedElementEnterTransition(transitionSet);
+
+        fragmentTransaction.addSharedElement(mActionButton, getString(R.string.trans_fab));
+        fragmentTransaction.replace(R.id.container, editFragment);
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     @Override
