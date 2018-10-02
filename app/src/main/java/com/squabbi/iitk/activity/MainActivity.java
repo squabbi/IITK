@@ -5,7 +5,6 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.Fragment;
@@ -20,7 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.activity.ui.mainlistview.InventoryFragment;
+import com.squabbi.iitk.activity.ui.mainlistview.InventoryListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.PortalListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.MainActivityViewModel;
 import com.squabbi.iitk.activity.ui.newinventory.NewInventoryActivity;
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // Fragments
     private PortalListFragment mPortalListFragment;
-    private InventoryFragment mInventoryFragment;
+    private InventoryListFragment mInventoryFragment;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Assign Fragments.
         mPortalListFragment = new PortalListFragment();
-        mInventoryFragment = new InventoryFragment();
+        mInventoryFragment = new InventoryListFragment();
 
         mNavigationView.setNavigationItemSelectedListener(this);
 
