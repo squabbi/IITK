@@ -25,7 +25,6 @@ import com.squabbi.iitk.adapter.PortalAdapter;
  */
 public class PortalListFragment extends Fragment {
 
-    private static final String TAG = "PortalListFragment";
     public static final String PORTAL_ID_KEY = "portal_id";
 
     private MainActivityViewModel mViewModel;
