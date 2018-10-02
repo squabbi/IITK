@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "30580375225-g33ssrpd0gkqepit0h3mpinfn2ihjul6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.squabbi.iitk",
+            "certificate_hash": "a6ba276524aa0c11538df92087a0a4200fa45019"
+          }
+        },
+        {
           "client_id": "30580375225-0kp412r79pvtq0imn8qlc4596q9g1b6v.apps.googleusercontent.com",
           "client_type": 3
         }
