@@ -73,7 +73,6 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
     private Place mPlace;
     private Integer mColour;
 
-    private static final String TAG = "NewPortalActivity";
     private static final String TAG_CHROMA_DIALOG = "TAG_CHROMA_DIALOG";
     private static final int PLACE_PICKER_REQUEST = 1;
 
