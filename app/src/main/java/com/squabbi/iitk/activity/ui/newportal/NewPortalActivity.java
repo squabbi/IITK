@@ -101,6 +101,14 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
             }
         });
 
+        // Observe changes to Place LiveData
+        mViewModel.getPlaceLiveData().observe(this, new Observer<Place>() {
+            @Override
+            public void onChanged(Place place) {
+                mPlace = place;
+            }
+        });
+
         setSupportActionBar(mToolbar);
 
         // Get a support ActionBar corresponding to this toolbar and
@@ -200,7 +208,7 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
 
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                mPlace = PlacePicker.getPlace(this, data);
+                mViewModel.setPlaceLiveData(PlacePicker.getPlace(this, data));
                 // Display friendly Place name only if it is empty
                 if (isEmpty(mPortalFriendlyLocationEt)) {
                     mPortalFriendlyLocationEt.setText(String.valueOf(mPlace.getName()));
