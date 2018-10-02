@@ -16,3 +16,8 @@
 .idea/runConfigurations.xml
 /.idea/codeStyles/codeStyleConfig.xml
 /.idea/assetWizardSettings.xml
+/.project
+/.settings/org.eclipse.buildship.core.prefs
+/app/.classpath
+/app/.project
+/app/.settings/org.eclipse.buildship.core.prefs
