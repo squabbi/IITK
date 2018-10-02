@@ -23,6 +23,7 @@ public class NewPortalViewModel extends ViewModel {
     private FirebaseRepository mFirebaseRepository = FirebaseRepository.getInstance();
     private MutableLiveData<Integer> mColourLiveData = new MutableLiveData<>();
     private MutableLiveData<String> mPortalLocationLiveData = new MutableLiveData<>();
+    private MutableLiveData<Place> mPlaceLiveData = new MutableLiveData<>();
 
     public NewPortalViewModel() {
         // Set default colour
@@ -58,5 +59,13 @@ public class NewPortalViewModel extends ViewModel {
 
     public void setPortalLocationLiveData(String portalLocation) {
         mPortalLocationLiveData.setValue(portalLocation);
+    }
+
+    public MutableLiveData<Place> getPlaceLiveData() {
+        return mPlaceLiveData;
+    }
+
+    public void setPlaceLiveData(Place place) {
+        this.mPlaceLiveData.setValue(place);
     }
 }
