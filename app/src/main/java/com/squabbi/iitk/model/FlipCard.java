@@ -1,6 +1,7 @@
 package com.squabbi.iitk.model;
 
 public class FlipCard extends Weapon {
+
     private FlipType mFlipType;
 
     FlipCard(WeaponType weaponType, Rarity rarity, FlipType flipType) {

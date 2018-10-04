@@ -41,6 +41,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:text="@string/select_colour" />
 
             <View
@@ -53,16 +54,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:text="@string/new_inv_select_lockers"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
             android:weightSum="6">
 
             <ImageView
+                android:id="@+id/new_inv_green_locker_imageview"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:src="@drawable/key_locker_green"
@@ -73,6 +75,7 @@
                 android:layout_height="match_parent" />
 
             <ImageView
+                android:id="@+id/new_inv_blue_locker_imageview"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:src="@drawable/key_locker_blue"
@@ -83,6 +86,7 @@
                 android:layout_height="match_parent" />
 
             <ImageView
+                android:id="@+id/new_inv_white_locker_imageview"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:src="@drawable/key_locker_white"
@@ -93,6 +97,7 @@
                 android:layout_height="match_parent" />
 
             <ImageView
+                android:id="@+id/new_inv_red_locker_imageview"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:src="@drawable/key_locker_red"
@@ -103,6 +108,7 @@
                 android:layout_height="match_parent" />
 
             <ImageView
+                android:id="@+id/new_inv_yellow_locker_imageview"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:src="@drawable/key_locker_yellow"
@@ -113,6 +119,7 @@
                 android:layout_height="match_parent" />
 
             <ImageView
+                android:id="@+id/new_inv_anniversary_locker_imageview"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:src="@drawable/key_locker_anniversary"

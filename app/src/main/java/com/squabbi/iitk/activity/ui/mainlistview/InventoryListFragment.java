@@ -26,7 +26,6 @@ public class InventoryListFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_inventory_list, container, false);
-        TextView text = view.findViewById(R.id.inv_text);
 
         return view;
     }

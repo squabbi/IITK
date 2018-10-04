@@ -13,7 +13,7 @@
     <!-- Portal ViewHolder strings -->
     <string name="portal_item_no_location">No location&#8230;</string>
 
-    <!-- Add portal strings -->
+    <!-- New portal strings -->
     <string name="permissions_camera">We need permission to write to external storage to save Portal photos and access to the camera in case you want to take a photo of the portal.</string>
     <string name="hint_portal_location">Friendly Location</string>
     <string name="hint_portal_name">Name</string>
@@ -43,7 +43,7 @@
     <string name="menu_portal_edit">Edit</string>
     <string name="menu_portal_share">Share&#8230;</string>
 
-    <!-- Add inventory strings -->
+    <!-- New inventory strings -->
     <string name="hint_inventory_name">Inventory Name</string>
     <string name="select_colour">Select colour:</string>
     <string name="new_inv_preselect_capsules">Select the number of capsules you have:</string>
@@ -64,6 +64,7 @@
         <item>Yellow Key Locker</item>
         <item>Anniversary Key Locker</item>
     </string-array>
+    <string name="new_inv_select_lockers">Select Key Lockers:</string>
 
     <!-- Login screen strings -->
     <string name="login_instructions">To access IITK\'s auto-backup, and cross-platform functionality, please log-in with your Google account.</string>
