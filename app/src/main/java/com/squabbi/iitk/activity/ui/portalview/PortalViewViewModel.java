@@ -1,7 +1,6 @@
 package com.squabbi.iitk.activity.ui.portalview;
 
 import android.app.Application;
-import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -20,6 +19,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+/**
+ * Portal View ViewModel, listens to changes to the Firestore document (Portal) and updates
+ * the view accordingly. This uses a MODIFIED constructor, to be used with a ViewModel Factory
+ * in order to pass the DocumentPath.
+ */
 public class PortalViewViewModel extends AndroidViewModel {
 
     private static final String TAG = "PortalViewViewModel";
@@ -38,7 +42,12 @@ public class PortalViewViewModel extends AndroidViewModel {
     private ListenerRegistration mRegistration;
     private DocumentListener mListener = new DocumentListener();
 
-    // Constructor
+    /**
+     * Passes Application to super's constructor. Provides the ViewModel with the Portal
+     * DocumentPath and creates a new document reference object assigned to the Listener.
+     * @param application Provides the application context to the ViewModel.
+     * @param documentPath The path to the document on Firestore.
+     */
     public PortalViewViewModel(@NonNull Application application, final String documentPath) {
         // Match super's constructor
         super(application);
