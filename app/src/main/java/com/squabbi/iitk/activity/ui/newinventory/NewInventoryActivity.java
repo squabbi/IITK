@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.widget.GridView;
 
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.adapter.KeyLockerAdapter;
 
 public class NewInventoryActivity extends AppCompatActivity {
 
@@ -25,7 +24,5 @@ public class NewInventoryActivity extends AppCompatActivity {
 
         // Register ViewModel
         mViewModel = ViewModelProviders.of(this).get(NewInventoryViewModel.class);
-
-        mLockerGridView.setAdapter(new KeyLockerAdapter(this));
     }
 }
