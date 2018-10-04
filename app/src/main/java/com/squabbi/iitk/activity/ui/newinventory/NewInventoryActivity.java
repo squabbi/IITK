@@ -3,13 +3,13 @@ package com.squabbi.iitk.activity.ui.newinventory;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -57,6 +57,22 @@ public class NewInventoryActivity extends AppCompatActivity {
         }
     }
 
+    private static void setUnselected(ImageView imageView) {
+
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+        ColorMatrixColorFilter colorMatrixColorFilter = new ColorMatrixColorFilter(matrix);
+
+        imageView.setColorFilter(colorMatrixColorFilter);
+        imageView.setImageAlpha(128);
+    }
+
+    private static void setSelected(ImageView imageView) {
+
+        imageView.setColorFilter(null);
+        imageView.setImageAlpha(255);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +82,11 @@ public class NewInventoryActivity extends AppCompatActivity {
         // Register ViewModel
         mViewModel = ViewModelProviders.of(this).get(NewInventoryViewModel.class);
 
+        // Set initial status of Lockers
+        for (ImageView v : mLockerImageViews) {
+            setUnselected(v);
+        }
+
         // Observe LiveData for checkboxes
         mViewModel.getSelectedCapsules().observe(this, new Observer<boolean[]>() {
             @Override
@@ -73,10 +94,10 @@ public class NewInventoryActivity extends AppCompatActivity {
                 // Set the checked status depending on array
                 for (int i = 0; i < Constants.LockerTypes.length; i++) {
                     if (booleans[i]) {
-                        mLockerImageViews.get(i).setBackground(new ColorDrawable(Color.RED));
+                        setSelected(mLockerImageViews.get(i));
                     } else {
                         // Unhighlight the capsule
-                        mLockerImageViews.get(i).setBackground(new ColorDrawable(Color.TRANSPARENT));
+                        setUnselected(mLockerImageViews.get(i));
                     }
                 }
             }
