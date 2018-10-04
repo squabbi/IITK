@@ -49,13 +49,74 @@
                 android:layout_height="20dp"/>
         </LinearLayout>
 
-        <GridView
-            android:id="@+id/lockers_gridview"
+        <!-- Key Locker selector row -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnWidth="96dp"
-            android:numColumns="auto_fit"
-            android:stretchMode="spacingWidthUniform"
-            android:gravity="center_vertical" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:weightSum="6">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:src="@drawable/key_locker_green"
+                android:layout_weight="1"/>
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:src="@drawable/key_locker_blue"
+                android:layout_weight="1"/>
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:src="@drawable/key_locker_white"
+                android:layout_weight="1"/>
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:src="@drawable/key_locker_red"
+                android:layout_weight="1"/>
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:src="@drawable/key_locker_yellow"
+                android:layout_weight="1"/>
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:src="@drawable/key_locker_anniversary"
+                android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
