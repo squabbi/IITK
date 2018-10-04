@@ -1,5 +1,6 @@
 package com.squabbi.iitk.activity.ui.portalview;
 
+import android.app.Application;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 
@@ -14,11 +15,12 @@ import com.squabbi.iitk.util.FirebaseRepository;
 
 import javax.annotation.Nullable;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class PortalViewViewModel extends ViewModel {
+public class PortalViewViewModel extends AndroidViewModel {
 
     private static final String TAG = "PortalViewViewModel";
 
@@ -37,7 +39,10 @@ public class PortalViewViewModel extends ViewModel {
     private DocumentListener mListener = new DocumentListener();
 
     // Constructor
-    public PortalViewViewModel(final String documentPath) {
+    public PortalViewViewModel(@NonNull Application application, final String documentPath) {
+        // Match super's constructor
+        super(application);
+
         // Save documentPath
         this.mDocumentPath = documentPath;
 
@@ -71,7 +76,7 @@ public class PortalViewViewModel extends ViewModel {
                     if (portal.getCreatedAt() != null) {
                         mPortalDateCreated.setValue(portal.getCreatedAt().toString());
                     } else {
-                        mPortalDateCreated.setValue(Resources.getSystem().getString(R.string.detail_portal_createddate_unvailable));
+                        mPortalDateCreated.setValue(getApplication().getString(R.string.detail_portal_createddate_unavailable));
                     }
 
                     mPortalColourDrawableLiveData.setValue(new ColorDrawable(portal.getColour()));

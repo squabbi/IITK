@@ -42,7 +42,7 @@ public class PortalViewActivity extends AppCompatActivity implements PortalViewF
 
         // Get string from intent
         mViewModel = ViewModelProviders.of(this,
-                new ViewModelFactory(getIntent().getStringExtra(PortalListFragment.PORTAL_ID_KEY)))
+                new ViewModelFactory(getApplication(), getIntent().getStringExtra(PortalListFragment.PORTAL_ID_KEY)))
                 .get(PortalViewViewModel.class);
 
         if (savedInstanceState == null) {

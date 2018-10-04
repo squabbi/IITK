@@ -1,5 +1,7 @@
 package com.squabbi.iitk.util;
 
+import android.app.Application;
+
 import com.squabbi.iitk.activity.ui.portalview.PortalViewViewModel;
 
 import androidx.annotation.NonNull;
@@ -21,7 +23,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
         if (modelClass == PortalViewViewModel.class) {
-            return (T) new PortalViewViewModel((String) mParams[0]);
+            return (T) new PortalViewViewModel((Application) mParams[0], (String) mParams[1]);
         } else {
             return super.create(modelClass);
         }
