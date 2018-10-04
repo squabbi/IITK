@@ -34,7 +34,7 @@
     <string name="detail_portal_date_created">Date created:</string>
     <string name="detail_portal_appbar_title">Portal Details</string>
 
-    <string name="detail_portal_createddate_unvailable">Time created unavailable&#8230;</string>
+    <string name="detail_portal_createddate_unavailable">Time created unavailable&#8230;</string>
 
     <string name="detail_portal_delete_toast">Deleted Portal: %1$s.</string>
 
