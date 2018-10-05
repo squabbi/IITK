@@ -2,7 +2,7 @@ package com.squabbi.iitk.util;
 
 public class Constants {
 
-    enum CapsuleTypes {
+    public enum LockerType {
 
         GREEN,
         BLUE,
