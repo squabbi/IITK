@@ -1,15 +1,32 @@
 package com.squabbi.iitk.model;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.util.Date;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class Inventory {
 
     private String mName;
     private String mDescription;
+    private Integer mColour;
     private List<Item> mInventoryContents;
+    @ServerTimestamp
+    private Date mCreatedAt;
 
     // Empty constructor required by Firebase
-    public Inventory() {}
+    Inventory() {}
+
+    public Inventory(@NonNull String name, @NonNull String description,
+                     Integer colour, List<Item> items) {
+
+        this.mName = name;
+        this.mDescription = description;
+        this.mInventoryContents = items;
+        this.mColour = colour;
+    }
 
     public String getName() {
         return mName;
@@ -33,5 +50,21 @@ public class Inventory {
 
     public void setInventoryContents(List<Item> inventoryContents) {
         mInventoryContents = inventoryContents;
+    }
+
+    public Integer getColour() {
+        return mColour;
+    }
+
+    public void setColour(Integer color) {
+        mColour = color;
+    }
+
+    public Date getCreatedAt() {
+        return mCreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        mCreatedAt = createdAt;
     }
 }
