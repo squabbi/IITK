@@ -8,17 +8,15 @@ import java.util.List;
 @IgnoreExtraProperties
 public class Capsule extends Item {
 
-    public static final String FIELD_CAPSULE_TYPE = "capsuleType";
-    public static final String FIELD_CAPSULE_ID = "capsuleId";
-    //public static final String FIELD_CAPSULE_
-
     private CapsuleType mCapsuleType;
     private String mCapsuleId;
+    // TODO: Remove lists, utilise documents/collections
     private List<Item> mCapsuleContents = new LinkedList<>();
 
+    // Empty constructor for Firestore
     Capsule() {}
 
-    Capsule(CapsuleType capsuleType, String capsuleId, Rarity rarity) {
+    public Capsule(CapsuleType capsuleType, String capsuleId, Rarity rarity) {
         super(rarity, 0);
         this.mCapsuleType = capsuleType;
     }
@@ -33,6 +31,22 @@ public class Capsule extends Item {
 
     public void setCapsuleType(CapsuleType capsuleType) {
         mCapsuleType = capsuleType;
+    }
+
+    public String getCapsuleId() {
+        return mCapsuleId;
+    }
+
+    public void setCapsuleId(String capsuleId) {
+        mCapsuleId = capsuleId;
+    }
+
+    public List<Item> getCapsuleContents() {
+        return mCapsuleContents;
+    }
+
+    public void setCapsuleContents(List<Item> capsuleContents) {
+        mCapsuleContents = capsuleContents;
     }
 
     public Integer numberOfItems() {
