@@ -1,5 +1,6 @@
 package com.squabbi.iitk.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -7,6 +8,8 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
@@ -17,12 +20,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.ui.mainlistview.InventoryListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.PortalListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.MainActivityViewModel;
-import com.squabbi.iitk.activity.ui.newinventory.NewInventoryActivity;
 import com.squabbi.iitk.activity.ui.newportal.NewPortalActivity;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -49,7 +54,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.main_activity_appbar)
     BottomAppBar mBottomAppBar;
 
-    private MainActivityViewModel mMainActivityViewModel;
+    // Fields for Dialog
+    EditText mDialogInventoryNameEt;
+    EditText mDialogInventoryDescriptionEt;
+    TextInputLayout mInventoryNameInputLayout;
+    TextInputLayout mInventoryDescriptionInputLayout;
+
+    private MainActivityViewModel mViewModel;
 
     // Fragments
     private PortalListFragment mPortalListFragment;
@@ -80,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ButterKnife.bind(this);
 
         // Setup and reference ViewModel
-        mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         setSupportActionBar(mBottomAppBar);
         ActionBar actionBar = getSupportActionBar();
@@ -108,7 +119,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, NewPortalActivity.class));
                 break;
             case R.id.nav_inventory:
-                startActivity(new Intent(this, NewInventoryActivity.class));
+                // Show New Inventory dialog.
+                View dialogView = getLayoutInflater().inflate(R.layout.dialog_new_inventory, null);
+                final AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setTitle(R.string.dialog_newinv_title)
+                        .setView(dialogView)
+                        .setPositiveButton(R.string.confirm, null)
+                        .setNegativeButton(R.string.cancel, null)
+                        .create();
+
+                // Assign ViewIDs to fields.
+                mDialogInventoryNameEt = dialogView.findViewById(R.id.dialog_newinv_name_edittext);
+                mDialogInventoryDescriptionEt = dialogView.findViewById(R.id.dialog_newinv_description_edittext);
+
+                mInventoryNameInputLayout = dialogView.findViewById(R.id.dialog_newinv_name_inputlayout);
+                mInventoryDescriptionInputLayout = dialogView.findViewById(R.id.dialog_newinv_description_inputlayout);
+
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+
+                        Button positiveBtn = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                        positiveBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                // Implement onClick confirm result.
+                                // TODO: Implement colour picker here
+                                if (validateText()) {
+                                    mViewModel.addInventory(mDialogInventoryNameEt.getText().toString(),
+                                            mDialogInventoryDescriptionEt.getText().toString(), -3992);
+                                    alertDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                });
+
+                alertDialog.show();
                 break;
         }
     }
@@ -162,7 +210,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ft.commit();
     }
 
-    public MainActivityViewModel getMainActivityViewModel() {
-        return getMainActivityViewModel();
+    private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
+    }
+
+    private boolean validateText() {
+        boolean passingStatus = true;
+
+        // Check for empty name.
+        if (isEmpty(mDialogInventoryNameEt)) {
+            mInventoryNameInputLayout.setError(getString(R.string.inputlayout_error_emptyname));
+            mInventoryNameInputLayout.setErrorEnabled(true);
+            passingStatus = false;
+        }
+
+        // Check for empty description.
+        if (isEmpty(mDialogInventoryDescriptionEt)) {
+            mInventoryDescriptionInputLayout.setError(getString(R.string.inputlayout_error_emptydescription));
+            mInventoryDescriptionInputLayout.setErrorEnabled(true);
+            passingStatus = false;
+        }
+
+        return passingStatus;
     }
 }
