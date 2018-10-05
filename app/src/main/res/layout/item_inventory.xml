@@ -45,6 +45,7 @@
             android:layout_marginStart="@dimen/activity_padding">
 
             <ImageView
+                android:id="@+id/item_inventory_imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_outline_folder_open_24px"
