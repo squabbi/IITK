@@ -33,4 +33,9 @@ public class MainActivityViewModel extends ViewModel {
 
         return mBaseInventoryFirestoreRecyclerBuilder;
     }
+
+    public void addInventory(String name, String description, Integer colour) {
+
+        mFirebaseRepository.addInventory(new Inventory(name, description, colour));
+    }
 }
