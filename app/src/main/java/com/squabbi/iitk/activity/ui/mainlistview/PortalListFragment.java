@@ -13,12 +13,11 @@ import butterknife.ButterKnife;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.PortalViewActivity;
-import com.squabbi.iitk.adapter.PortalAdapter;
+import com.squabbi.iitk.adapter.PortalListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +27,7 @@ public class PortalListFragment extends Fragment {
     public static final String PORTAL_ID_KEY = "portal_id";
 
     private MainActivityViewModel mViewModel;
-    private PortalAdapter mAdapter;
+    private PortalListAdapter mAdapter;
 
     @BindView(R.id.portal_recycler)
     RecyclerView mPortalRecycler;
@@ -39,10 +38,10 @@ public class PortalListFragment extends Fragment {
 
     private void initRecycler() {
 
-        mAdapter = new PortalAdapter(mViewModel.getBaseFirestoreRecyclerBuilder()
+        mAdapter = new PortalListAdapter(mViewModel.getBaseFirestoreRecyclerBuilder()
             .setLifecycleOwner(this).build());
 
-        mAdapter.setOnItemClickListener(new PortalAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new PortalListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 // Show new activity of Portal Details
