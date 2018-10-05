@@ -44,10 +44,10 @@ public class NewInventoryViewModel extends ViewModel {
             }
         }
 
-        // Create inventory object
-        Inventory inventory = new Inventory(name, description,
-                getColourLiveData().getValue(), items);
-        mFirebaseRepository.addInventory(inventory);
+//        // Create inventory object
+//        Inventory inventory = new Inventory(name, description,
+//                getColourLiveData().getValue(), items);
+//        mFirebaseRepository.addInventory(inventory);
     }
 
     public ChromaDialog.Builder getChromaDialogBuilder() {
