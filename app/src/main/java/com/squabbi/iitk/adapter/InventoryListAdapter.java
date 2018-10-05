@@ -16,6 +16,7 @@ import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Inventory;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,10 +42,9 @@ public class InventoryListAdapter extends FirestoreRecyclerAdapter<Inventory,
         inventoryHolder.mNameTv.setText(inventory.getName());
         inventoryHolder.mDescriptionTv.setText(inventory.getDescription());
 
-        if (inventory.getColour() != null) {
-            inventoryHolder.mImageView.setColorFilter(inventory.getColour(),
-                    PorterDuff.Mode.OVERLAY);
-        }
+        // Set background colour from Portal if it's not null.
+        if (inventory.getColour() != null) inventoryHolder.mCardView.setCardBackgroundColor(inventory.getColour());
+        else inventoryHolder.mCardView.setCardBackgroundColor(Color.GRAY);
     }
 
     @NonNull
@@ -64,8 +64,8 @@ public class InventoryListAdapter extends FirestoreRecyclerAdapter<Inventory,
         @BindView(R.id.item_inventory_description)
         TextView mDescriptionTv;
 
-        @BindView(R.id.item_inventory_imageview)
-        ImageView mImageView;
+        @BindView(R.id.item_inventory_card_layout)
+        CardView mCardView;
 
         public InventoryHolder(@NonNull View itemView) {
             super(itemView);
