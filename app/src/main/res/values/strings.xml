@@ -23,8 +23,6 @@
     <string name="contentDesc_locationButton">Launch Place Picker</string>
 
     <string name="toast_addPortal_failed">Failed to add portal. Please try again.</string>
-    <string name="inputlayout_error_emptyname">Portal name cannot be empty.</string>
-    <string name="inputlayout_error_emptyfriendlylocation">Portal\'s friendly location cannot be empty.</string>
 
     <!-- Portal Detail view -->
     <string name="name">Name:</string>
@@ -65,6 +63,11 @@
     </string-array>
     <string name="new_inv_select_lockers">Select Key Lockers:</string>
     <string name="dialog_newinv_title">New Inventory</string>
+
+    <!-- InputLayout error message strings -->
+    <string name="inputlayout_error_emptyname">Name cannot be empty.</string>
+    <string name="inputlayout_error_emptyfriendlylocation">Friendly location cannot be empty.</string>
+    <string name="inputlayout_error_emptydescription">Description cannot be empty.</string>
 
     <!-- Login screen strings -->
     <string name="login_instructions">To access IITK\'s auto-backup, and cross-platform functionality, please log-in with your Google account.</string>
