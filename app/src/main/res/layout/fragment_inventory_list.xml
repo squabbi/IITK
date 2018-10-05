@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".activity.ui.mainlistview.InventoryListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/inv_text"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.squabbi.iitk.activity.ui.mainlistview.MainActivityViewModel"/>
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello inventory fragment" />
+        android:orientation="vertical"
+        android:id="@+id/inventory_view_root_layout">
 
-</FrameLayout>
+        <!-- Place filter fragment here -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/inventory_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_inventory"/>
+    </LinearLayout>
+</layout>
