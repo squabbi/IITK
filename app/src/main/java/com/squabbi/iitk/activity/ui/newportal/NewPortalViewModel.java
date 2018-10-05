@@ -26,6 +26,7 @@ public class NewPortalViewModel extends ViewModel {
     private MutableLiveData<Place> mPlaceLiveData = new MutableLiveData<>();
 
     public NewPortalViewModel() {
+
         // Set default colour
         setColourLiveData(Color.WHITE);
     }
@@ -39,6 +40,7 @@ public class NewPortalViewModel extends ViewModel {
     }
 
     public ChromaDialog.Builder getChromaDialogBuilder() {
+
         return new ChromaDialog.Builder()
                 .initialColor(Color.GRAY)
                 .colorMode(ColorMode.RGB)

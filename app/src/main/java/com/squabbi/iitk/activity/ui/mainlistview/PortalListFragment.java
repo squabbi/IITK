@@ -24,7 +24,7 @@ import com.squabbi.iitk.adapter.PortalListAdapter;
  */
 public class PortalListFragment extends Fragment {
 
-    public static final String PORTAL_ID_KEY = "portal_id";
+    public static final String PORTAL_REFERENCE_KEY = "portal_ref";
 
     private MainActivityViewModel mViewModel;
     private PortalListAdapter mAdapter;
@@ -38,10 +38,10 @@ public class PortalListFragment extends Fragment {
 
     private void initRecycler() {
 
-        mAdapter = new PortalListAdapter(mViewModel.getBaseFirestoreRecyclerBuilder()
+        mAdapter = new PortalListAdapter(mViewModel.getBasePortalFirestoreRecyclerBuilder()
             .setLifecycleOwner(this).build());
 
-        mAdapter.setOnItemClickListener(new PortalListAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new PortalListAdapter.OnPortalItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 // Show new activity of Portal Details
@@ -56,8 +56,9 @@ public class PortalListFragment extends Fragment {
     }
 
     private void openPortalDetail(DocumentSnapshot documentSnapshot) {
+
         Intent intent = new Intent(getContext(), PortalViewActivity.class);
-        intent.putExtra(PORTAL_ID_KEY, documentSnapshot.getReference().getPath());
+        intent.putExtra(PORTAL_REFERENCE_KEY, documentSnapshot.getReference().getPath());
         startActivity(intent);
     }
 

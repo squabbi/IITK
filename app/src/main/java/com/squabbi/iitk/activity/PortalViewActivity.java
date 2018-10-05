@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import android.os.Bundle;
 import android.transition.Fade;
@@ -13,7 +11,6 @@ import android.transition.TransitionInflater;
 import android.transition.TransitionSet;
 import android.view.View;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.ui.mainlistview.PortalListFragment;
 import com.squabbi.iitk.activity.ui.portalview.PortalViewEditFragment;
@@ -42,7 +39,7 @@ public class PortalViewActivity extends AppCompatActivity implements PortalViewF
 
         // Get string from intent
         mViewModel = ViewModelProviders.of(this,
-                new ViewModelFactory(getApplication(), getIntent().getStringExtra(PortalListFragment.PORTAL_ID_KEY)))
+                new ViewModelFactory(getApplication(), getIntent().getStringExtra(PortalListFragment.PORTAL_REFERENCE_KEY)))
                 .get(PortalViewViewModel.class);
 
         if (savedInstanceState == null) {
