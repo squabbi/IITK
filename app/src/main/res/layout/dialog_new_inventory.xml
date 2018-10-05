@@ -5,6 +5,7 @@
     android:padding="@dimen/activity_padding">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialog_newinv_name_inputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -12,10 +13,11 @@
             android:id="@+id/dialog_newinv_name_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name"/>
+            android:hint="@string/hint_name"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialog_newinv_description_inputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -23,6 +25,6 @@
             android:id="@+id/dialog_newinv_description_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_inventory_description"/>
+            android:hint="@string/hint_description"/>
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
