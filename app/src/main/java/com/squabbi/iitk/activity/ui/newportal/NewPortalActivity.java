@@ -35,6 +35,13 @@ import com.squabbi.iitk.databinding.ActivityNewPortalBinding;
 
 public class NewPortalActivity extends AppCompatActivity implements OnColorSelectedListener {
 
+    private NewPortalViewModel mViewModel;
+    private Place mPlace;
+    private Integer mColour;
+
+    private static final String TAG_CHROMA_DIALOG = "TAG_CHROMA_DIALOG";
+    private static final int PLACE_PICKER_REQUEST = 1;
+
     @BindView(R.id.new_portal_toolbar)
     Toolbar mToolbar;
 
@@ -68,13 +75,6 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
 
     @BindView(R.id.new_portal_fab)
     FloatingActionButton mFab;
-
-    private NewPortalViewModel mViewModel;
-    private Place mPlace;
-    private Integer mColour;
-
-    private static final String TAG_CHROMA_DIALOG = "TAG_CHROMA_DIALOG";
-    private static final int PLACE_PICKER_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,6 +190,7 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
     }
 
     private void addPortal() {
+
         // Complete the action and add the Portal to the Database.
         // Get strings from textviews
         String name = mPortalNameEt.getText().toString();
