@@ -12,7 +12,6 @@ public class Inventory {
     private String mName;
     private String mDescription;
     private Integer mColour;
-    private List<Item> mInventoryContents;
     @ServerTimestamp
     private Date mCreatedAt;
 
@@ -20,11 +19,10 @@ public class Inventory {
     Inventory() {}
 
     public Inventory(@NonNull String name, @NonNull String description,
-                     Integer colour, List<Item> items) {
+                     Integer colour) {
 
         this.mName = name;
         this.mDescription = description;
-        this.mInventoryContents = items;
         this.mColour = colour;
     }
 
@@ -42,14 +40,6 @@ public class Inventory {
 
     public void setDescription(String description) {
         mDescription = description;
-    }
-
-    public List<Item> getInventoryContents() {
-        return mInventoryContents;
-    }
-
-    public void setInventoryContents(List<Item> inventoryContents) {
-        mInventoryContents = inventoryContents;
     }
 
     public Integer getColour() {
