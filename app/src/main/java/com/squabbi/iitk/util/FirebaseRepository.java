@@ -9,6 +9,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
+import com.squabbi.iitk.model.Inventory;
 import com.squabbi.iitk.model.Portal;
 
 import androidx.annotation.NonNull;
@@ -21,9 +22,12 @@ public class FirebaseRepository {
     private Boolean mResult;
 
     // Constants and finals for various collections
-    public static final String COLLECTION_PORTALS= "portals";
+    public static final String COLLECTION_PORTALS = "portals";
+    public static final String COLLECTION_INVENTORY = "inventory";
     public static final String COLLECTION_AGENTS = "agents";
+
     private CollectionReference mPortalCollectionReference;
+    private CollectionReference mInventoryCollectionReference;
 
     public static FirebaseRepository getInstance() {
         if (sFirebaseRepository == null) {
@@ -44,9 +48,12 @@ public class FirebaseRepository {
 
         mFirestore.setFirestoreSettings(settings);
 
-        // Load up collection reference of all portals
+        // Load up collection references
         mPortalCollectionReference = mFirestore.collection(COLLECTION_AGENTS)
                 .document(mAuth.getUid()).collection(COLLECTION_PORTALS);
+
+        mInventoryCollectionReference = mFirestore.collection(COLLECTION_AGENTS)
+                .document(mAuth.getUid()).collection(COLLECTION_INVENTORY);
     }
 
     public FirebaseAuth getAuth() {
@@ -58,13 +65,15 @@ public class FirebaseRepository {
     }
 
     public Query getPortalDocuments() {
-        // TODO: Apply different cases to allow people to filter portals
+        // TODO: Apply different cases to allow users to filter portals
         // Example query for A-Z portal names
         return mPortalCollectionReference.orderBy("name", Query.Direction.ASCENDING);
     }
 
-    public DocumentSnapshot getDocumentObject(String documentPath) {
-        return mFirestore.document(documentPath).get().getResult();
+    public Query getInventoryDocuments() {
+        // TODO: Apply different cases to allow users to filter inventory
+        // Example query for A-Z portal names
+        return mInventoryCollectionReference.orderBy("createdAt", Query.Direction.ASCENDING);
     }
 
     public DocumentReference getDocumentRefObject(String documentPath) {
@@ -75,19 +84,9 @@ public class FirebaseRepository {
         mPortalCollectionReference.add(portal);
     }
 
+    public void addInventory(Inventory inventory) { mInventoryCollectionReference.add(inventory); }
+
     public void deleteDocument(String documentPath) {
         mFirestore.document(documentPath).delete();
-    }
-
-    private void setResult(boolean result) {
-        this.mResult = result;
-    }
-
-    private boolean getResult() {
-        return mResult;
-    }
-
-    private void clearResult() {
-        mResult = null;
     }
 }

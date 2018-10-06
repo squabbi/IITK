@@ -16,20 +16,17 @@
     <!-- New portal strings -->
     <string name="permissions_camera">We need permission to write to external storage to save Portal photos and access to the camera in case you want to take a photo of the portal.</string>
     <string name="hint_portal_location">Friendly Location</string>
-    <string name="hint_portal_name">Name</string>
+    <string name="hint_name">Name</string>
     <string name="hint_portal_notes">Notes</string>
-    <string name="new_portal_location_label">Location:</string>
 
     <string name="contentDesc_ocrButton">Launch OCR</string>
     <string name="contentDesc_locationButton">Launch Place Picker</string>
 
     <string name="toast_addPortal_failed">Failed to add portal. Please try again.</string>
-    <string name="inputlayout_error_emptyname">Portal name cannot be empty.</string>
-    <string name="inputlayout_error_emptyfriendlylocation">Portal\'s friendly location cannot be empty.</string>
 
     <!-- Portal Detail view -->
-    <string name="detail_portal_name">Name:</string>
-    <string name="detail_portal_location">Location:</string>
+    <string name="name">Name:</string>
+    <string name="location">Location:</string>
     <string name="detail_portal_notes">Notes:</string>
     <string name="detail_portal_date_created">Date created:</string>
     <string name="detail_portal_appbar_title">Portal Details</string>
@@ -44,7 +41,7 @@
     <string name="menu_portal_share">Share&#8230;</string>
 
     <!-- New inventory strings -->
-    <string name="hint_inventory_name">Inventory Name</string>
+    <string name="hint_description">Description</string>
     <string name="select_colour">Select colour:</string>
     <string name="new_inv_preselect_capsules">Select the number of capsules you have:</string>
     <string name="new_inv_preselect_lockers">Select which key lockers you have:</string>
@@ -65,6 +62,12 @@
         <item>Anniversary Key Locker</item>
     </string-array>
     <string name="new_inv_select_lockers">Select Key Lockers:</string>
+    <string name="dialog_newinv_title">New Inventory</string>
+
+    <!-- InputLayout error message strings -->
+    <string name="inputlayout_error_emptyname">Name cannot be empty.</string>
+    <string name="inputlayout_error_emptyfriendlylocation">Friendly location cannot be empty.</string>
+    <string name="inputlayout_error_emptydescription">Description cannot be empty.</string>
 
     <!-- Login screen strings -->
     <string name="login_instructions">To access IITK\'s auto-backup, and cross-platform functionality, please log-in with your Google account.</string>
@@ -81,6 +84,8 @@
     <string name="button_sign_in">Sign-in</string>
     <string name="button_sign_up">Sign-up</string>
 
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
     <string name="skip">Skip</string>
     <string name="done">Done</string>
     <string name="close">Close</string>

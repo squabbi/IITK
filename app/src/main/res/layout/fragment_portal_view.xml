@@ -84,7 +84,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/detail_portal_name"
+                        android:text="@string/name"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
 
                     <TextView
@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:text="@string/detail_portal_location"/>
+                        android:text="@string/location"/>
 
                     <TextView
                         android:layout_width="match_parent"
