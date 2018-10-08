@@ -50,10 +50,12 @@ public class Inventory {
         mColour = color;
     }
 
+    @ServerTimestamp
     public Date getCreatedAt() {
         return mCreatedAt;
     }
 
+    @ServerTimestamp
     public void setCreatedAt(Date createdAt) {
         mCreatedAt = createdAt;
     }
