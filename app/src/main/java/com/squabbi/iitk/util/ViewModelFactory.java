@@ -2,7 +2,7 @@ package com.squabbi.iitk.util;
 
 import android.app.Application;
 
-import com.squabbi.iitk.activity.ui.portalview.PortalViewViewModel;
+import com.squabbi.iitk.activity.ui.portal.view.PortalViewViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
