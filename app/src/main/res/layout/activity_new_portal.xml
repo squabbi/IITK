@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.ui.newportal.NewPortalActivity">
+    tools:context=".activity.ui.portal.NewPortalActivity">
 
     <data>
         <variable
             name="viewmodel"
-            type="com.squabbi.iitk.activity.ui.newportal.NewPortalViewModel" />
+            type="com.squabbi.iitk.activity.ui.portal.NewPortalViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

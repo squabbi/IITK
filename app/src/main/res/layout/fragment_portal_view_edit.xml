@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activity.PortalViewActivity">
+    tools:context=".activity.ui.portal.view.PortalViewActivity">
     <data>
         <variable
             name="viewmodel"
-            type="com.squabbi.iitk.activity.ui.portalview.PortalViewViewModel"/>
+            type="com.squabbi.iitk.activity.ui.portal.view.PortalViewViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

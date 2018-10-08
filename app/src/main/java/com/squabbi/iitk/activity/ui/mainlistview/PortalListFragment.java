@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.activity.PortalViewActivity;
+import com.squabbi.iitk.activity.ui.portal.view.PortalViewActivity;
 import com.squabbi.iitk.adapter.PortalListAdapter;
 
 /**
