@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.ui.newinventory.NewInventoryActivity">
+    tools:context=".activity.ui.inventory.ManageInventoryActivity">
 
     <data>
         <variable
             name="viewModel"
-            type="com.squabbi.iitk.activity.ui.newinventory.NewInventoryViewModel"/>
+            type="com.squabbi.iitk.activity.ui.inventory.ManageInventoryViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
