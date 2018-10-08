@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,7 +27,7 @@ import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.ui.mainlistview.InventoryListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.PortalListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.MainActivityViewModel;
-import com.squabbi.iitk.activity.ui.newportal.NewPortalActivity;
+import com.squabbi.iitk.activity.ui.portal.NewPortalActivity;
 
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
