@@ -27,6 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     @OnClick(R.id.start_hover_button)
     void onClick(View view) {
+
         startHoverService();
     }
 
@@ -46,6 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         if (REQUEST_CODE_HOVER_PERMISSION == requestCode) {
             mPermissionsRequested = true;
+            startHoverService();
         }
 
         super.onActivityResult(requestCode, resultCode, data);
