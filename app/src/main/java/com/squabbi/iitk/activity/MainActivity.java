@@ -172,6 +172,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_inventory:
                 updateFragment(mInventoryFragment);
                 break;
+            case R.id.nav_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
         }
 
         setTitle(item.getTitle());
