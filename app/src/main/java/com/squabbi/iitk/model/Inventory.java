@@ -55,7 +55,6 @@ public class Inventory {
         return mCreatedAt;
     }
 
-    @ServerTimestamp
     public void setCreatedAt(Date createdAt) {
         mCreatedAt = createdAt;
     }
