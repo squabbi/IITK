@@ -58,7 +58,6 @@ public class MyHoverMenu extends HoverMenu {
 
     private View createTabView(@DrawableRes int tabBitmapRes, @ColorInt int backgroundColor, @ColorInt Integer iconColor) {
         Resources resources = mContext.getResources();
-        // TODO: Implement elevation
 
         HoverTabView tabView = new HoverTabView(mContext, resources.getDrawable(R.drawable.tab_background),
                 resources.getDrawable(tabBitmapRes));
