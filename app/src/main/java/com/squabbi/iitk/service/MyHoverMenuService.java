@@ -28,18 +28,6 @@ public class MyHoverMenuService extends HoverMenuService {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        //Bus.getInstance().register(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        //Bus.getInstance().unregister(this);
-        super.onDestroy();
-    }
-
-    @Override
     protected void onHoverMenuLaunched(@NonNull Intent intent, @NonNull HoverView hoverView) {
         hoverView.setMenu(createHoverMenu());
         hoverView.collapse();
