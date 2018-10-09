@@ -12,6 +12,5 @@ public class IitkApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         FastSave.init(getApplicationContext());
-//        FirebaseApp.initializeApp(this);
     }
 }
