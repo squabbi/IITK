@@ -15,44 +15,41 @@ import io.mattcarroll.hover.HoverMenu;
 import io.mattcarroll.hover.HoverView;
 import io.mattcarroll.hover.window.HoverMenuService;
 
-public class MasterHoverMenuService extends HoverMenuService {
+public class MyHoverMenuService extends HoverMenuService {
 
-    private static final String TAG = "MasterHoverMenuService";
+    private static final String TAG = "MyHoverMenuService";
     private HoverMenu mHoverMenu;
-
-    public static void showFloatingMenu(Context context) {
-
-        context.startService(new Intent(context, MasterHoverMenuService.class));
-    }
 
     // TODO: May have to implement EventBus in onCreate and onDestroy
 
 
-    @Override
-    protected Context getContextForHoverMenu() {
+    public static void showFloatingMenu(Context context) {
+        context.startService(new Intent(context, MyHoverMenuService.class));
+    }
 
-        return new ContextThemeWrapper(this, R.style.AppTheme);
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        //Bus.getInstance().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        //Bus.getInstance().unregister(this);
+        super.onDestroy();
     }
 
     @Override
     protected void onHoverMenuLaunched(@NonNull Intent intent, @NonNull HoverView hoverView) {
-
         hoverView.setMenu(createHoverMenu());
         hoverView.collapse();
     }
 
     private HoverMenu createHoverMenu() {
-
         try {
-            mHoverMenu = new HoverMenuFactory().createMenus();
-            return mHoverMenu;
-        } catch (IOException ioEx) {
-            throw new RuntimeException(ioEx);
+            return new HoverMenuFactory().createMenus(getContextForHoverMenu());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-    }
-
-    public void onEventMainThread(@NonNull HoverTheme newTheme) {
-
-        mHoverMenu.setTheme(newTheme);
     }
 }
