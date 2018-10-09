@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.service.MyHoverMenuService;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -22,5 +23,6 @@ public class SettingsActivity extends AppCompatActivity {
     @OnClick(R.id.start_hover_button)
     void onClick(View view) {
         // TODO: Implement hover service start
+        MyHoverMenuService.showFloatingMenu(getApplicationContext());
     }
 }
