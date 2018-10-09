@@ -22,3 +22,4 @@
 /app/.project
 /app/.settings/org.eclipse.buildship.core.prefs
 /.vscode/settings.json
+/app/google-services.json

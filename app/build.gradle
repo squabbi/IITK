@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.squabbi.iitk"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 28
         multiDexEnabled true
         versionCode 1
@@ -39,6 +39,7 @@ dependencies {
     implementation 'com.github.yehiahd:FastSave-Android:1.0.4'
     implementation 'com.google.android.gms:play-services-places:16.0.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
 
     // FirebaseUI for Cloud Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:4.2.0'

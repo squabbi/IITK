@@ -2,6 +2,8 @@ package com.squabbi.iitk.hover;
 
 import android.content.Context;
 
+import com.squabbi.iitk.hover.ui.HoverTimerView;
+
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,12 +13,12 @@ import io.mattcarroll.hover.Content;
 
 public class HoverMenuFactory {
 
-    public MasterHoverMenu createMenus(@NonNull Context context) throws IOException {
+    public MyHoverMenu createMenus(@NonNull Context context) throws IOException {
 
         // Create a map with keys and respective menus
         Map<String, Content> menuMap = new LinkedHashMap<>();
-        menuMap.put(MasterHoverMenu.TIMER_ID, new HoverTimeView(context));
+        menuMap.put(MyHoverMenu.TIMER_ID, new HoverTimerView(context));
 
-        return new MasterHoverMenu(context, "iitk", menuMap);
+        return new MyHoverMenu(context, "iitk", menuMap);
     }
 }
