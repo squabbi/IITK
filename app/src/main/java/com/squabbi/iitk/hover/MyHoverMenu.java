@@ -52,6 +52,9 @@ public class MyHoverMenu extends HoverMenu {
             case TIMER_ID: {
                 return createTabView(R.drawable.ic_outline_timer_24px, Color.RED, Color.GREEN);
             }
+            case INTEL_ID: {
+                return createTabView(R.drawable.ic_outline_my_location_24px, Color.BLUE, Color.YELLOW);
+            }
             default: throw new RuntimeException("Unknown tab selected: " + sectionId);
         }
     }
