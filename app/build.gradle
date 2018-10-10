@@ -51,8 +51,8 @@ dependencies {
     // Hover
     implementation 'io.mattcarroll.hover:hover:0.9.8'
 
-    // Alternative Hover implementations
-    implementation 'com.bezyapps.floatieslibrary:floaties:1.0.1'
+    // Chrome Custom Tabs
+    implementation 'androidx.browser:browser:1.0.0'
 
     // 64K limit bypass for pre-5.0 (API 21)
     implementation 'com.android.support:multidex:1.0.3'
