@@ -9,12 +9,16 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -64,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Fragments
     private PortalListFragment mPortalListFragment;
     private InventoryListFragment mInventoryFragment;
+
+    // Permissions
+    private static final String[] PERMISSIONS = {
+        "ACCESS_FINE_LOCATION"
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -203,7 +212,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void openIntelMap(int intelType) {
+        if (intelType == 0) {
+            // Current location Intel map
+            // Check/ask for location permission
+            String url = "https://ingress.com/intel";
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            builder.setToolbarColor(Color.BLACK);
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.launchUrl(this, Uri.parse(url));
+        }
+    }
 
+    private String getCurrentLocationString() {
+        // Check for permissions
+        return null;
     }
 
     private void updateFragment(Fragment fragment) {
