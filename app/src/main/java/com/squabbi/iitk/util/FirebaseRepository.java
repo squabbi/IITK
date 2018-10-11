@@ -9,7 +9,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
+import com.squabbi.iitk.model.Capsule;
 import com.squabbi.iitk.model.Inventory;
+import com.squabbi.iitk.model.Item;
 import com.squabbi.iitk.model.Portal;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,7 @@ public class FirebaseRepository {
     // Constants and finals for various collections
     public static final String COLLECTION_PORTALS = "portals";
     public static final String COLLECTION_INVENTORY = "inventory";
+    public static final String COLLECTION_ITEMS = "items";
     public static final String COLLECTION_AGENTS = "agents";
 
     private CollectionReference mPortalCollectionReference;
@@ -88,5 +91,18 @@ public class FirebaseRepository {
 
     public void deleteDocument(String documentPath) {
         mFirestore.document(documentPath).delete();
+    }
+
+    public void addItemToInventory(String inventoryId, Item item) {
+
+        mInventoryCollectionReference.document(inventoryId).collection(COLLECTION_ITEMS).add(item);
+    }
+
+    public void addItemToCapsule(String inventoryId, String capsuleId, Item item) {
+
+        mInventoryCollectionReference.document(inventoryId).collection(COLLECTION_ITEMS)
+                .document(capsuleId)
+                .collection(COLLECTION_ITEMS)
+                .add(item);
     }
 }
