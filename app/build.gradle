@@ -44,8 +44,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:4.2.0'
 
     // ButterKnife
-    implementation 'com.jakewharton:butterknife:9.0.0-SNAPSHOT'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
+    implementation 'com.jakewharton:butterknife:9.0.0-rc1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
 
     // Hover
     implementation 'io.mattcarroll.hover:hover:0.9.8'
