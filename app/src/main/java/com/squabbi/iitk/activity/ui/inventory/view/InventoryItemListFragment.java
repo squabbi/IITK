@@ -3,40 +3,68 @@ package com.squabbi.iitk.activity.ui.inventory.view;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.adapter.InventoryItemListAdapter;
+import com.squabbi.iitk.databinding.FragmentInventoryItemListBinding;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link InventoryItemListFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- *
  */
 public class InventoryItemListFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private InventoryViewViewModel mViewModel;
+    private InventoryItemListAdapter mAdapter;
+
+    @BindView(R.id.inventory_items_recycler)
+    RecyclerView mRecyclerView;
+
+    public static InventoryItemListFragment newInstance() { return new InventoryItemListFragment(); }
 
     public InventoryItemListFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel = ViewModelProviders.of(getActivity()).get(InventoryViewViewModel.class);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inventory_item_list, container, false);
+        FragmentInventoryItemListBinding binding = FragmentInventoryItemListBinding
+                .inflate(inflater, container, false);
+        ButterKnife.bind(this, binding.getRoot());
+
+        binding.setViewmodel(mViewModel);
+        binding.setLifecycleOwner(this);
+
+        return binding.getRoot();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onInventoryItemSelected(DocumentSnapshot documentSnapshot, int position) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onItemSelected(documentSnapshot, position);
         }
     }
 
@@ -58,17 +86,9 @@ public class InventoryItemListFragment extends Fragment {
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * Interface for getting the document
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onItemSelected(DocumentSnapshot documentSnapshot, int position);
     }
 }

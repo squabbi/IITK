@@ -13,26 +13,19 @@ import butterknife.ButterKnife;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.activity.ui.inventory.view.InventoryViewActivity;
 import com.squabbi.iitk.adapter.InventoryListAdapter;
-import com.squabbi.iitk.model.Item;
-import com.squabbi.iitk.model.KeyLocker;
-import com.squabbi.iitk.model.Weapon;
-import com.squabbi.iitk.util.Constants;
-
-import java.util.LinkedList;
-import java.util.List;
+import com.squabbi.iitk.adapter.OnFirestoreItemClickListener;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InventoryListFragment extends Fragment {
+public class InventoryListFragment extends Fragment implements OnFirestoreItemClickListener {
 
     public static final String INVENTORY_REFERENCE_KEY = "inventory_ref";
 
@@ -51,12 +44,7 @@ public class InventoryListFragment extends Fragment {
         mAdapter = new InventoryListAdapter(mViewModel.getBaseInventoryFirestoreRecyclerBuilder()
         .setLifecycleOwner(this).build());
 
-        mAdapter.setOnInventoryItemClickListener(new InventoryListAdapter.OnInventoryItemClickListener() {
-            @Override
-            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                openInventoryDetail(documentSnapshot);
-            }
-        });
+        mAdapter.setOnInventoryItemClickListener(this);
 
         mInventoryRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mInventoryRecycler.setHasFixedSize(true);
@@ -66,7 +54,10 @@ public class InventoryListFragment extends Fragment {
 
     private void openInventoryDetail(DocumentSnapshot documentSnapshot) {
 
-        //Intent intent = new Intent(getContext(), )
+        Intent intent = new Intent(getContext(), InventoryViewActivity.class);
+        intent.putExtra(INVENTORY_REFERENCE_KEY, documentSnapshot.getReference().getId());
+        startActivity(intent);
+
         Toast.makeText(getContext(), documentSnapshot.getId(), Toast.LENGTH_LONG).show();
     }
 
@@ -79,7 +70,7 @@ public class InventoryListFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         // Register ViewModel
-        mViewModel = ViewModelProviders.of(getActivity()).get(MainActivityViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         // Set up the Inventory RecyclerView
         initRecycler();
@@ -87,4 +78,8 @@ public class InventoryListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+        openInventoryDetail(documentSnapshot);
+    }
 }
