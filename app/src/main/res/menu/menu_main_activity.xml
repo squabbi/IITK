@@ -3,8 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_open_intel"
+        android:orderInCategory="99"
         android:visible="true"
         android:title="@string/open_intel_map_here"
         android:icon="@drawable/ic_outline_my_location_24px"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/menu_open_hover"
+        android:orderInCategory="100"
+        android:visible="true"
+        android:title="@string/menu_start_hover_service"
+        android:icon="@drawable/ic_outline_picture_in_picture_24px"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="101"
+        android:title="@string/nav_settings"
+        app:showAsAction="never"/>
 </menu>
