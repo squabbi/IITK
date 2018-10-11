@@ -16,8 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".activity.ui.portal.view.PortalViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.ui.portal.view.PortalViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.ui.inventory.ManageInventoryActivity" />
         <activity
             android:name=".activity.MainActivity"
@@ -50,6 +51,8 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <activity android:name=".activity.ui.inventory.view.InventoryViewActivity"></activity>
     </application>
 
 </manifest>

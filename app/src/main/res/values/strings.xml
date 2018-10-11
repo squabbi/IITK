@@ -103,5 +103,8 @@
         \n\nNullam sed libero lacus. Integer hendrerit dapibus urna, et interdum orci dapibus sit amet. Morbi ac nibh fermentum, euismod ipsum sed, sagittis libero. Cras tempus tempus augue, quis facilisis erat pharetra sit amet. Integer commodo tristique leo a dignissim. Quisque molestie tempor lectus eu condimentum. Sed sed interdum urna. Pellentesque dolor velit, semper et ex a, congue molestie nulla. Pellentesque eget commodo metus. Ut tincidunt odio a enim ullamcorper, sit amet blandit orci commodo.
     </string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <!-- MainActivity strings -->
 </resources>
