@@ -2,7 +2,7 @@ package com.squabbi.iitk.adapter;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
-public interface OnInventoryItemClickListener {
+public interface OnFirestoreItemClickListener {
 
     void onItemClick(DocumentSnapshot documentSnapshot, int position);
 }

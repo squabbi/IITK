@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalListAdapter.PortalHolder> {
 
-    private OnPortalItemClickListener mListener;
+    private OnFirestoreItemClickListener mListener;
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -98,12 +98,7 @@ public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalLi
         }
     }
 
-    public interface OnPortalItemClickListener {
-
-        void onItemClick(DocumentSnapshot documentSnapshot, int position);
-    }
-
-    public void setOnItemClickListener(OnPortalItemClickListener listener) {
+    public void setOnItemClickListener(OnFirestoreItemClickListener listener) {
 
         this.mListener = listener;
     }
