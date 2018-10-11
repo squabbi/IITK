@@ -2,12 +2,14 @@ package com.squabbi.iitk.activity.ui.portal.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -160,8 +162,25 @@ public class PortalViewFragment extends Fragment {
 
     @OnClick(R.id.portalview_fab)
     void fabOnClick() {
-        // Open fragment transaction for edit view
-        performTransition();
+        // Open intel map with coordinates of Portal
+        openIntelMap();
+    }
+
+    private void openIntelMap() {
+
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(Color.BLACK);
+        CustomTabsIntent customTabsIntent = builder.build();
+
+        GeoPoint geoPoint = mViewModel.getPortalGeoPoint().getValue();
+
+        if (geoPoint != null) {
+            // Format the string
+            String locationString = "https://www.ingress.com/intel?ll=" + geoPoint.getLatitude() + "," + geoPoint.getLongitude() + "&z=15";
+            customTabsIntent.launchUrl(getContext(), Uri.parse(locationString));
+        } else {
+            customTabsIntent.launchUrl(getContext(), Uri.parse("https://www.ingress.com/intel"));
+        }
     }
 
     private void performTransition()
