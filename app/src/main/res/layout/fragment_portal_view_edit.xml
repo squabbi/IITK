@@ -88,15 +88,36 @@
                         app:srcCompat="@drawable/ic_outline_my_location_24px"
                         android:onClick="launchPlacePicker"/>
                 </LinearLayout>
+
+                <!-- Portal friendly location name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/portaledit_friendly_location_inputlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/portaledit_friendly_location_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_portal_location"
+                        android:text="@{viewmodel.portalFriendlyLocation}"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Notes EditText -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/portaledit_notes_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="6"
+                        android:hint="@string/hint_portal_notes"
+                        android:text="@{viewmodel.portalNotes}"/>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </ScrollView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_outline_done_24px"
-            android:transitionName="@string/trans_fab"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -48,12 +48,18 @@ public class MyHoverMenu extends HoverMenu {
     }
 
     private View createTabView(@NonNull String sectionId) {
+        Resources resources = mContext.getResources();
+        // Colours
+        int secondaryColour = resources.getColor(R.color.secondaryColor, mContext.getTheme());
+        int primraryColour = resources.getColor(R.color.primaryTextColor, mContext.getTheme());
+
+
         switch (sectionId) {
             case TIMER_ID: {
-                return createTabView(R.drawable.ic_outline_timer_24px, Color.RED, Color.GREEN);
+                return createTabView(R.drawable.ic_outline_timer_24px, secondaryColour, primraryColour);
             }
             case INTEL_ID: {
-                return createTabView(R.drawable.ic_outline_location_on_24px, Color.BLUE, Color.YELLOW);
+                return createTabView(R.drawable.ic_outline_map_24px, secondaryColour, primraryColour);
             }
             default: throw new RuntimeException("Unknown tab selected: " + sectionId);
         }
@@ -62,8 +68,8 @@ public class MyHoverMenu extends HoverMenu {
     private View createTabView(@DrawableRes int tabBitmapRes, @ColorInt int backgroundColor, @ColorInt Integer iconColor) {
         Resources resources = mContext.getResources();
 
-        HoverTabView tabView = new HoverTabView(mContext, resources.getDrawable(R.drawable.tab_background),
-                resources.getDrawable(tabBitmapRes));
+        HoverTabView tabView = new HoverTabView(mContext, resources.getDrawable(R.drawable.circle, mContext.getTheme()),
+                resources.getDrawable(tabBitmapRes, mContext.getTheme()));
 
         tabView.setTabBackgroundColour(backgroundColor);
         tabView.setTabForegroundColour(iconColor);

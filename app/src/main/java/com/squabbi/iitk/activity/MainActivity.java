@@ -5,9 +5,12 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
+import com.dmgdesignuk.locationutils.easylocationutility.EasyLocationUtility;
+import com.dmgdesignuk.locationutils.easylocationutility.LocationRequestCallback;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.Fragment;
@@ -18,6 +21,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.squabbi.iitk.R;
@@ -32,11 +37,14 @@ import com.squabbi.iitk.activity.ui.mainlistview.InventoryListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.PortalListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.MainActivityViewModel;
 import com.squabbi.iitk.activity.ui.portal.NewPortalActivity;
+import com.squabbi.iitk.service.MyHoverMenuService;
+import com.squabbi.iitk.util.Constants;
 
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.mattcarroll.hover.overlay.OverlayPermission;
 
 /**
  * This sets the content of the main activity with a app bar, navigation drawer,
@@ -69,10 +77,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private PortalListFragment mPortalListFragment;
     private InventoryListFragment mInventoryFragment;
 
-    // Permissions
-    private static final String[] PERMISSIONS = {
-        "ACCESS_FINE_LOCATION"
-    };
+    private static final Integer REQUEST_CODE_HOVER_PERMISSION = 91;
+    private boolean mPermissionsRequested = false;
+
+    // Constants
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,6 +96,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (REQUEST_CODE_HOVER_PERMISSION == requestCode) {
+            mPermissionsRequested = true;
+
         }
     }
 
@@ -123,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onClick(View view) {
         MenuItem item = mNavigationView.getCheckedItem();
         switch (item.getItemId()) {
-            case  R.id.nav_portals:
+            case R.id.nav_portals:
                 startActivity(new Intent(this, NewPortalActivity.class));
                 break;
             case R.id.nav_inventory:
@@ -181,9 +199,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_inventory:
                 updateFragment(mInventoryFragment);
                 break;
-            case R.id.nav_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                break;
         }
 
         setTitle(item.getTitle());
@@ -196,7 +211,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_open_intel:
-                openIntelMap(0);
+                getCurrentLocation(Constants.LOCATION_GET_INTEL);
+                break;
+            case R.id.menu_open_hover:
+                startHoverService();
                 break;
             case android.R.id.home:
                 // Open navigation bar
@@ -211,22 +229,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
-    private void openIntelMap(int intelType) {
-        if (intelType == 0) {
-            // Current location Intel map
-            // Check/ask for location permission
-            String url = "https://ingress.com/intel";
-            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-            builder.setToolbarColor(Color.BLACK);
-            CustomTabsIntent customTabsIntent = builder.build();
-            customTabsIntent.launchUrl(this, Uri.parse(url));
+    private void getCurrentLocation(final int type) {
+
+        EasyLocationUtility locationUtility = new EasyLocationUtility(this);
+
+        // Check if permission to access device location has been granted and ask for it if not
+        if (locationUtility.permissionIsGranted()){
+            // Permission is granted
+            Toast.makeText(getApplication(), "Determining location...", Toast.LENGTH_LONG).show();
+
+            locationUtility.getCurrentLocationOneTime(new LocationRequestCallback() {
+                @Override
+                public void onLocationResult(Location location) {
+                    switch (type) {
+                        // Regular Intel map
+                        case Constants.LOCATION_GET_INTEL:
+                            showIntelMap(location);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onFailedRequest(String s) {
+                    Toast.makeText(getApplication(), "Failed to determine location.", Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            // Permission not granted, ask for it
+            locationUtility.requestPermission(EasyLocationUtility.RequestCodes.CURRENT_LOCATION_ONE_TIME);
+            Toast.makeText(getApplication(), "Please run the action again.", Toast.LENGTH_LONG).show();
         }
     }
 
-    private String getCurrentLocationString() {
-        // Check for permissions
-        return null;
+    private void showIntelMap(Location location) {
+
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(Color.BLACK);
+        CustomTabsIntent customTabsIntent = builder.build();
+
+        if (location != null) {
+            // Format the string
+            String locationString = "https://www.ingress.com/intel?ll=" + location.getLatitude() + "," + location.getLongitude() + "&z=15";
+            customTabsIntent.launchUrl(this, Uri.parse(locationString));
+        } else {
+            customTabsIntent.launchUrl(this, Uri.parse("https://www.ingress.com/intel"));
+        }
     }
+
+    /**
+     * Starts HoverService with Location passed to it to initalise the View.
+     *
+     * On Android M and above we need to ask the user for permission to display the Hover
+     * menu within the "alert window" layer.  Use OverlayPermission to check for the permission
+     * and to request it.
+     */
+    public void startHoverService() {
+
+        if (!mPermissionsRequested && !OverlayPermission.hasRuntimePermissionToDrawOverlay(this)) {
+            Intent intent = OverlayPermission.createIntentToRequestOverlayPermission(this);
+            startActivityForResult(intent, REQUEST_CODE_HOVER_PERMISSION);
+        } else { MyHoverMenuService.showFloatingMenu(this); }
+    }
+
 
     private void updateFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

@@ -1,6 +1,7 @@
 package com.squabbi.iitk.hover;
 
 import android.content.Context;
+import android.location.Location;
 
 import com.squabbi.iitk.hover.ui.HoverIntelView;
 import com.squabbi.iitk.hover.ui.HoverTimerView;

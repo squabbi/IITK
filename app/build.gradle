@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.squabbi.iitk"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 28
         multiDexEnabled true
         versionCode 1
@@ -52,6 +52,12 @@ dependencies {
 
     // Chrome Custom Tabs
     implementation 'androidx.browser:browser:1.0.0'
+
+    // Location utilities
+    implementation 'com.github.DMGDesignUK:DmgLocationUtils:v1.0.1'
+
+    // Advanced WebView
+    implementation 'com.github.delight-im:Android-AdvancedWebView:v3.0.0'
 
     // 64K limit bypass for pre-5.0 (API 21)
     implementation 'com.android.support:multidex:1.0.3'

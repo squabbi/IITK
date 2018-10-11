@@ -8,14 +8,16 @@
     android:theme="@style/HoverTheme"
     android:padding="@dimen/activity_padding">
 
-    <WebView
+    <im.delight.android.webview.AdvancedWebView
         android:id="@+id/hover_intel_webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/hover_intel_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_outline_refresh_24px"
         android:layout_margin="@dimen/fab_margin"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
