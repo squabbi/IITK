@@ -17,12 +17,13 @@ import android.view.ViewGroup;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.ui.portal.view.PortalViewActivity;
+import com.squabbi.iitk.adapter.OnFirestoreItemClickListener;
 import com.squabbi.iitk.adapter.PortalListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PortalListFragment extends Fragment {
+public class PortalListFragment extends Fragment implements OnFirestoreItemClickListener {
 
     public static final String PORTAL_REFERENCE_KEY = "portal_ref";
 
@@ -41,13 +42,7 @@ public class PortalListFragment extends Fragment {
         mAdapter = new PortalListAdapter(mViewModel.getBasePortalFirestoreRecyclerBuilder()
             .setLifecycleOwner(this).build());
 
-        mAdapter.setOnItemClickListener(new PortalListAdapter.OnPortalItemClickListener() {
-            @Override
-            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                // Show new activity of Portal Details
-                openPortalDetail(documentSnapshot);
-            }
-        });
+        mAdapter.setOnItemClickListener(this);
 
         mPortalRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mPortalRecycler.setHasFixedSize(true);
@@ -75,5 +70,11 @@ public class PortalListFragment extends Fragment {
         initRecycler();
 
         return view;
+    }
+
+    @Override
+    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+        // Show new activity of Portal Details
+        openPortalDetail(documentSnapshot);
     }
 }
