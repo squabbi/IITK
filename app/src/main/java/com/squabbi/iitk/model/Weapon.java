@@ -13,7 +13,7 @@ public class Weapon extends Item {
         BURSTER, ULTRA_STRIKE, FLIP_CARD
     }
 
-    Weapon (WeaponType weaponType, Rarity rarity, Integer level) {
+    public Weapon (WeaponType weaponType, Rarity rarity, Integer level) {
         super(rarity, level);
         this.mWeaponType = weaponType;
     }
