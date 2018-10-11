@@ -25,9 +25,11 @@ public class FirebaseRepository {
 
     // Constants and finals for various collections
     public static final String COLLECTION_PORTALS = "portals";
-    public static final String COLLECTION_INVENTORY = "inventory";
     public static final String COLLECTION_ITEMS = "items";
+    public static final String COLLECTION_INVENTORY = "inventory";
     public static final String COLLECTION_AGENTS = "agents";
+
+    public static final String FIELD_NAME = "name";
 
     private CollectionReference mPortalCollectionReference;
     private CollectionReference mInventoryCollectionReference;
@@ -81,6 +83,13 @@ public class FirebaseRepository {
 
     public DocumentReference getDocumentRefObject(String documentPath) {
         return mFirestore.document(documentPath);
+    }
+
+    public String getInventoryName(String documentId) {
+//        return mInventoryCollectionReference.document(documentId).get()
+//                .getResult().getString(FIELD_NAME);
+        // TODO: Pass Inventory Object + reference
+        return "Doge's inventory";
     }
 
     public void addPortal(Portal portal) {
