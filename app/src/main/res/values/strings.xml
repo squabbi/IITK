@@ -102,6 +102,7 @@
         \n\nEtiam blandit hendrerit consectetur. Sed sit amet felis a sem malesuada eleifend. Proin ultrices neque non vehicula maximus. Maecenas eget metus vulputate, sagittis mauris in, vehicula sapien. Phasellus vel nibh velit. Maecenas non elementum neque, sed efficitur nulla. Nam et dui leo. Ut vitae volutpat orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu ultrices risus. Pellentesque augue tellus, tincidunt sit amet erat ac, tincidunt pellentesque mauris. Donec vulputate justo vel velit venenatis, cursus facilisis tortor rhoncus. Mauris iaculis efficitur nibh, sit amet auctor mi laoreet vitae. Proin finibus iaculis magna, eget mattis lectus mollis a.
         \n\nNullam sed libero lacus. Integer hendrerit dapibus urna, et interdum orci dapibus sit amet. Morbi ac nibh fermentum, euismod ipsum sed, sagittis libero. Cras tempus tempus augue, quis facilisis erat pharetra sit amet. Integer commodo tristique leo a dignissim. Quisque molestie tempor lectus eu condimentum. Sed sed interdum urna. Pellentesque dolor velit, semper et ex a, congue molestie nulla. Pellentesque eget commodo metus. Ut tincidunt odio a enim ullamcorper, sit amet blandit orci commodo.
     </string>
+    <string name="menu_start_hover_service">Start Hover Service</string>
 
     <!-- MainActivity strings -->
 </resources>
