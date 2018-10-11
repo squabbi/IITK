@@ -16,7 +16,7 @@ import com.squabbi.iitk.R;
 
 public class CapsuleViewFragment extends Fragment {
 
-    private CapsuleViewViewModel mViewModel;
+    private InventoryViewViewModel mViewModel;
 
     public static CapsuleViewFragment newInstance() {
         return new CapsuleViewFragment();
@@ -31,7 +31,7 @@ public class CapsuleViewFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(CapsuleViewViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(InventoryViewViewModel.class);
         // TODO: Use the ViewModel
     }
 
