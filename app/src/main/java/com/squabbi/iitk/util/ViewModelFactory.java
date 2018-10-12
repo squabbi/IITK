@@ -2,6 +2,8 @@ package com.squabbi.iitk.util;
 
 import android.app.Application;
 
+import com.squabbi.iitk.activity.ui.inventory.ManageInventoryActivity;
+import com.squabbi.iitk.activity.ui.inventory.ManageInventoryViewModel;
 import com.squabbi.iitk.activity.ui.inventory.view.InventoryViewViewModel;
 import com.squabbi.iitk.activity.ui.portal.view.PortalViewViewModel;
 
@@ -26,7 +28,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         if (modelClass == PortalViewViewModel.class) {
             return (T) new PortalViewViewModel((Application) mParams[0], (String) mParams[1]);
         } else if (modelClass == InventoryViewViewModel.class) {
-            return (T) new InventoryViewViewModel((String) mParams[0]);
+            return (T) new InventoryViewViewModel((String) mParams[0], (String) mParams[1]);
+        } else if (modelClass == ManageInventoryViewModel.class) {
+            return (T) new ManageInventoryViewModel((String) mParams[0]);
         } else {
             return super.create(modelClass);
         }
