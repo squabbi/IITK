@@ -81,15 +81,14 @@ public class FirebaseRepository {
         return mInventoryCollectionReference.orderBy("createdAt", Query.Direction.ASCENDING);
     }
 
-    public DocumentReference getDocumentRefObject(String documentPath) {
-        return mFirestore.document(documentPath);
+    public Query getInventoryItemDocuments(String inventoryId){
+        // TODO: Apply different cases to allow users to filter inventory
+        // Example by type??
+        return mInventoryCollectionReference.document(inventoryId).collection(COLLECTION_ITEMS);
     }
 
-    public String getInventoryName(String documentId) {
-//        return mInventoryCollectionReference.document(documentId).get()
-//                .getResult().getString(FIELD_NAME);
-        // TODO: Pass Inventory Object + reference
-        return "Doge's inventory";
+    public DocumentReference getDocumentRefObject(String documentPath) {
+        return mFirestore.document(documentPath);
     }
 
     public void addPortal(Portal portal) {
