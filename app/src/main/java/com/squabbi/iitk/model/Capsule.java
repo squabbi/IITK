@@ -17,8 +17,9 @@ public class Capsule extends Item {
     Capsule() {}
 
     public Capsule(CapsuleType capsuleType, String capsuleId, Rarity rarity) {
-        super(rarity, 0);
+        super(ItemType.CAPSULE, rarity, 0);
         this.mCapsuleType = capsuleType;
+        this.mCapsuleId = capsuleId;
     }
 
     public enum CapsuleType {

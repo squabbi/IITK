@@ -23,9 +23,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.databinding.ActivityNewInventoryBinding;
+import com.squabbi.iitk.activity.ui.inventory.view.InventoryViewActivity;
+import com.squabbi.iitk.databinding.ActivityManageInventoryBinding;
+import com.squabbi.iitk.model.Item;
+import com.squabbi.iitk.model.Weapon;
 import com.squabbi.iitk.util.Constants;
+import com.squabbi.iitk.util.ViewModelFactory;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class ManageInventoryActivity extends AppCompatActivity {
@@ -37,9 +42,6 @@ public class ManageInventoryActivity extends AppCompatActivity {
 
     @BindView(R.id.new_inventory_toolbar)
     Toolbar mToolbar;
-
-    @BindView(R.id.new_inventory_colourbar)
-    View mColourBar;
 
     @BindView(R.id.new_inventory_name_edittext)
     EditText mNameEt;
@@ -83,10 +85,12 @@ public class ManageInventoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Register ViewModel
-        mViewModel = ViewModelProviders.of(this).get(ManageInventoryViewModel.class);
+        mViewModel = ViewModelProviders.of(this,
+                new ViewModelFactory(getIntent().getStringExtra(InventoryViewActivity.INVENTORY_ID_KEY)))
+                .get(ManageInventoryViewModel.class);
 
         // Bind the ViewModel to XML
-        ActivityNewInventoryBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_new_inventory);
+        ActivityManageInventoryBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_manage_inventory);
         binding.setViewModel(mViewModel);
         binding.setLifecycleOwner(this);
 
@@ -110,16 +114,6 @@ public class ManageInventoryActivity extends AppCompatActivity {
                         setUnselected(mLockerImageViews.get(i));
                     }
                 }
-            }
-        });
-
-        // Observe changes to colour bar live data
-        mViewModel.getColourLiveData().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                mColour = integer;
-                ColorDrawable colorDrawable = new ColorDrawable(integer);
-                mColourBar.setBackground(colorDrawable);
             }
         });
 
@@ -147,10 +141,17 @@ public class ManageInventoryActivity extends AppCompatActivity {
                 closeKeyboard();
                 // Validate entries
                 if (validateText()) {
-                    // Add portal and exit activity
-                    addInventory();
-                    finish();
+
                 }
+
+                // Add portal and exit activity
+                addInventory();
+                finish();
+
+                break;
+            case android.R.id.home:
+                // Close activity
+                finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -178,11 +179,10 @@ public class ManageInventoryActivity extends AppCompatActivity {
 
     private void addInventory() {
 
-        // Complete the action and add the Portal to the Database.
-        // Get strings from textviews
-        String name = mNameEt.getText().toString();
+        List<Item> sampleItems = new LinkedList<>();
+        sampleItems.add(new Weapon(Weapon.WeaponType.BURSTER, Item.Rarity.RARE, 4));
 
-        mViewModel.addInventory(name, "Sample description");
+        mViewModel.addItemsToInventory(sampleItems);
     }
 
     private static void setUnselected(ImageView imageView) {

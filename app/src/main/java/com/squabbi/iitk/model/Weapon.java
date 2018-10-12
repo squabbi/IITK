@@ -5,16 +5,14 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Weapon extends Item {
 
-    public static final String FIELD_WEAPON_TYPE = "weaponType";
-
     private WeaponType mWeaponType;
 
     public enum WeaponType {
         BURSTER, ULTRA_STRIKE, FLIP_CARD
     }
 
-    Weapon (WeaponType weaponType, Rarity rarity, Integer level) {
-        super(rarity, level);
+    public Weapon (WeaponType weaponType, Rarity rarity, Integer level) {
+        super(ItemType.WEAPON, rarity, level);
         this.mWeaponType = weaponType;
     }
 

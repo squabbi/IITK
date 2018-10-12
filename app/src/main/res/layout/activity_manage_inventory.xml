@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.ui.inventory.ManageInventoryActivity">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.squabbi.iitk.activity.ui.inventory.ManageInventoryViewModel"/>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/new_inventory_appbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/new_inventory_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Manage Inventory"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?actionBarSize"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_padding">
+
+            <EditText
+                android:id="@+id/new_inventory_name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_name" />
+
+            <!-- Key Locker selector row -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:text="@string/new_inv_select_lockers"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <ImageView
+                    android:id="@+id/new_inv_green_locker_imageview"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/key_locker_green"
+                    android:layout_weight="1"/>
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/new_inv_blue_locker_imageview"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/key_locker_blue"
+                    android:layout_weight="1"/>
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/new_inv_white_locker_imageview"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/key_locker_white"
+                    android:layout_weight="1"/>
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/new_inv_red_locker_imageview"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/key_locker_red"
+                    android:layout_weight="1"/>
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/new_inv_yellow_locker_imageview"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/key_locker_yellow"
+                    android:layout_weight="1"/>
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/new_inv_anniversary_locker_imageview"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/key_locker_anniversary"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

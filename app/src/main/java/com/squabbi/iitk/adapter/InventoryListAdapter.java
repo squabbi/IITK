@@ -1,17 +1,13 @@
 package com.squabbi.iitk.adapter;
 
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Inventory;
 
@@ -24,7 +20,7 @@ import butterknife.ButterKnife;
 public class InventoryListAdapter extends FirestoreRecyclerAdapter<Inventory,
         InventoryListAdapter.InventoryHolder> {
 
-    private OnInventoryItemClickListener mListener;
+    private OnFirestoreItemClickListener mListener;
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -86,12 +82,7 @@ public class InventoryListAdapter extends FirestoreRecyclerAdapter<Inventory,
         }
     }
 
-    public interface OnInventoryItemClickListener {
-
-        void onItemClick(DocumentSnapshot documentSnapshot, int position);
-    }
-
-    public void setOnInventoryItemClickListener(OnInventoryItemClickListener listener) {
+    public void setOnInventoryItemClickListener(OnFirestoreItemClickListener listener) {
 
         this.mListener = listener;
     }

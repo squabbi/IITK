@@ -62,6 +62,7 @@ public class PortalViewViewModel extends AndroidViewModel {
     private class DocumentListener implements EventListener<DocumentSnapshot> {
         @Override
         public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
             if (e != null) {
                 // A Firebase error occurred
                 e.printStackTrace();
@@ -69,6 +70,7 @@ public class PortalViewViewModel extends AndroidViewModel {
             }
 
             if (documentSnapshot != null) {
+
                 Portal portal = documentSnapshot.toObject(Portal.class);
 
                 if (portal != null) {

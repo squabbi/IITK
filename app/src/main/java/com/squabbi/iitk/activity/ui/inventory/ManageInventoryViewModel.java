@@ -23,9 +23,11 @@ public class ManageInventoryViewModel extends ViewModel {
     private MutableLiveData<boolean[]> mSelectedCapsulesLiveData = new MutableLiveData<>();
     private boolean[] mSelectedCapsules = new boolean[6];
     private MutableLiveData<Integer> mColorLiveData = new MutableLiveData<>();
+    private String mInventoryId;
 
-    public ManageInventoryViewModel() {
+    public ManageInventoryViewModel(String inventoryId) {
 
+        this.mInventoryId = inventoryId;
         // Set default colour
         setColorLiveData(Color.WHITE);
     }
@@ -46,6 +48,14 @@ public class ManageInventoryViewModel extends ViewModel {
 //        Inventory inventory = new Inventory(name, description,
 //                getColourLiveData().getValue(), items);
 //        mFirebaseRepository.addInventory(inventory);
+    }
+
+    public void addItemsToInventory(List<Item> items) {
+
+        // TODO: DO THIS SORTING IN THE REPOSITORY ??
+        for (Item item : items) {
+            mFirebaseRepository.addItemToInventory(mInventoryId, item);
+        }
     }
 
     public ChromaDialog.Builder getChromaDialogBuilder() {

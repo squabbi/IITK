@@ -25,9 +25,11 @@ public class FirebaseRepository {
 
     // Constants and finals for various collections
     public static final String COLLECTION_PORTALS = "portals";
-    public static final String COLLECTION_INVENTORY = "inventory";
     public static final String COLLECTION_ITEMS = "items";
+    public static final String COLLECTION_INVENTORY = "inventory";
     public static final String COLLECTION_AGENTS = "agents";
+
+    public static final String FIELD_NAME = "name";
 
     private CollectionReference mPortalCollectionReference;
     private CollectionReference mInventoryCollectionReference;
@@ -77,6 +79,12 @@ public class FirebaseRepository {
         // TODO: Apply different cases to allow users to filter inventory
         // Example query for A-Z portal names
         return mInventoryCollectionReference.orderBy("createdAt", Query.Direction.ASCENDING);
+    }
+
+    public Query getInventoryItemDocuments(String inventoryId){
+        // TODO: Apply different cases to allow users to filter inventory
+        // Example by type??
+        return mInventoryCollectionReference.document(inventoryId).collection(COLLECTION_ITEMS);
     }
 
     public DocumentReference getDocumentRefObject(String documentPath) {
