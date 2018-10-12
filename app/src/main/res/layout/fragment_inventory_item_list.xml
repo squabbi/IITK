@@ -10,19 +10,19 @@
             type="com.squabbi.iitk.activity.ui.inventory.view.InventoryViewViewModel"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/new_portal_appbarlayout"
+            android:id="@+id/inventory_view_appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/new_portal_toolbar"
+                android:id="@+id/inventory_view_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -36,6 +36,13 @@
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
             tools:listitem="@layout/item_inventory_item" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/inventory_item_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_outline_add_24px" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
