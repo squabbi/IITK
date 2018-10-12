@@ -7,9 +7,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.adapter.InventoryItemListAdapter;
+import com.squabbi.iitk.adapter.OnFirestoreItemClickListener;
 import com.squabbi.iitk.databinding.FragmentInventoryItemListBinding;
 
 /**
@@ -26,7 +29,7 @@ import com.squabbi.iitk.databinding.FragmentInventoryItemListBinding;
  * {@link InventoryItemListFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class InventoryItemListFragment extends Fragment {
+public class InventoryItemListFragment extends Fragment implements OnFirestoreItemClickListener {
 
     private OnFragmentInteractionListener mListener;
     private InventoryViewViewModel mViewModel;
@@ -39,6 +42,17 @@ public class InventoryItemListFragment extends Fragment {
 
     public InventoryItemListFragment() {
         // Required empty public constructor
+    }
+
+    private void initRecycler() {
+
+        mAdapter = new InventoryItemListAdapter(mViewModel.getBaseItemFirestoreRecyclerBuilder()
+            .setLifecycleOwner(this).build());
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setHasFixedSize(true);
+
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -58,6 +72,8 @@ public class InventoryItemListFragment extends Fragment {
 
         binding.setViewmodel(mViewModel);
         binding.setLifecycleOwner(this);
+
+        initRecycler();
 
         return binding.getRoot();
     }
@@ -85,10 +101,21 @@ public class InventoryItemListFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+        mListener.onItemSelected(documentSnapshot, position);
+    }
+
+    @OnClick(R.id.inventory_item_fab)
+    void onClick(View view) {
+        mListener.onViewPressed(view);
+    }
+
     /**
      * Interface for getting the document
      */
     public interface OnFragmentInteractionListener {
         void onItemSelected(DocumentSnapshot documentSnapshot, int position);
+        void onViewPressed(View view);
     }
 }
