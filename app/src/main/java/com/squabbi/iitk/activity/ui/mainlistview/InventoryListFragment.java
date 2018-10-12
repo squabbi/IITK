@@ -27,7 +27,8 @@ import com.squabbi.iitk.adapter.OnFirestoreItemClickListener;
  */
 public class InventoryListFragment extends Fragment implements OnFirestoreItemClickListener {
 
-    public static final String INVENTORY_REFERENCE_KEY = "inventory_ref";
+    public static final String INVENTORY_PATH_KEY = "inventory_path";
+    public static final String INVENTORY_ID_KEY = "inventory_id";
 
     private MainActivityViewModel mViewModel;
     private InventoryListAdapter mAdapter;
@@ -55,10 +56,9 @@ public class InventoryListFragment extends Fragment implements OnFirestoreItemCl
     private void openInventoryDetail(DocumentSnapshot documentSnapshot) {
 
         Intent intent = new Intent(getContext(), InventoryViewActivity.class);
-        intent.putExtra(INVENTORY_REFERENCE_KEY, documentSnapshot.getReference().getId());
+        intent.putExtra(INVENTORY_PATH_KEY, documentSnapshot.getReference().getPath());
+        intent.putExtra(INVENTORY_ID_KEY, documentSnapshot.getReference().getId());
         startActivity(intent);
-
-        Toast.makeText(getContext(), documentSnapshot.getId(), Toast.LENGTH_LONG).show();
     }
 
     @Override
