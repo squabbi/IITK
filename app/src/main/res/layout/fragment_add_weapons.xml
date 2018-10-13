@@ -1,65 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/add_mods_recyclerview"
+<androidx.viewpager.widget.ViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_inventory_weapons_viewpager"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="vertical"
-    tools:listitem="@layout/item_inventory_item" />
+    android:layout_height="wrap_content">
 
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context=".activity.ui.inventory.AddCapsulesFragment"-->
-    <!--android:id="@+id/add_mod_tablelayout"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<TableLayout-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:padding="@dimen/activity_padding">-->
-
-        <!--&lt;!&ndash; ITO EN Transmuters &ndash;&gt;-->
-        <!--<TableRow>-->
-            <!--<TextView-->
-                <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"-->
-                <!--android:text="@string/section_itoen_transmuters"-->
-                <!--android:layout_column="1"/>-->
-        <!--</TableRow>-->
-
-        <!--<include layout="@layout/section_itoen_transmuter"/>-->
-
-        <!--&lt;!&ndash; Link Amps &ndash;&gt;-->
-        <!--<TableRow>-->
-            <!--<TextView-->
-                <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"-->
-                <!--android:text="@string/section_link_amps"-->
-                <!--android:layout_column="1"/>-->
-        <!--</TableRow>-->
-
-        <!--<include layout="@layout/section_link_amps"/>-->
-
-        <!--&lt;!&ndash; Portal Shields &ndash;&gt;-->
-        <!--<TableRow>-->
-            <!--<TextView-->
-                <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"-->
-                <!--android:text="@string/section_shields"-->
-                <!--android:layout_column="1"/>-->
-        <!--</TableRow>-->
-
-        <!--<include layout="@layout/section_shields"/>-->
-
-        <!--&lt;!&ndash; Heat Sinks &ndash;&gt;-->
-        <!--<TableRow>-->
-            <!--<TextView-->
-                <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"-->
-                <!--android:text="@string/section_heat_sinks"-->
-                <!--android:layout_column="1"/>-->
-        <!--</TableRow>-->
-
-        <!--<include layout="@layout/section_heat_sinks"/>-->
-
-    <!--</TableLayout>-->
-<!--</ScrollView>-->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/add_inventory_weapons_tablayout"
+        android:background="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.google.android.material.tabs.TabLayout>
+</androidx.viewpager.widget.ViewPager>
