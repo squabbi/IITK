@@ -18,7 +18,7 @@
         <activity
             android:name=".activity.ui.portal.view.PortalViewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.ui.inventory.ManageInventoryActivity" />
+        <activity android:name=".activity.ui.inventory.manage.ManageInventoryActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTop" />
