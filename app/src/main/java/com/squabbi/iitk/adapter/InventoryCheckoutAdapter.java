@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.InventoryItem;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -17,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class InventoryItemAdapter extends RecyclerView.Adapter<InventoryItemAdapter.ViewHolder> {
+public class InventoryCheckoutAdapter extends RecyclerView.Adapter<InventoryCheckoutAdapter.ViewHolder> {
 
-    private List<InventoryItem> mInventoryItemList;
+    private List<InventoryItem> mInventoryItemList = new LinkedList<>();
     private OnModItemClickListener mListener;
 
     public interface OnModItemClickListener {
@@ -27,10 +28,15 @@ public class InventoryItemAdapter extends RecyclerView.Adapter<InventoryItemAdap
         void onModClicked(InventoryItem item, int position);
     }
 
-    public InventoryItemAdapter(List<InventoryItem> inventoryItemList, OnModItemClickListener listener) {
+    public InventoryCheckoutAdapter(OnModItemClickListener listener) {
 
-        this.mInventoryItemList = inventoryItemList;
         this.mListener = listener;
+    }
+
+    public void setInventoryItemList(List<InventoryItem> itemList) {
+
+        this.mInventoryItemList = itemList;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -67,7 +73,7 @@ public class InventoryItemAdapter extends RecyclerView.Adapter<InventoryItemAdap
 
     @NonNull
     @Override
-    public InventoryItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public InventoryCheckoutAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_inventory_item, parent, false);
@@ -76,7 +82,7 @@ public class InventoryItemAdapter extends RecyclerView.Adapter<InventoryItemAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InventoryItemAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InventoryCheckoutAdapter.ViewHolder holder, int position) {
         InventoryItem inventoryItem = mInventoryItemList.get(position);
         Context context = holder.itemView.getContext();
 
