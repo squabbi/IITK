@@ -2,8 +2,7 @@ package com.squabbi.iitk.util;
 
 import android.app.Application;
 
-import com.squabbi.iitk.activity.ui.inventory.ManageInventoryActivity;
-import com.squabbi.iitk.activity.ui.inventory.ManageInventoryViewModel;
+import com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryViewModel;
 import com.squabbi.iitk.activity.ui.inventory.view.InventoryViewViewModel;
 import com.squabbi.iitk.activity.ui.portal.view.PortalViewViewModel;
 
