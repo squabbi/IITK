@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/menu_shopping_cart"
+        android:title="@string/open_inventory_cart"
+        android:icon="@drawable/ic_outline_shopping_cart_24px"
+        app:showAsAction="always"
+        android:visible="true"/>
 </menu>
