@@ -12,7 +12,7 @@ public class Item {
     // Empty constructor for Firestore
     Item() {}
 
-    Item (ItemType itemType, Rarity rarity, Integer level) {
+    Item (ItemType itemType,  Rarity rarity, Integer level) {
 
         this.mItemType = itemType;
         this.mRarity = rarity;
