@@ -1,13 +1,14 @@
-package com.squabbi.iitk.activity.ui.inventory;
+package com.squabbi.iitk.activity.ui.inventory.manage.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.squabbi.iitk.R;
+import com.squabbi.iitk._interface.OnInventoryItemClickListener;
+import com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryViewModel;
 import com.squabbi.iitk.adapter.InventoryItemAdapter;
 import com.squabbi.iitk.model.InventoryItem;
 import com.squabbi.iitk.model.Item;
@@ -26,11 +27,11 @@ import butterknife.ButterKnife;
 
 public class AddCubesFragment extends Fragment {
 
-    private OnInventoryFragmentInteractionListener mListener;
+    private OnInventoryItemClickListener mListener;
     private ManageInventoryViewModel mViewModel;
     private RecyclerView.Adapter mAdapter;
 
-    @BindView(R.id.add_cubes_recyclerview)
+    @BindView(R.id.ingress_item_recyclerview)
     RecyclerView mRecyclerView;
 
     // Required empty constructor
@@ -50,9 +51,9 @@ public class AddCubesFragment extends Fragment {
 
         mAdapter = new InventoryItemAdapter(getItems(), new InventoryItemAdapter.OnModItemClickListener() {
             @Override
-            public void onModClicked(int position) {
+            public void onModClicked(InventoryItem item, int position) {
                 // Handle clicks on mods (add them to ViewModel's basket)
-                Toast.makeText(getContext(), "You touched item: " + position + ". That is: " + getContext().getString(getItems().get(position).getNameResource()), Toast.LENGTH_LONG).show();
+                mListener.onItemSelected(item, position);
             }
         });
 
@@ -64,15 +65,15 @@ public class AddCubesFragment extends Fragment {
         List<InventoryItem> inventoryItems = new LinkedList<>();
 
         // Power Cube items
-        inventoryItems.add(new InventoryItem(R.string.power_cube_lawson, Item.Rarity.VERY_RARE, 0, R.drawable.power_cube_lawson));
-        inventoryItems.add(new InventoryItem(R.string.power_cube_level, Item.Rarity.VERY_COMMON, 1, R.drawable.power_cube_l1));
-        inventoryItems.add(new InventoryItem(R.string.power_cube_level, Item.Rarity.VERY_COMMON, 2, R.drawable.power_cube_l2));
-        inventoryItems.add(new InventoryItem(R.string.power_cube_level, Item.Rarity.VERY_COMMON, 3, R.drawable.power_cube_l3));
-        inventoryItems.add(new InventoryItem(R.string.power_cube_level, Item.Rarity.VERY_COMMON, 4, R.drawable.power_cube_l4));
-        inventoryItems.add(new InventoryItem(R.string.power_cube_level, Item.Rarity.VERY_COMMON, 5, R.drawable.power_cube_l5));
-        inventoryItems.add(new InventoryItem(R.string.power_cube_level, Item.Rarity.VERY_COMMON, 6, R.drawable.power_cube_l6));
-        inventoryItems.add(new InventoryItem(R.string.power_cube_level, Item.Rarity.VERY_COMMON, 7, R.drawable.power_cube_l7));
-        inventoryItems.add(new InventoryItem(R.string.power_cube_level, Item.Rarity.VERY_COMMON, 8, R.drawable.power_cube_l8));
+        inventoryItems.add(new InventoryItem(Item.DetailItemType.LAWSON, R.string.power_cube_lawson, Item.Rarity.VERY_RARE, 0, R.drawable.power_cube_lawson));
+        inventoryItems.add(new InventoryItem(Item.DetailItemType.POWER_CUBE, R.string.power_cube_level, Item.Rarity.VERY_COMMON, 1, R.drawable.power_cube_l1));
+        inventoryItems.add(new InventoryItem(Item.DetailItemType.POWER_CUBE, R.string.power_cube_level, Item.Rarity.VERY_COMMON, 2, R.drawable.power_cube_l2));
+        inventoryItems.add(new InventoryItem(Item.DetailItemType.POWER_CUBE, R.string.power_cube_level, Item.Rarity.VERY_COMMON, 3, R.drawable.power_cube_l3));
+        inventoryItems.add(new InventoryItem(Item.DetailItemType.POWER_CUBE, R.string.power_cube_level, Item.Rarity.VERY_COMMON, 4, R.drawable.power_cube_l4));
+        inventoryItems.add(new InventoryItem(Item.DetailItemType.POWER_CUBE, R.string.power_cube_level, Item.Rarity.VERY_COMMON, 5, R.drawable.power_cube_l5));
+        inventoryItems.add(new InventoryItem(Item.DetailItemType.POWER_CUBE, R.string.power_cube_level, Item.Rarity.VERY_COMMON, 6, R.drawable.power_cube_l6));
+        inventoryItems.add(new InventoryItem(Item.DetailItemType.POWER_CUBE, R.string.power_cube_level, Item.Rarity.VERY_COMMON, 7, R.drawable.power_cube_l7));
+        inventoryItems.add(new InventoryItem(Item.DetailItemType.POWER_CUBE, R.string.power_cube_level, Item.Rarity.VERY_COMMON, 8, R.drawable.power_cube_l8));
 
         return inventoryItems;
     }
@@ -81,7 +82,7 @@ public class AddCubesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_cubes, container, false);
+        View view = inflater.inflate(R.layout.fragment_item_recycler, container, false);
         ButterKnife.bind(this, view);
 
         initRecycler();
@@ -92,11 +93,11 @@ public class AddCubesFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnInventoryFragmentInteractionListener) {
-            mListener = (OnInventoryFragmentInteractionListener) context;
+        if (context instanceof OnInventoryItemClickListener) {
+            mListener = (OnInventoryItemClickListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnInventoryFragmentInteractionListener");
+                    + " must implement OnInventoryItemClickListener");
         }
     }
 

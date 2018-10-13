@@ -1,4 +1,4 @@
-package com.squabbi.iitk.activity.ui.inventory;
+package com.squabbi.iitk.activity.ui.inventory.manage.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.activity.ui.inventory.weapons.AddUltraStrikeFragment;
-import com.squabbi.iitk.activity.ui.inventory.weapons.AddXmpFragment;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.weapons.AddFlipCardsFragment;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.weapons.AddUltraStrikesFragment;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.weapons.AddXmpsFragment;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -60,16 +61,18 @@ public class AddWeaponsFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return AddXmpFragment.newInstance();
+                    return AddXmpsFragment.newInstance();
                 case 1:
-                    return AddUltraStrikeFragment.newInstance();
+                    return AddUltraStrikesFragment.newInstance();
+                case 2:
+                    return AddFlipCardsFragment.newInstance();
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return NUM_PAGES;
         }
 
         @Nullable

@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddXmpFragment extends Fragment {
+public class AddXmpsFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;
     private ManageInventoryViewModel mViewModel;
@@ -35,10 +35,10 @@ public class AddXmpFragment extends Fragment {
     RecyclerView mRecyclerView;
 
     // Required empty constructor
-    public AddXmpFragment() {}
+    public AddXmpsFragment() {}
 
-    public static AddXmpFragment newInstance() {
-        return new AddXmpFragment();
+    public static AddXmpsFragment newInstance() {
+        return new AddXmpsFragment();
     }
 
     private void initRecycler() {

@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddUltraStrikeFragment extends Fragment {
+public class AddUltraStrikesFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;
     private ManageInventoryViewModel mViewModel;
@@ -35,10 +35,10 @@ public class AddUltraStrikeFragment extends Fragment {
     RecyclerView mRecyclerView;
 
     // Required empty constructor
-    public AddUltraStrikeFragment() {}
+    public AddUltraStrikesFragment() {}
 
-    public static AddUltraStrikeFragment newInstance() {
-        return new AddUltraStrikeFragment();
+    public static AddUltraStrikesFragment newInstance() {
+        return new AddUltraStrikesFragment();
     }
 
     private void initRecycler() {

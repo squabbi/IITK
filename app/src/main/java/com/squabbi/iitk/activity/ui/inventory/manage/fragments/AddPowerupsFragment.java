@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddStoreItemsFragment extends Fragment {
+public class AddPowerupsFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;
     private ManageInventoryViewModel mViewModel;
@@ -33,12 +33,12 @@ public class AddStoreItemsFragment extends Fragment {
     @BindView(R.id.ingress_item_recyclerview)
     RecyclerView mRecyclerView;
 
-    public AddStoreItemsFragment() {
+    public AddPowerupsFragment() {
         // Required empty public constructor
     }
 
-    public static AddStoreItemsFragment newInstance() {
-        return new AddStoreItemsFragment();
+    public static AddPowerupsFragment newInstance() {
+        return new AddPowerupsFragment();
     }
 
     private void initRecycler() {
