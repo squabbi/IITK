@@ -2,10 +2,12 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="fab_top_margin">32dp</dimen>
     <dimen name="activity_padding">8dp</dimen>
+    <dimen name="dialog_padding">16dp</dimen>
     <dimen name="activity_welcome_padding">40dp</dimen>
     <dimen name="login_button_margin">100dp</dimen>
     <dimen name="portal_view_toolbar">220dp</dimen>
     <dimen name="colour_bar">20dp</dimen>
+    <dimen name="image_small">50dp</dimen>
 
     <!-- Material elevation guidelines -->
     <dimen name="elevation_snackbar">6dp</dimen>
