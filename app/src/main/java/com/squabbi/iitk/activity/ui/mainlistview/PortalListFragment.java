@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.ui.portal.view.PortalViewActivity;
-import com.squabbi.iitk.adapter.OnFirestoreItemClickListener;
+import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
 import com.squabbi.iitk.adapter.PortalListAdapter;
 
 /**
@@ -73,7 +73,7 @@ public class PortalListFragment extends Fragment implements OnFirestoreItemClick
     }
 
     @Override
-    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+    public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, int position) {
         // Show new activity of Portal Details
         openPortalDetail(documentSnapshot);
     }

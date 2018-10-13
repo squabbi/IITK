@@ -1,4 +1,4 @@
-package com.squabbi.iitk.adapter;
+package com.squabbi.iitk._interface;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 

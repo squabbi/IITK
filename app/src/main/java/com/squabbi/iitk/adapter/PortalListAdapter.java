@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 import com.google.firebase.firestore.GeoPoint;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
 import com.squabbi.iitk.model.Portal;
 
 import androidx.annotation.NonNull;
@@ -91,7 +91,7 @@ public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalLi
 
                     // Ensure selected position exists and there is a listener
                     if (position != RecyclerView.NO_POSITION && mListener != null) {
-                        mListener.onItemClick(getSnapshots().getSnapshot(position), position);
+                        mListener.onFirestoreItemClick(getSnapshots().getSnapshot(position), position);
                     }
                 }
             });
@@ -99,7 +99,6 @@ public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalLi
     }
 
     public void setOnItemClickListener(OnFirestoreItemClickListener listener) {
-
         this.mListener = listener;
     }
 }

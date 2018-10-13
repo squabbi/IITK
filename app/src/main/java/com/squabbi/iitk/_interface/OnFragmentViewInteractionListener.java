@@ -1,11 +1,8 @@
-package com.squabbi.iitk.activity.ui.inventory.manage;
+package com.squabbi.iitk._interface;
 
 import android.view.View;
 
-import com.squabbi.iitk.model.InventoryItem;
+public interface OnFragmentViewInteractionListener {
 
-public interface OnInventoryFragmentInteractionListener {
-
-    void onItemSelected(InventoryItem item, int position);
     void onViewPressed(View view);
 }
