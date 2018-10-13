@@ -1,8 +1,8 @@
 package com.squabbi.iitk.util;
 
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.model.FirestoreItem;
 import com.squabbi.iitk.model.FlipCard;
-import com.squabbi.iitk.model.Inventory;
 import com.squabbi.iitk.model.InventoryItem;
 import com.squabbi.iitk.model.Item;
 import com.squabbi.iitk.model.LawsonPowerCube;
@@ -11,7 +11,7 @@ import com.squabbi.iitk.model.PowerCube;
 import com.squabbi.iitk.model.Powerup;
 import com.squabbi.iitk.model.Resonator;
 import com.squabbi.iitk.model.SoftBankUltraLink;
-import com.squabbi.iitk.model.Weapon;
+import com.squabbi.iitk.model.UltraStrike;
 import com.squabbi.iitk.model.XmpBurster;
 
 import static com.squabbi.iitk.util.Constants.HeatSinkImageResources;
@@ -64,13 +64,14 @@ public class InventoryItemConverter {
                 return new Mod(item.getRarity(), Mod.ModType.TURRET);
             case MULTI_HACK:
                 return new Mod(item.getRarity(), Mod.ModType.MULTI_HACK);
+            case ULTRA_STRIKE:
+                return new UltraStrike(item.getLevel());
             default:
                 throw new UnsupportedOperationException();
         }
     }
 
-    public static InventoryItem determineInventoryItem(Item item) {
-
+    public static InventoryItem determineInventoryItem(FirestoreItem item) {
         // Determine type of ITEM
         switch (item.getItemType()) {
             case RESONATOR:
@@ -84,11 +85,7 @@ public class InventoryItemConverter {
             case MOD:
                 return constructMod(item);
             case POWER_CUBE:
-                return new InventoryItem(Item.DetailItemType.POWER_CUBE,
-                        R.string.power_cube_level,
-                        item.getRarity(),
-                        item.getLevel(),
-                        PowerCubeImageResources[item.getLevel()-1]);
+                return constructPowerCube(item);
             case POWERUP:
                 return constructPowerup(item);
             default:
@@ -96,9 +93,9 @@ public class InventoryItemConverter {
         }
     }
 
-    private static InventoryItem constructWeapon(Item item) {
-        // Cast item to a Weapon class
-        switch (((Weapon) item).getWeaponType()) {
+    private static InventoryItem constructWeapon(FirestoreItem item) {
+
+        switch (item.getWeaponType()) {
             case BURSTER:
                 return new InventoryItem(Item.DetailItemType.XMP,
                         R.string.xmp_burster_level,
@@ -118,9 +115,26 @@ public class InventoryItemConverter {
         }
     }
 
-    private static InventoryItem constructFlipCard(Item item) {
-        // Cast item to FlipCard
-        switch (((FlipCard) item).getFlipType()) {
+    private static InventoryItem constructPowerCube(FirestoreItem item) {
+
+        if (item.isLawson()) {
+            return new InventoryItem(Item.DetailItemType.POWER_CUBE,
+                    R.string.power_cube_lawson,
+                    item.getRarity(),
+                    item.getLevel(),
+                    R.drawable.power_cube_lawson);
+        } else {
+            return new InventoryItem(Item.DetailItemType.POWER_CUBE,
+                    R.string.power_cube_level,
+                    item.getRarity(),
+                    item.getLevel(),
+                    PowerCubeImageResources[item.getLevel()-1]);
+        }
+    }
+
+    private static InventoryItem constructFlipCard(FirestoreItem item) {
+
+        switch (item.getFlipType()) {
             case ADA_REFACTOR:
                 return new InventoryItem(Item.DetailItemType.ADA,
                         R.string.flip_ada,
@@ -138,9 +152,9 @@ public class InventoryItemConverter {
         }
     }
 
-    private static InventoryItem constructMod(Item item) {
-        // Cast item to Mod
-        switch (((Mod) item).getModType()) {
+    private static InventoryItem constructMod(FirestoreItem item) {
+
+        switch (item.getModType()) {
             case ITO_EN_P:
                 return new InventoryItem(Item.DetailItemType.ITO_EN_P,
                         R.string.itoem_transmuter_plus,
@@ -178,8 +192,8 @@ public class InventoryItemConverter {
         }
     }
 
-    private static InventoryItem constructMultiHack(Item item) {
-        // Convert by Rarity
+    private static InventoryItem constructMultiHack(FirestoreItem item) {
+
         switch (item.getRarity()) {
             case COMMON:
                 return new InventoryItem(Item.DetailItemType.MULTI_HACK,
@@ -204,8 +218,8 @@ public class InventoryItemConverter {
         }
     }
 
-    private static InventoryItem constructHeatSink(Item item) {
-        // Convert by Rarity
+    private static InventoryItem constructHeatSink(FirestoreItem item) {
+
         switch (item.getRarity()) {
             case COMMON:
                 return new InventoryItem(Item.DetailItemType.HEAT_SINK,
@@ -230,9 +244,9 @@ public class InventoryItemConverter {
         }
     }
 
-    private static InventoryItem constructLinkAmp(Item item) {
-        // Cast to Mod
-        if ((((Mod) item).isSbul())) {
+    private static InventoryItem constructLinkAmp(FirestoreItem item) {
+        // Check if Link Amp is SoftBank UL first
+        if (item.isSbul()) {
             return new InventoryItem(Item.DetailItemType.SOFTBANK_UL,
                     R.string.softbank_ultra_link,
                     item.getRarity(),
@@ -259,9 +273,9 @@ public class InventoryItemConverter {
 
     }
 
-    private static InventoryItem constructShield(Item item) {
+    private static InventoryItem constructShield(FirestoreItem item) {
         // Cast to Mod, check if it is an Aegis shield
-        if ((((Mod) item).isAegis())) {
+        if (item.isAegis()) {
             return new InventoryItem(Item.DetailItemType.AEGIS_SHIELD,
                     R.string.shield_aegis,
                     item.getRarity(),
@@ -293,10 +307,10 @@ public class InventoryItemConverter {
         }
     }
 
-    private static InventoryItem constructPowerup(Item item) {
+    private static InventoryItem constructPowerup(FirestoreItem item) {
         // TODO: setup BEACON ITEM
         // Cast as Powerup
-        switch (((Powerup) item).getPowerupType()) {
+        switch (item.getPowerupType()) {
             case FRACKER:
                 return new InventoryItem(Item.DetailItemType.FRACKER,
                         R.string.portal_fracker,
