@@ -24,7 +24,27 @@ public class Item {
     }
 
     public enum Rarity {
-        VERY_COMMON, COMMON, RARE, VERY_RARE
+        VERY_COMMON {
+            @Override
+            public String toString() {
+                return "Very Common";
+            }
+        }, COMMON {
+            @Override
+            public String toString() {
+                return "Common";
+            }
+        }, RARE {
+            @Override
+            public String toString() {
+                return "Rare";
+            }
+        }, VERY_RARE {
+            @Override
+            public String toString() {
+                return "Very Rare";
+            }
+        }
     }
 
     public ItemType getItemType() {
