@@ -10,8 +10,6 @@ public class Capsule extends Item {
 
     private CapsuleType mCapsuleType;
     private String mCapsuleId;
-    // TODO: Remove lists, utilise documents/collections
-    private List<Item> mCapsuleContents = new LinkedList<>();
 
     // Empty constructor for Firestore
     Capsule() {}
@@ -40,17 +38,5 @@ public class Capsule extends Item {
 
     public void setCapsuleId(String capsuleId) {
         mCapsuleId = capsuleId;
-    }
-
-    public List<Item> getCapsuleContents() {
-        return mCapsuleContents;
-    }
-
-    public void setCapsuleContents(List<Item> capsuleContents) {
-        mCapsuleContents = capsuleContents;
-    }
-
-    public Integer numberOfItems() {
-        return mCapsuleContents.size();
     }
 }
