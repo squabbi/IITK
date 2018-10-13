@@ -1,7 +1,6 @@
-package com.squabbi.iitk.activity.ui.inventory;
+package com.squabbi.iitk.activity.ui.inventory.manage.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryViewModel;
+import com.squabbi.iitk.activity.ui.inventory.manage.OnInventoryFragmentInteractionListener;
 
 
 /**

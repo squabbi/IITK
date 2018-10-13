@@ -1,20 +1,19 @@
-package com.squabbi.iitk.activity.ui.inventory;
+package com.squabbi.iitk.activity.ui.inventory.manage;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.lifecycle.Observer;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import android.content.Context;
 import android.graphics.ColorMatrix;
@@ -26,11 +25,22 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.android.material.tabs.TabLayout;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk._interface.OnFragmentViewInteractionListener;
+import com.squabbi.iitk._interface.OnInventoryItemClickListener;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.AddCapsulesKeysFragment;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.AddCubesFragment;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.AddModsFragment;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.AddResonatorsFragment;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.AddPowerupsFragment;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.AddWeaponsFragment;
+import com.squabbi.iitk.activity.ui.inventory.manage.fragments.InventoryCheckoutFragment;
 import com.squabbi.iitk.activity.ui.inventory.view.InventoryViewActivity;
 import com.squabbi.iitk.databinding.ActivityManageInventoryBinding;
+import com.squabbi.iitk.model.InventoryItem;
 import com.squabbi.iitk.model.Item;
 import com.squabbi.iitk.model.Weapon;
 import com.squabbi.iitk.util.ViewModelFactory;
@@ -38,11 +48,25 @@ import com.squabbi.iitk.util.ViewModelFactory;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ManageInventoryActivity extends AppCompatActivity implements OnInventoryFragmentInteractionListener {
+public class ManageActivityView extends AppCompatActivity implements OnFragmentViewInteractionListener, OnInventoryItemClickListener {
+
+    @Override
+    public void onViewPressed(View view) {
+        // Use switch to handle different button presses (including menus)
+    }
+
+    @Override
+    public void onItemSelected(InventoryItem item, int position) {
+        // Handle different presses here on items via switch or even a helper/util class
+        Toast.makeText(this, "Selected item: " + item.getDetailItemType() + " . Position in recycler: " + position, Toast.LENGTH_LONG).show();
+        // Add item to viewmode's thing
+        mViewModel.addItemToInventoryCart(item);
+    }
 
     private ManageInventoryViewModel mViewModel;
 
-    private static final int NUM_PAGES = 8;
+    private static final int NUM_PAGES = 6;
+    private String[] mPageNames;
     private PagerAdapter mPagerAdapter;
 
     @BindView(R.id.add_inventory_items_viewpager)
@@ -51,49 +75,8 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnInve
     @BindView(R.id.add_inventory_items_toolbar)
     Toolbar mToolbar;
 
-    @Override
-    public void onItemSelected(DocumentSnapshot documentSnapshot, int position) {
-
-    }
-
-    @Override
-    public void onViewPressed(View view) {
-
-    }
-
-//    // Array of Locker ImageViews
-//    @BindViews({ R.id.new_inv_green_locker_imageview, R.id.new_inv_blue_locker_imageview,
-//            R.id.new_inv_white_locker_imageview, R.id.new_inv_red_locker_imageview, R.id.new_inv_yellow_locker_imageview,
-//            R.id.new_inv_anniversary_locker_imageview })
-//    List<ImageView> mLockerImageViews;
-//
-//    // Set onClickListener for Locker ImageViews
-//    @OnClick({ R.id.new_inv_green_locker_imageview, R.id.new_inv_blue_locker_imageview,
-//            R.id.new_inv_white_locker_imageview, R.id.new_inv_red_locker_imageview, R.id.new_inv_yellow_locker_imageview,
-//            R.id.new_inv_anniversary_locker_imageview })
-//    public void selectLocker(ImageView imageView) {
-//
-//        switch (imageView.getId()) {
-//            case R.id.new_inv_green_locker_imageview:
-//                mViewModel.setSelectedCapsule(0, !mViewModel.getSelectedCapsule(0));
-//                break;
-//            case R.id.new_inv_blue_locker_imageview:
-//                mViewModel.setSelectedCapsule(1, !mViewModel.getSelectedCapsule(1));
-//                break;
-//            case R.id.new_inv_white_locker_imageview:
-//                mViewModel.setSelectedCapsule(2, !mViewModel.getSelectedCapsule(2));
-//                break;
-//            case R.id.new_inv_red_locker_imageview:
-//                mViewModel.setSelectedCapsule(3, !mViewModel.getSelectedCapsule(3));
-//                break;
-//            case R.id.new_inv_yellow_locker_imageview:
-//                mViewModel.setSelectedCapsule(4, !mViewModel.getSelectedCapsule(4));
-//                break;
-//            case R.id.new_inv_anniversary_locker_imageview:
-//                mViewModel.setSelectedCapsule(5, !mViewModel.getSelectedCapsule(5));
-//                break;
-//        }
-//    }
+    @BindView(R.id.add_inventory_items_tablayout)
+    TabLayout mTabLayout;
 
     private class InventoryItemsPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -105,10 +88,16 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnInve
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return AddCapsulesFragment.newInstance();
+                    return AddPowerupsFragment.newInstance();
                 case 1:
-                    return AddModsFragment.newInstance();
+                    return AddCapsulesKeysFragment.newInstance();
                 case 2:
+                    return AddModsFragment.newInstance();
+                case 3:
+                    return AddCubesFragment.newInstance();
+                case 4:
+                    return AddResonatorsFragment.newInstance();
+                case 5:
                     return AddWeaponsFragment.newInstance();
             }
             return null;
@@ -116,7 +105,13 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnInve
 
         @Override
         public int getCount() {
-            return 3;
+            return NUM_PAGES;
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mPageNames[position];
         }
     }
 
@@ -138,6 +133,11 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnInve
         // Instantiate ViewPager and PagerAdapter
         mPagerAdapter = new InventoryItemsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.setOffscreenPageLimit(NUM_PAGES);
+
+        // Set array of pages
+        mPageNames = getResources().getStringArray(R.array.inventory);
+        mTabLayout.setupWithViewPager(mViewPager);
 
         setSupportActionBar(mToolbar);
 
@@ -145,32 +145,42 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnInve
         // enable the close button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_outline_close_24px);
-
-        // TODO: Set fab for colour picker
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_done_add, menu);
+        getMenuInflater().inflate(R.menu.menu_manage_inventory, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_done:
-                // Close the keyboard and submit strings to ViewModel.
-                closeKeyboard();
-                // Add portal and exit activity
-                addInventory();
-                finish();
-
+            case R.id.menu_shopping_cart:
+                // TODO: Implement opening 'inventory cart' fragment
+                showInventoryCart();
                 break;
             case android.R.id.home:
                 // Close activity
+                // TODO: Check for empty cart, confirm before exiting
                 finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showInventoryCart() {
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment previousDialog = getSupportFragmentManager().findFragmentByTag("dialog");
+
+        if (previousDialog != null) {
+            fragmentTransaction.remove(previousDialog);
+        }
+
+        fragmentTransaction.addToBackStack(null);
+        DialogFragment dialogFragment = InventoryCheckoutFragment.newInstance();
+        dialogFragment.show(fragmentTransaction, "dialog");
+
     }
 
     private void closeKeyboard() {
