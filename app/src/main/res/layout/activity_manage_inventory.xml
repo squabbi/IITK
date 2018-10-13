@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.ui.inventory.ManageInventoryActivity">
+    tools:context=".activity.ui.inventory.manage.ManageInventoryActivity">
 
     <data>
         <variable
             name="viewModel"
-            type="com.squabbi.iitk.activity.ui.inventory.ManageInventoryViewModel"/>
+            type="com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryViewModel"/>
     </data>
 
     <RelativeLayout
@@ -28,16 +28,21 @@
                 android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:title="Manage Inventory"/>
-
-            <com.google.android.material.tabs.TabLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/add_inventory_items_viewpager"
             android:layout_below="@+id/add_inventory_items_appbarlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/add_inventory_items_tablayout"
+                app:tabMode="scrollable"
+                android:background="?attr/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.google.android.material.tabs.TabLayout>
+        </androidx.viewpager.widget.ViewPager>
     </RelativeLayout>
 </layout>
