@@ -1,6 +1,6 @@
 package com.squabbi.iitk.adapter;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.model.Mod;
+import com.squabbi.iitk.model.InventoryItem;
 
 import java.util.List;
 
@@ -17,19 +17,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHolder> {
+public class InventoryItemAdapter extends RecyclerView.Adapter<InventoryItemAdapter.ViewHolder> {
 
-    private List<Mod> mModList;
+    private List<InventoryItem> mInventoryItemList;
     private OnModItemClickListener mListener;
 
     public interface OnModItemClickListener {
 
-        void onModClicked(int position);
+        void onModClicked(InventoryItem item, int position);
     }
 
-    public ModItemAdapter(List<Mod> modList, OnModItemClickListener listener) {
+    public InventoryItemAdapter(List<InventoryItem> inventoryItemList, OnModItemClickListener listener) {
 
-        this.mModList = modList;
+        this.mInventoryItemList = inventoryItemList;
         this.mListener = listener;
     }
 
@@ -56,7 +56,9 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
 
                     // Ensure the position selected exists and there is a listener registered
                     if (position != RecyclerView.NO_POSITION && mListener != null) {
-                        mListener.onModClicked(position);
+                        // Get current item at position
+                        InventoryItem item = mInventoryItemList.get(position);
+                        mListener.onModClicked(item, position);
                     }
                 }
             });
@@ -65,7 +67,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
 
     @NonNull
     @Override
-    public ModItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public InventoryItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_inventory_item, parent, false);
@@ -74,17 +76,24 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ModItemAdapter.ViewHolder holder, int position) {
-        Mod mod = mModList.get(position);
+    public void onBindViewHolder(@NonNull InventoryItemAdapter.ViewHolder holder, int position) {
+        InventoryItem inventoryItem = mInventoryItemList.get(position);
+        Context context = holder.itemView.getContext();
 
         // Set text and images of Mods
-        holder.mNameTv.setText(mod.getName());
-        holder.mDescriptionTv.setText(mod.getRarity().toString());
-        holder.mImageView.setImageResource(mod.getImageResource());
+        // Different if the item has a level
+        if (inventoryItem.getLevel() != 0) {
+            holder.mNameTv.setText(context.getString(inventoryItem.getNameResource(), inventoryItem.getLevel()));
+        } else {
+            holder.mNameTv.setText(inventoryItem.getNameResource());
+        }
+
+        holder.mDescriptionTv.setText(inventoryItem.getRarity().toString());
+        holder.mImageView.setImageResource(inventoryItem.getImageResource());
     }
 
     @Override
     public int getItemCount() {
-        return mModList.size();
+        return mInventoryItemList.size();
     }
 }
