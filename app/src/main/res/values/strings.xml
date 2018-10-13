@@ -46,6 +46,19 @@
     <string name="new_inv_preselect_capsules">Select the number of capsules you have:</string>
     <string name="new_inv_preselect_lockers">Select which key lockers you have:</string>
 
+    <string name="open_inventory_cart">Open Inventory Cart</string>
+    <string name="removed_from_cart">Removed item from cart.</string>
+    <string name="remove_all_from_cart">Removed all items.</string>
+
+    <string name="dialog_title_clear_cart">Clear cart?</string>
+    <string name="dialog_message_clear_cart">All items in the cart will be removed.</string>
+    <string name="empty_cart">Your cart is empty! Add some items.</string>
+
+    <string name="dialog_title_checkout">Confirm checkout</string>
+    <string name="dialog_message_checkout">Are you ready to checkout these items into your inventory?</string>
+
+    <!-- Capsules -->
+    <!-- Capsules: Key Lockers -->
     <string name="locker_green">Green Key Locker</string>
     <string name="locker_blue">Blue Key Locker</string>
     <string name="locker_white">White Key Locker</string>
@@ -53,8 +66,38 @@
     <string name="locker_yellow">Yellow Key Locker</string>
     <string name="locker_anniversary">Anniversary Key Locker</string>
 
-    <string name="cap_dupe">Quantum Capsule</string>
-    <string name="cap_normal">Capsule</string>
+    <!-- Capsules: Capsules -->
+    <string name="capsule_quantum">Quantum Capsule</string>
+    <string name="capsule">Capsule</string>
+
+    <!-- Portal Keys -->
+    <string name="portal_key">Portal Key</string>
+
+    <!-- Store items -->
+    <string name="portal_fracker">Portal Fracker</string>
+    <string name="beacon">Beacon</string>
+
+    <string name="store">Store</string>
+    <string name="capsules_keys">Capsules &amp; Key</string>
+    <string name="mods">Mods</string>
+    <string name="power_cubes">Power Cubes</string>
+    <string name="resonators">Resonators</string>
+    <string name="weapons">Weapons</string>
+
+    <string-array name="inventory">
+        <item>@string/store</item>
+        <item>@string/capsules_keys</item>
+        <item>@string/mods</item>
+        <item>@string/power_cubes</item>
+        <item>@string/resonators</item>
+        <item>@string/weapons</item>
+    </string-array>
+
+    <string-array name="weapons">
+        <item>Xmp Bursters</item>
+        <item>Ultra Strikes</item>
+        <item>Flip Cards</item>
+    </string-array>
 
     <string-array name="lockers">
         <item>@string/locker_green</item>
@@ -130,6 +173,18 @@
     <!-- Weapon: Ultra Strikes -->
     <string name="ultra_strike">Ultra Strike</string>
     <string name="ultra_strike_level">L%1$s Ultra Strike</string>
+    <!-- Weapon: Flip Cards -->
+    <string name="flip_ada">ADA Refactor</string>
+    <string name="flip_jarvis">JARVIS Virus</string>
+
+    <!-- Resonators -->
+    <string name="resonator">Resonator</string>
+    <string name="resonator_level">L%1$s Resonator</string>
+
+    <!-- Power Cubes -->
+    <string name="power_cube">Power Cube</string>
+    <string name="power_cube_lawson">Lawson Power Cube</string>
+    <string name="power_cube_level">L%1$s Power Cube</string>
 
     <string name="new_inv_select_lockers">Select Key Lockers:</string>
     <string name="dialog_newinv_title">New Inventory</string>
@@ -154,6 +209,7 @@
     <string name="button_sign_in">Sign-in</string>
     <string name="button_sign_up">Sign-up</string>
 
+    <string name="clear_all">Clear All</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="skip">Skip</string>
@@ -176,6 +232,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="checkout">Checkout</string>
+    <string name="inventory_cart">Inventory Cart</string>
 
     <!-- MainActivity strings -->
 </resources>
