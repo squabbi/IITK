@@ -2,7 +2,7 @@ package com.squabbi.iitk.model;
 
 public class PowerCube extends Item {
 
-    private boolean isLawson;
+    private boolean mIsLawson;
 
     // Required empty constructor
     public PowerCube() {}
@@ -13,14 +13,14 @@ public class PowerCube extends Item {
 
     public PowerCube(int level, boolean isLawson) {
         super(ItemType.POWER_CUBE, Rarity.VERY_COMMON, level);
-        this.isLawson = isLawson;
+        this.mIsLawson = isLawson;
     }
 
     public boolean isLawson() {
-        return isLawson;
+        return mIsLawson;
     }
 
     public void setLawson(boolean lawson) {
-        isLawson = lawson;
+        mIsLawson = lawson;
     }
 }
