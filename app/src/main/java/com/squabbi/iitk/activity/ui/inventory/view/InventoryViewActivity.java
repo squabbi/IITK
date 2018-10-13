@@ -11,14 +11,14 @@ import android.widget.Toast;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
-import com.squabbi.iitk.activity.ui.inventory.manage.ManageActivityView;
+import com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryActivity;
 import com.squabbi.iitk._interface.OnFragmentViewInteractionListener;
 import com.squabbi.iitk.activity.ui.mainlistview.InventoryListFragment;
 import com.squabbi.iitk.util.ViewModelFactory;
 
-public class ViewActivityView extends AppCompatActivity implements OnFragmentViewInteractionListener, OnFirestoreItemClickListener {
+public class InventoryViewActivity extends AppCompatActivity implements OnFragmentViewInteractionListener, OnFirestoreItemClickListener {
 
-    private ItemListFragmentView mItemListFragment;
+    private ItemListViewFragment mItemListFragment;
     private ItemViewFragment mItemViewFragment;
     private CapsuleViewFragment mCapsuleViewFragment;
 
@@ -33,7 +33,7 @@ public class ViewActivityView extends AppCompatActivity implements OnFragmentVie
         setContentView(R.layout.activity_inventory_view);
 
         // Instantiate fragments
-        mItemListFragment = ItemListFragmentView.newInstance();
+        mItemListFragment = ItemListViewFragment.newInstance();
         mItemViewFragment = ItemViewFragment.newInstance();
         mCapsuleViewFragment = CapsuleViewFragment.newInstance();
 
@@ -56,7 +56,7 @@ public class ViewActivityView extends AppCompatActivity implements OnFragmentVie
         switch (view.getId()) {
             case R.id.inventory_item_fab:
                 // Launch manage inventory activity
-                Intent intent = new Intent(this, ManageActivityView.class);
+                Intent intent = new Intent(this, ManageInventoryActivity.class);
                 intent.putExtra(INVENTORY_ID_KEY, mViewModel.getInventoryId());
                 startActivity(intent);
                 break;
