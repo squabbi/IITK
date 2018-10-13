@@ -29,7 +29,7 @@ import com.squabbi.iitk.databinding.FragmentInventoryItemListBinding;
  * {@link OnFragmentViewInteractionListener} interface
  * to handle interaction events.
  */
-public class ItemListFragmentView extends Fragment implements OnFirestoreItemClickListener, OnFragmentViewInteractionListener {
+public class ItemListViewFragment extends Fragment implements OnFirestoreItemClickListener, OnFragmentViewInteractionListener {
 
     private OnFragmentViewInteractionListener mListener;
     private OnFirestoreItemClickListener mFirestoreListener;
@@ -39,9 +39,9 @@ public class ItemListFragmentView extends Fragment implements OnFirestoreItemCli
     @BindView(R.id.inventory_items_recycler)
     RecyclerView mRecyclerView;
 
-    public static ItemListFragmentView newInstance() { return new ItemListFragmentView(); }
+    public static ItemListViewFragment newInstance() { return new ItemListViewFragment(); }
 
-    public ItemListFragmentView() {
+    public ItemListViewFragment() {
         // Required empty public constructor
     }
 

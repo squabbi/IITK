@@ -48,7 +48,7 @@ import com.squabbi.iitk.util.ViewModelFactory;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ManageActivityView extends AppCompatActivity implements OnFragmentViewInteractionListener, OnInventoryItemClickListener {
+public class ManageInventoryActivity extends AppCompatActivity implements OnFragmentViewInteractionListener, OnInventoryItemClickListener {
 
     @Override
     public void onViewPressed(View view) {
