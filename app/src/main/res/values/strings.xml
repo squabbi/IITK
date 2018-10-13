@@ -45,22 +45,147 @@
     <string name="select_colour">Select colour:</string>
     <string name="new_inv_preselect_capsules">Select the number of capsules you have:</string>
     <string name="new_inv_preselect_lockers">Select which key lockers you have:</string>
+
+    <string name="open_inventory_cart">Open Inventory Cart</string>
+    <string name="removed_from_cart">Removed item from cart.</string>
+    <string name="remove_all_from_cart">Removed all items.</string>
+
+    <string name="dialog_title_clear_cart">Clear cart?</string>
+    <string name="dialog_message_clear_cart">All items in the cart will be removed.</string>
+    <string name="empty_cart">Your cart is empty! Add some items.</string>
+
+    <string name="dialog_title_checkout">Confirm checkout</string>
+    <string name="dialog_message_checkout">Are you ready to checkout these items into your inventory?</string>
+
+    <!-- Capsules -->
+    <!-- Capsules: Key Lockers -->
     <string name="locker_green">Green Key Locker</string>
     <string name="locker_blue">Blue Key Locker</string>
     <string name="locker_white">White Key Locker</string>
     <string name="locker_red">Red Key Locker</string>
     <string name="locker_yellow">Yellow Key Locker</string>
     <string name="locker_anniversary">Anniversary Key Locker</string>
-    <string name="cap_dupe">Quantum Capsule</string>
-    <string name="cap_normal">Capsule</string>
-    <string-array name="lockers">
-        <item>Green Key Locker</item>
-        <item>Blue Key Locker</item>
-        <item>White Key Locker</item>
-        <item>Red Key Locker</item>
-        <item>Yellow Key Locker</item>
-        <item>Anniversary Key Locker</item>
+
+    <!-- Capsules: Capsules -->
+    <string name="capsule_quantum">Quantum Capsule</string>
+    <string name="capsule">Capsule</string>
+
+    <!-- Portal Keys -->
+    <string name="portal_key">Portal Key</string>
+
+    <!-- Store items -->
+    <string name="portal_fracker">Portal Fracker</string>
+    <string name="beacon">Beacon</string>
+
+    <string name="store">Store</string>
+    <string name="capsules_keys">Capsules &amp; Key</string>
+    <string name="mods">Mods</string>
+    <string name="power_cubes">Power Cubes</string>
+    <string name="resonators">Resonators</string>
+    <string name="weapons">Weapons</string>
+
+    <string-array name="inventory">
+        <item>@string/store</item>
+        <item>@string/capsules_keys</item>
+        <item>@string/mods</item>
+        <item>@string/power_cubes</item>
+        <item>@string/resonators</item>
+        <item>@string/weapons</item>
     </string-array>
+
+    <string-array name="weapons">
+        <item>Xmp Bursters</item>
+        <item>Ultra Strikes</item>
+        <item>Flip Cards</item>
+    </string-array>
+
+    <string-array name="lockers">
+        <item>@string/locker_green</item>
+        <item>@string/locker_blue</item>
+        <item>@string/locker_white</item>
+        <item>@string/locker_red</item>
+        <item>@string/locker_yellow</item>
+        <item>@string/locker_anniversary</item>
+    </string-array>
+
+    <string name="very_common">Very Common</string>
+    <string name="common">Common</string>
+    <string name="rare">Rare</string>
+    <string name="very_rare">Very Rare</string>
+
+    <string-array name="rarity">
+        <item>@string/very_common</item>
+        <item>@string/common</item>
+        <item>@string/rare</item>
+        <item>@string/very_rare</item>
+    </string-array>
+
+    <string name="l1">L1</string>
+    <string name="l2">L2</string>
+    <string name="l3">L3</string>
+    <string name="l4">L4</string>
+    <string name="l5">L5</string>
+    <string name="l6">L6</string>
+    <string name="l7">L7</string>
+    <string name="l8">L8</string>
+
+    <string-array name="levels">
+        <item>@string/l1</item>
+        <item>@string/l2</item>
+        <item>@string/l3</item>
+        <item>@string/l4</item>
+        <item>@string/l5</item>
+        <item>@string/l6</item>
+        <item>@string/l7</item>
+        <item>@string/l8</item>
+    </string-array>
+
+    <!-- Mods -->
+    <string name="section_itoen_transmuters">ITO EN Transmuter</string>
+    <string name="section_link_amps">Link Amps</string>
+    <string name="section_shields">Portal Shields</string>
+    <string name="section_heat_sinks">Heat Sinks</string>
+    <string name="section_force_amps">Force Amps</string>
+    <string name="section_multi_hacks">Multi-hacks</string>
+    <string name="section_turret">Turret</string>
+    <!-- Mods: ITO EN Transmuters -->
+    <string name="itoen_transmuter_minus">ITO EN Transmuter (-)</string>
+    <string name="itoem_transmuter_plus">ITO EN Transmuter (+)</string>
+    <!-- Mods: Link Amps -->
+    <string name="link_amp">Link Amp</string>
+    <string name="softbank_ultra_link">SoftBank Ultra Link</string>
+    <!-- Mods: Portal Shields -->
+    <string name="shield">Portal Shield</string>
+    <string name="shield_aegis">Aegis Shield</string>
+    <!-- Mods: Heat Sink -->
+    <string name="heat_sink">Heat Sink</string>
+    <!-- Mods: Force Amp -->
+    <string name="force_amp">Force Amp</string>
+    <!-- Mods: Multi-hack -->
+    <string name="multi_hack">Multi-hack</string>
+    <!-- Mods: Turret -->
+    <string name="turret">Turret</string>
+
+    <!-- Weapons -->
+    <!-- Weapon: Xmp Burster -->
+    <string name="xmp_burster">Xmp Burster</string>
+    <string name="xmp_burster_level">L%1$s Xmp Burster</string>
+    <!-- Weapon: Ultra Strikes -->
+    <string name="ultra_strike">Ultra Strike</string>
+    <string name="ultra_strike_level">L%1$s Ultra Strike</string>
+    <!-- Weapon: Flip Cards -->
+    <string name="flip_ada">ADA Refactor</string>
+    <string name="flip_jarvis">JARVIS Virus</string>
+
+    <!-- Resonators -->
+    <string name="resonator">Resonator</string>
+    <string name="resonator_level">L%1$s Resonator</string>
+
+    <!-- Power Cubes -->
+    <string name="power_cube">Power Cube</string>
+    <string name="power_cube_lawson">Lawson Power Cube</string>
+    <string name="power_cube_level">L%1$s Power Cube</string>
+
     <string name="new_inv_select_lockers">Select Key Lockers:</string>
     <string name="dialog_newinv_title">New Inventory</string>
 
@@ -84,6 +209,7 @@
     <string name="button_sign_in">Sign-in</string>
     <string name="button_sign_up">Sign-up</string>
 
+    <string name="clear_all">Clear All</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="skip">Skip</string>
@@ -106,6 +232,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="checkout">Checkout</string>
+    <string name="inventory_cart">Inventory Cart</string>
 
     <!-- MainActivity strings -->
 </resources>

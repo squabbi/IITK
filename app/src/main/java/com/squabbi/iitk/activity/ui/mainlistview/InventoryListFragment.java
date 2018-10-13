@@ -13,13 +13,12 @@ import butterknife.ButterKnife;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.activity.ui.inventory.view.InventoryViewActivity;
 import com.squabbi.iitk.adapter.InventoryListAdapter;
-import com.squabbi.iitk.adapter.OnFirestoreItemClickListener;
+import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
 
 
 /**
@@ -79,7 +78,8 @@ public class InventoryListFragment extends Fragment implements OnFirestoreItemCl
     }
 
     @Override
-    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+    public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, int position) {
+        // Opens inventory detail activity
         openInventoryDetail(documentSnapshot);
     }
 }

@@ -5,6 +5,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.squabbi.iitk.model.FirestoreItem;
 import com.squabbi.iitk.model.Inventory;
 import com.squabbi.iitk.model.Item;
 import com.squabbi.iitk.util.FirebaseRepository;
@@ -26,15 +27,15 @@ public class InventoryViewViewModel extends ViewModel {
     private ListenerRegistration mInventoryRegistration;
     private DocumentListener mInventoryListener = new DocumentListener();
 
-    private FirestoreRecyclerOptions.Builder<Item> mBaseInventoryItemFirestoreRecyclerBuilder;
+    private FirestoreRecyclerOptions.Builder<FirestoreItem> mBaseInventoryItemFirestoreRecyclerBuilder;
 
     public InventoryViewViewModel(String inventoryPath, String inventoryId) {
 
         this.mInventoryPath = inventoryPath;
         this.mInventoryId = inventoryId;
 
-        this.mBaseInventoryItemFirestoreRecyclerBuilder = new FirestoreRecyclerOptions.Builder<Item>()
-                .setQuery(mRepository.getInventoryItemDocuments(mInventoryId), Item.class);
+        this.mBaseInventoryItemFirestoreRecyclerBuilder = new FirestoreRecyclerOptions.Builder<FirestoreItem>()
+                .setQuery(mRepository.getInventoryItemDocuments(mInventoryId), FirestoreItem.class);
 
         // Create Inventory object from ID, listen to changes to the document
         mInventoryRegistration = mRepository.getDocumentRefObject(mInventoryPath)
@@ -62,7 +63,7 @@ public class InventoryViewViewModel extends ViewModel {
         }
     }
 
-    public FirestoreRecyclerOptions.Builder<Item> getBaseItemFirestoreRecyclerBuilder() {
+    public FirestoreRecyclerOptions.Builder<FirestoreItem> getBaseItemFirestoreRecyclerBuilder() {
         return mBaseInventoryItemFirestoreRecyclerBuilder;
     }
 

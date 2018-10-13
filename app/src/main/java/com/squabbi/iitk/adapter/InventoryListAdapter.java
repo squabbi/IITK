@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
 import com.squabbi.iitk.model.Inventory;
 
 import androidx.annotation.NonNull;
@@ -75,7 +76,7 @@ public class InventoryListAdapter extends FirestoreRecyclerAdapter<Inventory,
 
                     // Ensure the position selected exists and there is a listener registered
                     if (position != RecyclerView.NO_POSITION && mListener != null) {
-                        mListener.onItemClick(getSnapshots().getSnapshot(position), position);
+                        mListener.onFirestoreItemClick(getSnapshots().getSnapshot(position), position);
                     }
                 }
             });

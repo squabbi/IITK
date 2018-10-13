@@ -11,6 +11,9 @@ public class Weapon extends Item {
         BURSTER, ULTRA_STRIKE, FLIP_CARD
     }
 
+    // Empty constructor required by Firebase
+    public Weapon() {}
+
     public Weapon (WeaponType weaponType, Rarity rarity, Integer level) {
         super(ItemType.WEAPON, rarity, level);
         this.mWeaponType = weaponType;

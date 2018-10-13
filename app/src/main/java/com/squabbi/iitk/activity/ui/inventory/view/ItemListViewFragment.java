@@ -1,7 +1,6 @@
 package com.squabbi.iitk.activity.ui.inventory.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -19,35 +18,37 @@ import android.view.ViewGroup;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk._interface.OnFragmentViewInteractionListener;
 import com.squabbi.iitk.adapter.InventoryItemListAdapter;
-import com.squabbi.iitk.adapter.OnFirestoreItemClickListener;
+import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
 import com.squabbi.iitk.databinding.FragmentInventoryItemListBinding;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link InventoryItemListFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentViewInteractionListener} interface
  * to handle interaction events.
  */
-public class InventoryItemListFragment extends Fragment implements OnFirestoreItemClickListener {
+public class ItemListViewFragment extends Fragment implements OnFirestoreItemClickListener, OnFragmentViewInteractionListener {
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentViewInteractionListener mListener;
+    private OnFirestoreItemClickListener mFirestoreListener;
     private InventoryViewViewModel mViewModel;
     private InventoryItemListAdapter mAdapter;
 
     @BindView(R.id.inventory_items_recycler)
     RecyclerView mRecyclerView;
 
-    public static InventoryItemListFragment newInstance() { return new InventoryItemListFragment(); }
+    public static ItemListViewFragment newInstance() { return new ItemListViewFragment(); }
 
-    public InventoryItemListFragment() {
+    public ItemListViewFragment() {
         // Required empty public constructor
     }
 
     private void initRecycler() {
 
         mAdapter = new InventoryItemListAdapter(mViewModel.getBaseItemFirestoreRecyclerBuilder()
-            .setLifecycleOwner(this).build());
+            .setLifecycleOwner(this).build(), getContext());
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setHasFixedSize(true);
@@ -78,20 +79,21 @@ public class InventoryItemListFragment extends Fragment implements OnFirestoreIt
         return binding.getRoot();
     }
 
-    public void onInventoryItemSelected(DocumentSnapshot documentSnapshot, int position) {
-        if (mListener != null) {
-            mListener.onItemSelected(documentSnapshot, position);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentViewInteractionListener) {
+            mListener = (OnFragmentViewInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnFragmentViewInteractionListener");
+        }
+
+        if (context instanceof OnFirestoreItemClickListener) {
+            mFirestoreListener = (OnFirestoreItemClickListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+            + " must implement OnFirestoreItemClickListener");
         }
     }
 
@@ -99,23 +101,21 @@ public class InventoryItemListFragment extends Fragment implements OnFirestoreIt
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-        mListener.onItemSelected(documentSnapshot, position);
+        mFirestoreListener = null;
     }
 
     @OnClick(R.id.inventory_item_fab)
     void onClick(View view) {
+        onViewPressed(view);
+    }
+
+    @Override
+    public void onViewPressed(View view) {
         mListener.onViewPressed(view);
     }
 
-    /**
-     * Interface for getting the document
-     */
-    public interface OnFragmentInteractionListener {
-        void onItemSelected(DocumentSnapshot documentSnapshot, int position);
-        void onViewPressed(View view);
+    @Override
+    public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, int position) {
+        mFirestoreListener.onFirestoreItemClick(documentSnapshot, position);
     }
 }

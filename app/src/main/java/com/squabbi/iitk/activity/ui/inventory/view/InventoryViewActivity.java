@@ -10,13 +10,15 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.activity.ui.inventory.ManageInventoryActivity;
+import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
+import com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryActivity;
+import com.squabbi.iitk._interface.OnFragmentViewInteractionListener;
 import com.squabbi.iitk.activity.ui.mainlistview.InventoryListFragment;
 import com.squabbi.iitk.util.ViewModelFactory;
 
-public class InventoryViewActivity extends AppCompatActivity implements InventoryItemListFragment.OnFragmentInteractionListener {
+public class InventoryViewActivity extends AppCompatActivity implements OnFragmentViewInteractionListener, OnFirestoreItemClickListener {
 
-    private InventoryItemListFragment mItemListFragment;
+    private ItemListViewFragment mItemListFragment;
     private ItemViewFragment mItemViewFragment;
     private CapsuleViewFragment mCapsuleViewFragment;
 
@@ -31,7 +33,7 @@ public class InventoryViewActivity extends AppCompatActivity implements Inventor
         setContentView(R.layout.activity_inventory_view);
 
         // Instantiate fragments
-        mItemListFragment = InventoryItemListFragment.newInstance();
+        mItemListFragment = ItemListViewFragment.newInstance();
         mItemViewFragment = ItemViewFragment.newInstance();
         mCapsuleViewFragment = CapsuleViewFragment.newInstance();
 
@@ -49,12 +51,6 @@ public class InventoryViewActivity extends AppCompatActivity implements Inventor
     }
 
     @Override
-    public void onItemSelected(DocumentSnapshot documentSnapshot, int position) {
-        // Handle opening a new fragment for selected item
-        Toast.makeText(this, documentSnapshot.getId(), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void onViewPressed(View view) {
 
         switch (view.getId()) {
@@ -65,5 +61,11 @@ public class InventoryViewActivity extends AppCompatActivity implements Inventor
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, int position) {
+        // Handle opening a new fragment for selected item
+        Toast.makeText(this, documentSnapshot.getId(), Toast.LENGTH_LONG).show();
     }
 }

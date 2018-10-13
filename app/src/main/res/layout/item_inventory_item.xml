@@ -4,12 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     android:padding="@dimen/activity_padding">
 
     <ImageView
         android:id="@+id/item_inventoryitem_imageview"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_marginEnd="@dimen/activity_padding"
+        android:layout_width="@dimen/image_small"
+        android:layout_height="@dimen/image_small" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,12 +24,13 @@
             android:id="@+id/item_inventoryitem_name_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
         <TextView
             android:id="@+id/item_inventoryitem_description_textview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
     </LinearLayout>
 
 </LinearLayout>
