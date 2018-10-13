@@ -20,7 +20,79 @@ public class Item {
     }
 
     public enum ItemType {
-        WEAPON, MOD, KEY, KEY_LOCKER, CAPSULE
+        WEAPON {
+            @Override
+            public String toString() {
+                return "Weapon";
+            }
+        }, MOD {
+            @Override
+            public String toString() {
+                return "Mod";
+            }
+        }, KEY {
+            @Override
+            public String toString() {
+                return "Portal Key";
+            }
+        }, KEY_LOCKER {
+            @Override
+            public String toString() {
+                return "Key Locker";
+            }
+        }, CAPSULE {
+            @Override
+            public String toString() {
+                return "Capsule";
+            }
+        }, POWER_CUBE {
+            @Override
+            public String toString() {
+                return "Power Cube";
+            }
+        }, POWERUP {
+            @Override
+            public String toString() {
+                return "Powerup";
+            }
+        }, RESONATOR {
+            @Override
+            public String toString() {
+                return "Resonator";
+            }
+        }
+    }
+
+    public enum DetailItemType {
+
+        RESONATOR,
+        PORTAL_KEY,
+        SHIELD,
+        AEGIS_SHIELD,
+        FORCE_AMP,
+        LINK_AMP,
+        SOFTBANK_UL,
+        MULTI_HACK,
+        HEAT_SINK,
+        TURRET,
+        ITO_EN_P,
+        ITO_EN_M,
+        XMP,
+        ULTRA_STRIKE,
+        ADA,
+        JARVIS,
+        POWER_CUBE,
+        LAWSON,
+        CAPSULE,
+        QUANTUM,
+        LOCKER_GREEN,
+        LOCKER_BLUE,
+        LOCKER_WHITE,
+        LOCKER_RED,
+        LOCKER_YELLOW,
+        LOCKER_ANNIVERSARY,
+        FRACKER,
+        BEACON
     }
 
     public enum Rarity {
