@@ -43,6 +43,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.ui.inventory.view.InventoryViewActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCn8Y0c_5R7nkKIsJ7NLvDq--CGHFzNosA" />
@@ -50,8 +53,6 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
-        <activity android:name=".activity.ui.inventory.view.InventoryViewActivity"></activity>
     </application>
 
 </manifest>
