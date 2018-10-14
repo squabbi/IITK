@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (REQUEST_CODE_HOVER_PERMISSION == requestCode) {
             mPermissionsRequested = true;
-
         }
     }
 
