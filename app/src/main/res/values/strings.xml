@@ -240,6 +240,8 @@
     <string name="determining_location">Determining location...</string>
     <string name="determine_location_failed">Failed to determine location.</string>
     <string name="run_action_again">Please run the action again.</string>
+    <string name="empty_portals">No Portals to show! Add one below.</string>
+    <string name="empty_inventories">No Inventories to display! Add one below.</string>
 
     <!-- MainActivity strings -->
 </resources>
