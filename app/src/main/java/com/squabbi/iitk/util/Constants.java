@@ -20,6 +20,8 @@ public class Constants {
     public static final int LOCATION_GET_INTEL = 1;
     public static final int LOCATION_GET_HOVER = 2;
 
+    public static final String TAG_FRAGMENT_PORTAL_EDIT = "portal_edit_frag";
+
     public enum LockerType {
 
         GREEN,
