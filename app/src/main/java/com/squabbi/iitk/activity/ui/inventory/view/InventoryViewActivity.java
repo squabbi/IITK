@@ -168,6 +168,11 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
     }
 
     @Override
+    public void onMenuItemPressed(MenuItem menuItem) {
+
+    }
+
+    @Override
     public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, @Nullable Integer position) {
         // Handle opening a new fragment for selected item
         Toast.makeText(this, documentSnapshot.getId(), Toast.LENGTH_LONG).show();

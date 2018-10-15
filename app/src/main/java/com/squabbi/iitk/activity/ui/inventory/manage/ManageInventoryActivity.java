@@ -65,6 +65,11 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnFrag
     }
 
     @Override
+    public void onMenuItemPressed(MenuItem menuItem) {
+
+    }
+
+    @Override
     public void onItemSelected(InventoryItem item, int position) {
         // Handle different presses here on items via switch or even a helper/util class
         Toast.makeText(this, "Selected item: " + item.getDetailItemType() + " . Position in recycler: " + position, Toast.LENGTH_LONG).show();

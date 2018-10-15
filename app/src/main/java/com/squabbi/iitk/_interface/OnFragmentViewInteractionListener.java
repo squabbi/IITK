@@ -1,5 +1,6 @@
 package com.squabbi.iitk._interface;
 
+import android.view.MenuItem;
 import android.view.View;
 
 /**
@@ -13,4 +14,10 @@ public interface OnFragmentViewInteractionListener {
      * @param view the View that initiated the OnClick call.
      */
     void onViewPressed(View view);
+
+    /**
+     * Returns the menu item that called the OnMenuItemPressed.
+     * @param menuItem the menu item that initiated the callback.
+     */
+    void onMenuItemPressed(MenuItem menuItem);
 }
