@@ -13,18 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            android:fitsSystemWindows="true">
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"/>
-        </com.google.android.material.appbar.AppBarLayout>
-
         <!-- Main edit view -->
         <ScrollView
             android:id="@+id/portaledit_scrollview"
@@ -119,5 +107,11 @@
             </LinearLayout>
         </ScrollView>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_outline_save_24px"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_gravity="bottom|end"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
