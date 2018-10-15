@@ -30,7 +30,7 @@ public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalLi
     private OnFirestoreItemClickListener mListener;
 
     /**
-     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
+     * Create a new RecyclerView adapter that listens to a Firestore Query. See {@link
      * FirestoreRecyclerOptions} for configuration options.
      *
      * @param options
@@ -51,17 +51,21 @@ public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalLi
         if (geoPoint != null) {
             // Set LatLng to location TextView
             portalHolder.mLocationTv.setText(portal.getGeoPoint().toString());
-        } else if (friendlyLocation != null && !friendlyLocation.isEmpty()) {
+        }
+
+        if (friendlyLocation != null && !friendlyLocation.isEmpty()) {
             // Always try to default to friendly location
             portalHolder.mLocationTv.setText(portal.getFriendlyLocation());
-        } else {
+        }
+
+        if (friendlyLocation == null && geoPoint == null && friendlyLocation.isEmpty()){
             // Both geoPoint and friendlyLocation is null or empty
             portalHolder.mLocationTv.setText(R.string.portal_item_no_location);
         }
 
         // Set background colour from Portal if it's not null.
-        if (portal.getColour() != null) portalHolder.mCardView.setCardBackgroundColor(portal.getColour());
-        else portalHolder.mCardView.setCardBackgroundColor(Color.GRAY);
+        if (portal.getColour() != null) { portalHolder.mCardView.setCardBackgroundColor(portal.getColour()); }
+        else { portalHolder.mCardView.setCardBackgroundColor(Color.GRAY); }
     }
 
     @NonNull

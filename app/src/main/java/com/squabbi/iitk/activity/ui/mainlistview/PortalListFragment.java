@@ -3,6 +3,7 @@ package com.squabbi.iitk.activity.ui.mainlistview;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +14,12 @@ import butterknife.ButterKnife;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.firebase.ui.common.ChangeEventType;
+import com.firebase.ui.firestore.ChangeEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
 import com.squabbi.iitk.adapter.PortalListAdapter;
@@ -30,6 +36,9 @@ public class PortalListFragment extends Fragment {
 
     @BindView(R.id.portal_recycler)
     RecyclerView mPortalRecycler;
+
+    @BindView(R.id.empty_portal_list_textview)
+    TextView mEmptyPortalTv;
 
     /**
      * Empty constructor for PortalListFragment
