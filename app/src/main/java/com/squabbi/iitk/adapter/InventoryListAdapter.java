@@ -18,6 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Inventory List adapter which extends FirebaseUI's FirestoreRecyclerAdapter. This converts
+ * and abstracts the necessary functionality for showing Firestore Queries as objects into a UI element.
+ */
+
 public class InventoryListAdapter extends FirestoreRecyclerAdapter<Inventory,
         InventoryListAdapter.InventoryHolder> {
 
@@ -53,6 +58,7 @@ public class InventoryListAdapter extends FirestoreRecyclerAdapter<Inventory,
         return new InventoryHolder(itemView);
     }
 
+    /** Inner-class to bind the item view */
     class InventoryHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_inventory_name)
@@ -64,6 +70,10 @@ public class InventoryListAdapter extends FirestoreRecyclerAdapter<Inventory,
         @BindView(R.id.item_inventory_card_layout)
         CardView mCardView;
 
+        /**
+         * Constructor to bind the view and implement OnClick listeners.
+         * @param itemView View to be binded to.
+         */
         public InventoryHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -76,15 +86,18 @@ public class InventoryListAdapter extends FirestoreRecyclerAdapter<Inventory,
 
                     // Ensure the position selected exists and there is a listener registered
                     if (position != RecyclerView.NO_POSITION && mListener != null) {
-                        mListener.onFirestoreItemClick(getSnapshots().getSnapshot(position), position);
+                        mListener.onFirestoreItemClick(getSnapshots().getSnapshot(position), 1);
                     }
                 }
             });
         }
     }
 
-    public void setOnInventoryItemClickListener(OnFirestoreItemClickListener listener) {
-
+    /**
+     * Sets the OnClick listener which is called when an item is clicked.
+     * @param listener OnFirestoreItemClickListener to listen to callbacks.
+     */
+    public void setOnItemClickListener(OnFirestoreItemClickListener listener) {
         this.mListener = listener;
     }
 }

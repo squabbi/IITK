@@ -28,7 +28,13 @@ import butterknife.ButterKnife;
 /**
  * Fragment which intialises the list of FlipCard items for the user to select and add to the
  * inventory cart. This is used within the ManageInventory tab view.
+ * Activities that contain this fragment must implement the
+ * {@link OnInventoryItemClickListener} interface
+ * to handle interaction events.
+ * Use the {@link AddFlipCardsFragment#newInstance} factory method to
+ * create an instance of this fragment.
  */
+
 public class AddFlipCardsFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;

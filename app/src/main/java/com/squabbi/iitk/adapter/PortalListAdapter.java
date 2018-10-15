@@ -20,6 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Portal List adapter which extends FirebaseUI's FirestoreRecyclerAdapter. This converts
+ * and abstracts the necessary functionality for showing Firestore Queries as objects into a UI element.
+ */
+
 public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalListAdapter.PortalHolder> {
 
     private OnFirestoreItemClickListener mListener;
@@ -68,6 +73,7 @@ public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalLi
         return new PortalHolder(itemView);
     }
 
+    /** Inner-class for binding the view with items */
     class PortalHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_portal_name)
@@ -79,6 +85,10 @@ public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalLi
         @BindView(R.id.item_portal_card_layout)
         CardView mCardView;
 
+        /**
+         * Constructor for binding the view and setting OnClick.
+         * @param itemView View to be binded.
+         */
         public PortalHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -91,13 +101,17 @@ public class PortalListAdapter extends FirestoreRecyclerAdapter<Portal, PortalLi
 
                     // Ensure selected position exists and there is a listener
                     if (position != RecyclerView.NO_POSITION && mListener != null) {
-                        mListener.onFirestoreItemClick(getSnapshots().getSnapshot(position), position);
+                        mListener.onFirestoreItemClick(getSnapshots().getSnapshot(position), 0);
                     }
                 }
             });
         }
     }
 
+    /**
+     * Sets the OnClick listener which is called when an item is clicked.
+     * @param listener OnFirestoreItemClickListener to listen to callbacks.
+     */
     public void setOnItemClickListener(OnFirestoreItemClickListener listener) {
         this.mListener = listener;
     }

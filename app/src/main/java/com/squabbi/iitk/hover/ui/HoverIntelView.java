@@ -23,13 +23,20 @@ import butterknife.OnClick;
 import im.delight.android.webview.AdvancedWebView;
 import io.mattcarroll.hover.Content;
 
+import static com.squabbi.iitk.util.Constants.URL_DEFAULT_INGRESS;
+
+/**
+ * Content class for Hover. This class shows the Ingress Intel webpage within a frame.
+ */
+
 public class HoverIntelView extends FrameLayout implements Content {
 
     private AdvancedWebView mWebView;
 
-    private static final String INGRESS_BASE_URL = "https://www.ingress.com/intel?ll=%f,%f&z=15";
-    private static final String INGRESS_INTEL_URL = "https://www.ingress.com/intel";
-
+    /**
+     * Public constructor for the Ingress Intel site Hover Content frame.
+     * @param context context of the Hover service.
+     */
     public HoverIntelView(@NonNull Context context) {
         super(context);
 
@@ -45,9 +52,10 @@ public class HoverIntelView extends FrameLayout implements Content {
 
         mWebView = findViewById(R.id.hover_intel_webview);
         // TODO: Look at using EventBus to pass through Location
-        mWebView.loadUrl(INGRESS_INTEL_URL);
+        mWebView.loadUrl(URL_DEFAULT_INGRESS);
     }
 
+    /** ButterKnife bind for FAB to reload the page */
     @OnClick(R.id.hover_intel_fab)
     void onClick(View view) {
         // Referesh web-page

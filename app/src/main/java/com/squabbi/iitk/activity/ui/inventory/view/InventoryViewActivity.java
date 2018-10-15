@@ -1,6 +1,7 @@
 package com.squabbi.iitk.activity.ui.inventory.view;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -30,6 +31,15 @@ import com.squabbi.iitk.activity.ui.inventory.view.categories.ItemAllFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.InventoryListFragment;
 import com.squabbi.iitk.util.ViewModelFactory;
 
+import static com.squabbi.iitk.util.Constants.INVENTORY_ID_KEY;
+import static com.squabbi.iitk.util.Constants.INVENTORY_PATH_KEY;
+
+/**
+ * The activity opens the selected inventory and displays the items within the inventory.
+ * This activity implements {@link OnFirestoreItemClickListener}, {@link OnFragmentViewInteractionListener}
+ * and {@link NavigationView.OnNavigationItemSelectedListener}.
+ */
+
 public class InventoryViewActivity extends AppCompatActivity implements OnFragmentViewInteractionListener,
         OnFirestoreItemClickListener,
         NavigationView.OnNavigationItemSelectedListener {
@@ -41,8 +51,6 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
     private ItemAllFragment mItemAllFragment;
 
     private InventoryViewViewModel mViewModel;
-
-    public static final String INVENTORY_ID_KEY = "inventory_id";
 
     @BindView(R.id.inventory_items_drawerlayout)
     DrawerLayout mDrawerLayout;
@@ -62,8 +70,8 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
 
         // Register ViewModel with custom constructor
         mViewModel = ViewModelProviders.of(this, new ViewModelFactory(
-                getIntent().getStringExtra(InventoryListFragment.INVENTORY_PATH_KEY),
-                getIntent().getStringExtra(InventoryListFragment.INVENTORY_ID_KEY)
+                getIntent().getStringExtra(INVENTORY_PATH_KEY),
+                getIntent().getStringExtra(INVENTORY_ID_KEY)
         )).get(InventoryViewViewModel.class);
 
         setSupportActionBar(mToolbar);
@@ -97,7 +105,7 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
                 break;
         }
 
-        //setTitle(item.getTitle());
+        setTitle(item.getTitle());
         item.setChecked(true);
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -118,7 +126,9 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
     private void toggleNavigationDrawer() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else mDrawerLayout.openDrawer(GravityCompat.START);
+        } else {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 
     private void updateFragment(Fragment fragment) {
@@ -158,7 +168,7 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
     }
 
     @Override
-    public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, int position) {
+    public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, @Nullable Integer position) {
         // Handle opening a new fragment for selected item
         Toast.makeText(this, documentSnapshot.getId(), Toast.LENGTH_LONG).show();
     }

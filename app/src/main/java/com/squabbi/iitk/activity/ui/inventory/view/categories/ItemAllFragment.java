@@ -22,6 +22,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Fragment shows a list of all items in the Inventory.
+ * Activities that contain this fragment must implement the
+ * {@link OnInventoryItemClickListener} & {@link OnFragmentViewInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link ItemAllFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class ItemAllFragment extends Fragment {
 
     private OnFragmentViewInteractionListener mListener;
@@ -32,8 +40,10 @@ public class ItemAllFragment extends Fragment {
     @BindView(R.id.ingress_item_recyclerview)
     RecyclerView mRecyclerView;
 
+    /** Required empty public constructor */
     public ItemAllFragment() {}
 
+    /** Public factory method returns a new instance of the fragment */
     public static ItemAllFragment newInstance() {
         return new ItemAllFragment();
     }

@@ -32,11 +32,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
+import com.squabbi.iitk.activity.ui.inventory.view.InventoryViewActivity;
 import com.squabbi.iitk.activity.ui.mainlistview.InventoryListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.PortalListFragment;
 import com.squabbi.iitk.activity.ui.mainlistview.MainActivityViewModel;
 import com.squabbi.iitk.activity.ui.portal.NewPortalActivity;
+import com.squabbi.iitk.activity.ui.portal.view.PortalViewActivity;
 import com.squabbi.iitk.service.MyHoverMenuService;
 import com.squabbi.iitk.util.Constants;
 
@@ -46,14 +50,24 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.mattcarroll.hover.overlay.OverlayPermission;
 
+import static com.squabbi.iitk.util.Constants.INVENTORY_ID_KEY;
+import static com.squabbi.iitk.util.Constants.INVENTORY_PATH_KEY;
+import static com.squabbi.iitk.util.Constants.PORTAL_REFERENCE_KEY;
+import static com.squabbi.iitk.util.Constants.URL_CUSTOM_INGRESS;
+import static com.squabbi.iitk.util.Constants.URL_DEFAULT_INGRESS;
+
 /**
  * This sets the content of the main activity with a app bar, navigation drawer,
  * and sets up the respective listeners and onOptionsItemSelected to handle the
  * changes from the user interacting with the navigation drawer.
  *
  * This is where the fragments are changed programmatically.
+ *
+ * This Activity must implement {@link OnFirestoreItemClickListener} as its child fragments
+ * depend on it.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        OnFirestoreItemClickListener {
 
     // Butter Knife binding for the navigation drawer and toolbar
     @BindView(R.id.drawer_layout)
@@ -79,34 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private static final Integer REQUEST_CODE_HOVER_PERMISSION = 91;
     private boolean mPermissionsRequested = false;
-
-    // Constants
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
-        return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        // Check if navigation drawer is opened
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            // Close it
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (REQUEST_CODE_HOVER_PERMISSION == requestCode) {
-            mPermissionsRequested = true;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_open_intel:
-                getCurrentLocation(Constants.LOCATION_GET_INTEL);
+                getCurrentLocation();
                 break;
             case R.id.menu_open_hover:
                 startHoverService();
@@ -228,35 +214,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
-    private void getCurrentLocation(final int type) {
+    private void getCurrentLocation() {
 
         EasyLocationUtility locationUtility = new EasyLocationUtility(this);
 
         // Check if permission to access device location has been granted and ask for it if not
         if (locationUtility.permissionIsGranted()){
             // Permission is granted
-            Toast.makeText(getApplication(), "Determining location...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplication(), getString(R.string.determining_location), Toast.LENGTH_LONG).show();
 
             locationUtility.getCurrentLocationOneTime(new LocationRequestCallback() {
                 @Override
                 public void onLocationResult(Location location) {
-                    switch (type) {
-                        // Regular Intel map
-                        case Constants.LOCATION_GET_INTEL:
-                            showIntelMap(location);
-                            break;
-                    }
+                    showIntelMap(location);
                 }
 
                 @Override
                 public void onFailedRequest(String s) {
-                    Toast.makeText(getApplication(), "Failed to determine location.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), getString(R.string.determine_location_failed), Toast.LENGTH_LONG).show();
                 }
             });
         } else {
             // Permission not granted, ask for it
             locationUtility.requestPermission(EasyLocationUtility.RequestCodes.CURRENT_LOCATION_ONE_TIME);
-            Toast.makeText(getApplication(), "Please run the action again.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplication(), getString(R.string.run_action_again), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -268,10 +249,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (location != null) {
             // Format the string
-            String locationString = "https://www.ingress.com/intel?ll=" + location.getLatitude() + "," + location.getLongitude() + "&z=15";
-            customTabsIntent.launchUrl(this, Uri.parse(locationString));
+            customTabsIntent.launchUrl(this, Uri.parse(String.format(URL_CUSTOM_INGRESS, location.getLatitude(), location.getLongitude())));
         } else {
-            customTabsIntent.launchUrl(this, Uri.parse("https://www.ingress.com/intel"));
+            customTabsIntent.launchUrl(this, Uri.parse(URL_DEFAULT_INGRESS));
         }
     }
 
@@ -319,5 +299,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         return passingStatus;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Check if navigation drawer is opened
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            // Close it
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (REQUEST_CODE_HOVER_PERMISSION == requestCode) {
+            mPermissionsRequested = true;
+        }
+    }
+
+    @Override
+    public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, @Nullable Integer type) {
+
+        switch (type) {
+            case 0:
+                openPortalDetail(documentSnapshot);
+                break;
+            case 1:
+                openInventoryDetail(documentSnapshot);
+                break;
+        }
+    }
+
+    private void openInventoryDetail(DocumentSnapshot documentSnapshot) {
+
+        Intent intent = new Intent(this, InventoryViewActivity.class);
+        intent.putExtra(INVENTORY_PATH_KEY, documentSnapshot.getReference().getPath());
+        intent.putExtra(INVENTORY_ID_KEY, documentSnapshot.getReference().getId());
+        startActivity(intent);
+    }
+
+    private void openPortalDetail(DocumentSnapshot documentSnapshot) {
+
+        Intent intent = new Intent(this, PortalViewActivity.class);
+        intent.putExtra(PORTAL_REFERENCE_KEY, documentSnapshot.getReference().getPath());
+        startActivity(intent);
     }
 }

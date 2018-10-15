@@ -26,13 +26,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment subclass for displaying and adding user selected capsules and portal keys.
  * Activities that contain this fragment must implement the
  * {@link OnInventoryItemClickListener} interface
  * to handle interaction events.
  * Use the {@link AddCapsulesKeysFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class AddCapsulesKeysFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;

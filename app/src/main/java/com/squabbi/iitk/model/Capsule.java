@@ -2,8 +2,9 @@ package com.squabbi.iitk.model;
 
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
-import java.util.LinkedList;
-import java.util.List;
+/**
+ * POJO representing an Ingress Capsule.
+ */
 
 @IgnoreExtraProperties
 public class Capsule extends Item {
@@ -14,6 +15,12 @@ public class Capsule extends Item {
     // Empty constructor for Firestore
     Capsule() {}
 
+    /**
+     * Capsule's default constructor.
+     * @param capsuleType type of the Capsule.
+     * @param capsuleId ID of the Capsule.
+     * @param rarity rarity of the Capsule.
+     */
     public Capsule(CapsuleType capsuleType, String capsuleId, Rarity rarity) {
         super(ItemType.CAPSULE, rarity, 0);
         this.mCapsuleType = capsuleType;

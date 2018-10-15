@@ -23,8 +23,18 @@ import static com.squabbi.iitk.util.Constants.ShieldImageResources;
 import static com.squabbi.iitk.util.Constants.UltraStrikeImageResources;
 import static com.squabbi.iitk.util.Constants.XmpImageResources;
 
+/**
+ * Helper class converting different items, including {@link Item}, {@link InventoryItem} and
+ * {@link FirestoreItem}.
+ */
+
 public class InventoryItemConverter {
 
+    /**
+     * Determines a respective {@link Item} from an {@link InventoryItem}.
+     * @param item Item to be converted.
+     * @return Respective Item equivalent.
+     */
     public static Item determineItem(InventoryItem item) {
         // TODO: Finish capsule creation
         switch (item.getDetailItemType()) {
@@ -71,6 +81,11 @@ public class InventoryItemConverter {
         }
     }
 
+    /**
+     * Returns an equivalent InventoryItem (for display) from a {@link FirestoreItem}.
+     * @param item Firstore item to convert.
+     * @return Respective {@link InventoryItem} display item.
+     */
     public static InventoryItem determineInventoryItem(FirestoreItem item) {
         // Determine type of ITEM
         switch (item.getItemType()) {

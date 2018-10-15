@@ -24,6 +24,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * A fragment sub-class that shows a list of Resonators by level and allows the user
+ * to add the selected item to the inventory cart.
+ * This is a part of the {@link com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryActivity}
+ * Activities that contain this fragment must implement the
+ * {@link OnInventoryItemClickListener} interface
+ * to handle interaction events.
+ * Use the {@link AddResonatorsFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+
 public class AddResonatorsFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;
@@ -38,6 +49,7 @@ public class AddResonatorsFragment extends Fragment {
 
     }
 
+    /** Public factory method which creates a new instance of the fragment */
     public static AddResonatorsFragment newInstance() {
         return new AddResonatorsFragment();
     }

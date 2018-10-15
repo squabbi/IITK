@@ -25,6 +25,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Fragment for adding UltraStrikes. Shows a list of all UltraStrikes and their levels which can be
+ * added to the inventory cart. * Activities that contain this fragment must implement the
+ * {@link OnInventoryItemClickListener} interface
+ * to handle interaction events.
+ * Use the {@link AddUltraStrikesFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+
 public class AddUltraStrikesFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;
@@ -37,6 +46,7 @@ public class AddUltraStrikesFragment extends Fragment {
     // Required empty constructor
     public AddUltraStrikesFragment() {}
 
+    /** Public static method for constructing the fragment and returning a new instance of it. */
     public static AddUltraStrikesFragment newInstance() {
         return new AddUltraStrikesFragment();
     }

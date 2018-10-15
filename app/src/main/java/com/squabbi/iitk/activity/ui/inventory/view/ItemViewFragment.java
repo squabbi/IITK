@@ -15,7 +15,7 @@ import com.squabbi.iitk.R;
 import com.squabbi.iitk.model.Item;
 
 /**
- * A simple {@link Fragment} subclass.
+ * ItemView fragment used to view the details of the selected item.
  * Use the {@link ItemViewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
@@ -23,8 +23,8 @@ public class ItemViewFragment extends Fragment {
 
     InventoryViewViewModel mViewModel;
 
+    /** Public factory method that returns a new instance of the fragment */
     public static ItemViewFragment newInstance() {
-
         return new ItemViewFragment();
     }
 

@@ -6,6 +6,12 @@ import com.squabbi.iitk.util.Constants;
 import com.squabbi.iitk.model.Item.ItemType;
 import com.squabbi.iitk.model.Item.Rarity;
 
+/**
+ * Master-class for Firestore to convert Documents into objects.
+ * This class encompasses all sub-classes of the Item class and contains all relevant fields,
+ * enums and methods.
+ */
+
 @IgnoreExtraProperties
 public class FirestoreItem {
 
@@ -45,13 +51,6 @@ public class FirestoreItem {
 
     // Empty constructor for Firestore
     FirestoreItem() {}
-
-    FirestoreItem(ItemType itemType, Rarity rarity, Integer level) {
-
-        this.mItemType = itemType;
-        this.mRarity = rarity;
-        this.mLevel = level;
-    }
 
     // Stock Item getters and setters
     public ItemType getItemType() {

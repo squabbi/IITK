@@ -13,11 +13,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.ButterKnife;
 
+/**
+ * Fragment that provides edit controls for the current portal in view.
+ */
+
 public class PortalViewEditFragment extends Fragment {
 
     public static PortalViewEditFragment newInstance() { return new PortalViewEditFragment(); }
 
     private PortalViewViewModel mViewModel;
+
+    // TODO: Implement listener for onClick actions when it comes to saving the changes via a Map<string, object>.
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

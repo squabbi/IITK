@@ -1,5 +1,10 @@
 package com.squabbi.iitk.model;
 
+/**
+ * POJO for holding and exposing Ingress item's respective resources to be used for display
+ * purposes.
+ */
+
 public class InventoryItem {
 
     private Item.DetailItemType mDetailItemType;
@@ -8,6 +13,14 @@ public class InventoryItem {
     private Integer mLevel;
     private Integer mImageResource;
 
+    /**
+     * Creates an InventoryItem to visually represent an Ingress item.
+     * @param detailItemType Specific item this represents.
+     * @param name String resource ID of the item's name.
+     * @param rarity Rarity of the item.
+     * @param level Level of the item. 0 for non-leveled items.
+     * @param imageResource Drawable resource ID which represents item.
+     */
     public InventoryItem(Item.DetailItemType detailItemType, Integer name, Item.Rarity rarity, Integer level, Integer imageResource) {
 
         this.mDetailItemType = detailItemType;

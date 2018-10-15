@@ -11,6 +11,11 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 
+/**
+ * View class for constructing the look and design of each Tab's icon for use within
+ * the Hover service.
+ */
+
 public class HoverTabView extends View {
 
     private int mBackgroundColour;
@@ -20,6 +25,12 @@ public class HoverTabView extends View {
     private Drawable mIconDrawable;
     private int mIconInsetLeft, mIconInsetTop, mIconInsetRight, mIconInsetBottom;
 
+    /**
+     * Constructor for the HoverTabView View.
+     * @param context context of the Hover service.
+     * @param backgroundDrawable Drawable background for the Tab.
+     * @param iconDrawable Drawable icon for the Tab.
+     */
     public HoverTabView(Context context, Drawable backgroundDrawable, Drawable iconDrawable) {
 
         super(context);
@@ -35,12 +46,20 @@ public class HoverTabView extends View {
         mIconInsetLeft = mIconInsetTop = mIconInsetRight = mIconInsetBottom = insetsDp;
     }
 
+    /**
+     * Sets the background colour of the drawable within the tab.
+     * @param backgroundColour Background colour of the tab.
+     */
     public void setTabBackgroundColour(@ColorInt int backgroundColour) {
 
         mBackgroundColour = backgroundColour;
         mCircleDrawable.setColorFilter(mBackgroundColour, PorterDuff.Mode.SRC_ATOP);
     }
 
+    /**
+     * Sets the icon colour of the tab.
+     * @param foregroundColour Colour of the tab's icon.
+     */
     public void setTabForegroundColour(@ColorInt Integer foregroundColour) {
         mForegroundColour = foregroundColour;
         if (null != mForegroundColour) {
@@ -50,6 +69,10 @@ public class HoverTabView extends View {
         }
     }
 
+    /**
+     * Sets the tab's icon.
+     * @param icon Icon drawable for the tab.
+     */
     public void setIcon(@Nullable Drawable icon) {
         mIconDrawable = icon;
         if (null != mForegroundColour && null != mIconDrawable) {
