@@ -22,6 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.util.FirebaseAuthHelper;
 import com.squabbi.iitk.util.FirebaseRepository;
 
 import butterknife.ButterKnife;
@@ -34,7 +35,7 @@ import butterknife.OnClick;
 public class WelcomeActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
-    private FirebaseRepository mRepository = FirebaseRepository.getInstance();
+    private FirebaseAuthHelper mAuthHelper = FirebaseAuthHelper.getInstance();
     private static final String TAG = "WelcomeActivity";
     private static final String AGREEMENT_KEY = "agreement";
     private static final Integer RC_SIGN_IN = 1;
@@ -47,7 +48,7 @@ public class WelcomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         // Check if the user is logged in and has agreed
-        if (FastSave.getInstance().getBoolean(AGREEMENT_KEY) && mRepository.getAuth().getCurrentUser() != null) {
+        if (FastSave.getInstance().getBoolean(AGREEMENT_KEY) && mAuthHelper.getAuth().getCurrentUser() != null) {
             // Launch MainActivity
             startMainActivityAndFinish();
         }
@@ -89,7 +90,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 Snackbar.LENGTH_LONG).show();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mRepository.getAuth().signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuthHelper.getAuth().signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
