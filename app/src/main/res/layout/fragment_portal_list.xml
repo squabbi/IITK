@@ -22,16 +22,16 @@
             android:id="@+id/portal_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             tools:listitem="@layout/item_portal"/>
 
-            <TextView
-                android:id="@+id/empty_portal_list_textview"
-                android:drawableTop="@drawable/ic_outline_location_off_24px"
-                android:drawableTint="?attr/colorButtonNormal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="@string/empty_portals" />
+        <TextView
+            android:id="@+id/empty_portal_list_textview"
+            android:drawableTop="@drawable/ic_outline_location_off_24px"
+            android:drawableTint="?attr/colorButtonNormal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:text="@string/empty_portals" />
     </LinearLayout>
 </layout>
