@@ -60,9 +60,6 @@ public class PortalViewFragment extends Fragment {
     @BindView(R.id.portalview_mapview)
     MapView mMapView;
 
-    @BindView(R.id.portalview_toolbar)
-    Toolbar mToolbar;
-
     @BindView(R.id.portalview_collapsingtoolbar)
     CollapsingToolbarLayout mToolbarLayout;
 
@@ -97,10 +94,6 @@ public class PortalViewFragment extends Fragment {
         FragmentPortalViewBinding binding = FragmentPortalViewBinding.inflate(inflater, container, false);
         ButterKnife.bind(this, binding.getRoot());
 
-        // Set up action bar within the fragment.
-        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_outline_close_24px);
         setHasOptionsMenu(true); // Enables the overflow menu.
 
         mToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
@@ -149,8 +142,8 @@ public class PortalViewFragment extends Fragment {
                 break;
 
             case R.id.menu_portal_edit:
-                // TODO: Open edit fragment
-                mOnEditSelected.onEditSelected();
+//                mOnEditSelected.onEditSelected();
+                mListener.onMenuItemPressed(item);
                 break;
 
             case R.id.menu_portal_share:
@@ -175,24 +168,6 @@ public class PortalViewFragment extends Fragment {
     void fabOnClick(View view) {
         // Open intel map with coordinates of Portal
         mListener.onViewPressed(view);
-    }
-
-    private void performTransition()
-    {
-        // Create new instance of edit fragment
-        PortalViewEditFragment editFragment = PortalViewEditFragment.newInstance();
-
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-        TransitionSet transitionSet = new TransitionSet();
-        transitionSet.addTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
-        transitionSet.setDuration(1000);
-        transitionSet.setStartDelay(300);
-        editFragment.setSharedElementEnterTransition(transitionSet);
-
-        fragmentTransaction.addSharedElement(mActionButton, getString(R.string.trans_fab));
-        fragmentTransaction.replace(R.id.container, editFragment);
-        fragmentTransaction.commitAllowingStateLoss();
     }
 
     @Override
