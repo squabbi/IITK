@@ -2,7 +2,23 @@ package com.squabbi.iitk.util;
 
 import com.squabbi.iitk.R;
 
+/**
+ * Basic utility class which holds static constants to be used throughout classes.
+ */
+
 public class Constants {
+
+    public static final String INVENTORY_PATH_KEY = "inventory_path";
+    public static final String INVENTORY_ID_KEY = "inventory_id";
+    public static final String PORTAL_REFERENCE_KEY = "portal_ref";
+
+    public static final String URL_DEFAULT_INGRESS = "https://www.ingress.com/intel";
+    public static final String URL_CUSTOM_INGRESS = "https://www.ingress.com/intel?ll=%f,%f&z=15";
+
+    public static String[] LockerTypes = new String[] {"GREEN", "BLUE", "WHITE", "RED", "YELLOW", "ANNIVERSARY"};
+
+    public static final int LOCATION_GET_INTEL = 1;
+    public static final int LOCATION_GET_HOVER = 2;
 
     public enum LockerType {
 
@@ -90,9 +106,4 @@ public class Constants {
             R.drawable.shield_vr,
             R.drawable.shield_aegis
     };
-
-    public static String[] LockerTypes = new String[] {"GREEN", "BLUE", "WHITE", "RED", "YELLOW", "ANNIVERSARY"};
-
-    public static final int LOCATION_GET_INTEL = 1;
-    public static final int LOCATION_GET_HOVER = 2;
 }

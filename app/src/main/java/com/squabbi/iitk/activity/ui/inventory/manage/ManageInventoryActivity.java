@@ -48,6 +48,15 @@ import com.squabbi.iitk.util.ViewModelFactory;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.squabbi.iitk.util.Constants.INVENTORY_ID_KEY;
+
+/**
+ * An activity which allows the user to add items to be added to their selected inventory.
+ * This activity implements both an OnFragmentViewInteractionListener, as well as an
+ * OnIventoryItemClickListener, to handle those respective events from both adapters and views of
+ * fragments.
+ */
+
 public class ManageInventoryActivity extends AppCompatActivity implements OnFragmentViewInteractionListener, OnInventoryItemClickListener {
 
     @Override
@@ -78,8 +87,15 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnFrag
     @BindView(R.id.add_inventory_items_tablayout)
     TabLayout mTabLayout;
 
+    /**
+     * Private inner class which creates a PageAdapter for the Inventory Items list.
+     */
     private class InventoryItemsPagerAdapter extends FragmentStatePagerAdapter {
 
+        /**
+         * Public constructor for the PagerAdapter.
+         * @param fragmentManager Requires the FragmentManager of the activity.
+         */
         public InventoryItemsPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
@@ -121,7 +137,7 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnFrag
 
         // Register ViewModel
         mViewModel = ViewModelProviders.of(this,
-                new ViewModelFactory(getIntent().getStringExtra(InventoryViewActivity.INVENTORY_ID_KEY)))
+                new ViewModelFactory(getIntent().getStringExtra(INVENTORY_ID_KEY)))
                 .get(ManageInventoryViewModel.class);
 
         // Bind the ViewModel to XML
@@ -157,12 +173,10 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnFrag
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_shopping_cart:
-                // TODO: Implement opening 'inventory cart' fragment
                 showInventoryCart();
                 break;
             case android.R.id.home:
                 // Close activity
-                // TODO: Check for empty cart, confirm before exiting
                 finish();
         }
         return super.onOptionsItemSelected(item);
@@ -189,14 +203,6 @@ public class ManageInventoryActivity extends AppCompatActivity implements OnFrag
             InputMethodManager iMm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             iMm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-    }
-
-    private void addInventory() {
-
-        List<Item> sampleItems = new LinkedList<>();
-        sampleItems.add(new Weapon(Weapon.WeaponType.BURSTER, Item.Rarity.RARE, 4));
-
-        mViewModel.addItemsToInventory(sampleItems);
     }
 
     private static void setUnselected(ImageView imageView) {

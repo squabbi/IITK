@@ -21,6 +21,14 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * A fragment sub-class that shows a TabView of Weapons and allows the user to browse between
+ * the various weapons (Flip Cards, Xmps and Ultra Strikes to add the selected item to the inventory cart.
+ * This is a part of the {@link com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryActivity}
+ * Use the {@link AddWeaponsFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+
 public class AddWeaponsFragment extends Fragment {
 
     private static final int NUM_PAGES = 3;
@@ -36,6 +44,7 @@ public class AddWeaponsFragment extends Fragment {
     // Required public constructor
     public AddWeaponsFragment() {}
 
+    /** Public factory method that returns a new instance of the fragment */
     public static AddWeaponsFragment newInstance() {
         return new AddWeaponsFragment();
     }

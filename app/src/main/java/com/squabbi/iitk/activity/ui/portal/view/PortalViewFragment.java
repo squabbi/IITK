@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,12 +40,22 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.GeoPoint;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk._interface.OnFragmentViewInteractionListener;
 import com.squabbi.iitk.databinding.FragmentPortalViewBinding;
+
+/**
+ * Simple fragment which displays the details of the current portal.
+ * Use the factory method {@link PortalViewFragment#newInstance()} to create a new
+ * instance of this fragment.
+ *
+ * The parent Activity must implement an {@link OnFragmentViewInteractionListener}.
+ */
 
 public class PortalViewFragment extends Fragment {
 
     private PortalViewViewModel mViewModel;
     private OnEditSelected mOnEditSelected;
+    private OnFragmentViewInteractionListener mListener;
 
     @BindView(R.id.portalview_mapview)
     MapView mMapView;
@@ -161,26 +172,9 @@ public class PortalViewFragment extends Fragment {
     }
 
     @OnClick(R.id.portalview_fab)
-    void fabOnClick() {
+    void fabOnClick(View view) {
         // Open intel map with coordinates of Portal
-        openIntelMap();
-    }
-
-    private void openIntelMap() {
-
-        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        builder.setToolbarColor(Color.BLACK);
-        CustomTabsIntent customTabsIntent = builder.build();
-
-        GeoPoint geoPoint = mViewModel.getPortalGeoPoint().getValue();
-
-        if (geoPoint != null) {
-            // Format the string
-            String locationString = "https://www.ingress.com/intel?ll=" + geoPoint.getLatitude() + "," + geoPoint.getLongitude() + "&z=15";
-            customTabsIntent.launchUrl(getContext(), Uri.parse(locationString));
-        } else {
-            customTabsIntent.launchUrl(getContext(), Uri.parse("https://www.ingress.com/intel"));
-        }
+        mListener.onViewPressed(view);
     }
 
     private void performTransition()
@@ -199,6 +193,17 @@ public class PortalViewFragment extends Fragment {
         fragmentTransaction.addSharedElement(mActionButton, getString(R.string.trans_fab));
         fragmentTransaction.replace(R.id.container, editFragment);
         fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentViewInteractionListener) {
+            mListener = (OnFragmentViewInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentViewInteractionListener");
+        }
     }
 
     @Override

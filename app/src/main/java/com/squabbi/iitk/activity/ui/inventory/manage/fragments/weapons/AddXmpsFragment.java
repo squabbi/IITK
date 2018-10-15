@@ -25,18 +25,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Fragment for adding Xmp Bursters to the inventory checkout. This is a part of the
+ * InventoryManage tab view/activity.
+ * {@link OnInventoryItemClickListener} interface
+ * to handle interaction events.
+ * Use the {@link AddXmpsFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+
 public class AddXmpsFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;
     private ManageInventoryViewModel mViewModel;
     private RecyclerView.Adapter mAdapter;
 
+    // View binds
     @BindView(R.id.ingress_item_recyclerview)
     RecyclerView mRecyclerView;
 
     // Required empty constructor
     public AddXmpsFragment() {}
 
+    /** Static helper function that returns a new instance of the fragment. */
     public static AddXmpsFragment newInstance() {
         return new AddXmpsFragment();
     }

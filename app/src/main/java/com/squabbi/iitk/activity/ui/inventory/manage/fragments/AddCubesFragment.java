@@ -25,6 +25,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * A fragment that shows a list of Power Cubes from level 1 to level 8, for the user to select
+ * and add it to the inventory class. Used with the TabView in the
+ * {@link com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryActivity}
+ * Activities that contain this fragment must implement the
+ * {@link OnInventoryItemClickListener} interface
+ * to handle interaction events.
+ * Use the {@link AddCubesFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+
 public class AddCubesFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;
@@ -37,6 +48,7 @@ public class AddCubesFragment extends Fragment {
     // Required empty constructor
     public AddCubesFragment() {}
 
+    /** Public static function that returns a new instance of this fragment */
     public static AddCubesFragment newInstance() {
         return new AddCubesFragment();
     }
@@ -85,6 +97,7 @@ public class AddCubesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_recycler, container, false);
         ButterKnife.bind(this, view);
 
+        // Initalise the RecyclerView
         initRecycler();
 
         return view;

@@ -11,6 +11,10 @@ import java.util.Date;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+/**
+ * POJO representing an Ingress Portal.
+ */
+
 @IgnoreExtraProperties
 public class Portal {
 

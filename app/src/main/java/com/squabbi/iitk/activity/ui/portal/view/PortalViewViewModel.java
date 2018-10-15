@@ -59,6 +59,10 @@ public class PortalViewViewModel extends AndroidViewModel {
         mRegistration = mRepository.getDocumentRefObject(mDocumentPath).addSnapshotListener(mListener);
     }
 
+    /**
+     * DocumentListener overriden inner class is for handling changes to the current DocumentSnapshot
+     * so the new details can be set in the LiveData.
+     */
     private class DocumentListener implements EventListener<DocumentSnapshot> {
         @Override
         public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
@@ -122,6 +126,10 @@ public class PortalViewViewModel extends AndroidViewModel {
         return mPortalColourDrawableLiveData;
     }
 
+    /**
+     * Deletes the Portal document at the provided path.
+     * @param documentPath the document path which will be deleted.
+     */
     public void deletePortal(String documentPath) {
 
         // Remove listener before removing the document

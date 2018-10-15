@@ -33,6 +33,11 @@ import com.kunzisoft.androidclearchroma.listener.OnColorSelectedListener;
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.databinding.ActivityNewPortalBinding;
 
+/**
+ * New Portal activity provides the user with the controls to add a new portal. This involves
+ * a colour picker and location picker. This activity implements an OnColorSelectedListener to
+ * retrieve the selected colour data from the Chroma Color Picker activity.
+ */
 public class NewPortalActivity extends AppCompatActivity implements OnColorSelectedListener {
 
     private NewPortalViewModel mViewModel;
@@ -51,6 +56,7 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
     @BindView(R.id.portal_name_et)
     EditText mPortalNameEt;
 
+    /** ButterKnife bind to dismiss any errors that are still enabled */
     @OnTextChanged(value = R.id.portal_name_et, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void nameTextEntered(Editable editable) {
         mNameInputLayout.setErrorEnabled(false);
@@ -65,6 +71,7 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
     @BindView(R.id.portal_friendly_location_et)
     EditText mPortalFriendlyLocationEt;
 
+    /** ButterKnife bind to dismiss any errors that are still enabled */
     @OnTextChanged(value = R.id.portal_name_et, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void friendlyLocationTextEntered() {
         mFriendlyLocationInputLayout.setErrorEnabled(false);
@@ -126,6 +133,10 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
 
     }
 
+    /**
+     * Launches the Google Maps SDK Places Place Picker activity.
+     * @param view the view which initiated the onClick call.
+     */
     public void launchPlacePicker(View view) {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
@@ -224,7 +235,7 @@ public class NewPortalActivity extends AppCompatActivity implements OnColorSelec
 
     @Override
     public void onPositiveButtonClick(int color) {
-        // Set the LiveData
+        // Set the LiveData.
         mViewModel.setColourLiveData(color);
     }
 

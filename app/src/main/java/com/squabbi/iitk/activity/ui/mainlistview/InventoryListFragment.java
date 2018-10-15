@@ -1,6 +1,7 @@
 package com.squabbi.iitk.activity.ui.mainlistview;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -22,42 +23,35 @@ import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment sub-class for displaying the list of inventories associated with the current user
+ * that is logged in.
+ * The parent activity must implement {@link OnFirestoreItemClickListener} to handle interactions with
+ * Firestore based items from within RecyclerViews.
  */
-public class InventoryListFragment extends Fragment implements OnFirestoreItemClickListener {
 
-    public static final String INVENTORY_PATH_KEY = "inventory_path";
-    public static final String INVENTORY_ID_KEY = "inventory_id";
+public class InventoryListFragment extends Fragment {
 
     private MainActivityViewModel mViewModel;
     private InventoryListAdapter mAdapter;
+    private OnFirestoreItemClickListener mListener;
 
     @BindView(R.id.inventory_recycler)
     RecyclerView mInventoryRecycler;
 
-    public InventoryListFragment() {
-        // Required empty public constructor
-    }
+    /** Empty constructor for Fragment */
+    public InventoryListFragment() {}
 
     private void initRecycler() {
 
         mAdapter = new InventoryListAdapter(mViewModel.getBaseInventoryFirestoreRecyclerBuilder()
         .setLifecycleOwner(this).build());
 
-        mAdapter.setOnInventoryItemClickListener(this);
+        mAdapter.setOnItemClickListener(mListener);
 
         mInventoryRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mInventoryRecycler.setHasFixedSize(true);
 
         mInventoryRecycler.setAdapter(mAdapter);
-    }
-
-    private void openInventoryDetail(DocumentSnapshot documentSnapshot) {
-
-        Intent intent = new Intent(getContext(), InventoryViewActivity.class);
-        intent.putExtra(INVENTORY_PATH_KEY, documentSnapshot.getReference().getPath());
-        intent.putExtra(INVENTORY_ID_KEY, documentSnapshot.getReference().getId());
-        startActivity(intent);
     }
 
     @Override
@@ -78,8 +72,14 @@ public class InventoryListFragment extends Fragment implements OnFirestoreItemCl
     }
 
     @Override
-    public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, int position) {
-        // Opens inventory detail activity
-        openInventoryDetail(documentSnapshot);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof OnFirestoreItemClickListener) {
+            mListener = (OnFirestoreItemClickListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFirestoreItemClickListeners");
+        }
     }
 }

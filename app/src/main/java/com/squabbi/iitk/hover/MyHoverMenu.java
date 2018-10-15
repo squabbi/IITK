@@ -2,10 +2,8 @@ package com.squabbi.iitk.hover;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.squabbi.iitk.R;
 import com.squabbi.iitk.hover.ui.HoverTabView;
@@ -21,6 +19,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import io.mattcarroll.hover.Content;
 import io.mattcarroll.hover.HoverMenu;
+
+/**
+ *
+ */
 
 public class MyHoverMenu extends HoverMenu {
 

@@ -22,14 +22,19 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.squabbi.iitk.R;
+import com.squabbi.iitk.util.FirebaseRepository;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Welcome activity is the first activity which is launched. This activity connects to
+ * Firebase for Authentication.
+ */
 public class WelcomeActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
-    private FirebaseAuth mAuth;
+    private FirebaseRepository mRepository = FirebaseRepository.getInstance();
     private static final String TAG = "WelcomeActivity";
     private static final String AGREEMENT_KEY = "agreement";
     private static final Integer RC_SIGN_IN = 1;
@@ -41,11 +46,8 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
 
-        // Get Firebase Auth instance
-        mAuth = FirebaseAuth.getInstance();
-
         // Check if the user is logged in and has agreed
-        if (FastSave.getInstance().getBoolean(AGREEMENT_KEY) && mAuth.getCurrentUser() != null) {
+        if (FastSave.getInstance().getBoolean(AGREEMENT_KEY) && mRepository.getAuth().getCurrentUser() != null) {
             // Launch MainActivity
             startMainActivityAndFinish();
         }
@@ -72,9 +74,9 @@ public class WelcomeActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             }
-            catch (ApiException e) {
+            catch (ApiException apiEx) {
                 // TODO: Catch int exceptions, i.e. 7 is no internet I think
-                e.printStackTrace();
+                apiEx.printStackTrace();
             }
         }
     }
@@ -87,7 +89,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 Snackbar.LENGTH_LONG).show();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mRepository.getAuth().signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -105,6 +107,9 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * ButterKnife OnClick bind for the Google Sign In button.
+     */
     @OnClick(R.id.welcome_sign_in_btn)
     public void signIn() {
         // Create and start Google sign-in intent

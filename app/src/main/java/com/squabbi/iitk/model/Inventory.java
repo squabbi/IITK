@@ -3,9 +3,12 @@ package com.squabbi.iitk.model;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
-import java.util.List;
 
 import androidx.annotation.NonNull;
+
+/**
+ * POJO of Inventory class representing an Ingress Inventory.
+ */
 
 public class Inventory {
 
@@ -18,6 +21,7 @@ public class Inventory {
     // Empty constructor required by Firebase
     Inventory() {}
 
+    /** Constructor for creating capsules to be added to Firestore */
     public Inventory(@NonNull String name, @NonNull String description,
                      Integer colour) {
 

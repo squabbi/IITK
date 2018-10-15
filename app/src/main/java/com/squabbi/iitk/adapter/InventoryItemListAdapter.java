@@ -24,6 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Inventory Item List adapter which extends FirebaseUI's FirestoreRecyclerAdapter. This converts
+ * and abstracts the necessary functionality for showing Firestore Queries as objects into a UI element.
+ */
+
 public class InventoryItemListAdapter extends FirestoreRecyclerAdapter<FirestoreItem,
         InventoryItemListAdapter.ItemHolder> {
 
@@ -53,7 +58,6 @@ public class InventoryItemListAdapter extends FirestoreRecyclerAdapter<Firestore
         // Enable access to resources
         Resources resources = itemHolder.mDescriptionTv.getResources();
 
-        // TODO: Set appropriate resources to be displayed, convert generic ITEM, into more specific objects
         InventoryItem convertedItem = InventoryItemConverter.determineInventoryItem(item);
         // NAME
         itemHolder.mNameTv.setText(resources.getString(convertedItem.getNameResource(), convertedItem.getLevel()));
@@ -65,7 +69,6 @@ public class InventoryItemListAdapter extends FirestoreRecyclerAdapter<Firestore
         }
         // PICTURE
         itemHolder.mImageView.setImageResource(convertedItem.getImageResource());
-
     }
 
     @NonNull
@@ -77,6 +80,7 @@ public class InventoryItemListAdapter extends FirestoreRecyclerAdapter<Firestore
         return new ItemHolder(itemView);
     }
 
+    /** Inner-class to bind views to the ItemHolder view */
     class ItemHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_inventoryitem_imageview)
@@ -88,6 +92,10 @@ public class InventoryItemListAdapter extends FirestoreRecyclerAdapter<Firestore
         @BindView(R.id.item_inventoryitem_description_textview)
         TextView mDescriptionTv;
 
+        /**
+         * Constructor for ItemHolder ViewHolder to bind the view using ButterKnife.
+         * @param itemView View for each item to be binded to.
+         */
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

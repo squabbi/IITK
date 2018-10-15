@@ -14,6 +14,14 @@ import android.view.ViewGroup;
 
 import com.squabbi.iitk.R;
 
+/**
+ * Fragment shows a list of all items in the Inventory.
+ * Activities that contain this fragment must implement the
+ * {@link OnInventoryItemClickListener} & {@link OnFragmentViewInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link ItemAllFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class CapsuleViewFragment extends Fragment {
 
     private InventoryViewViewModel mViewModel;

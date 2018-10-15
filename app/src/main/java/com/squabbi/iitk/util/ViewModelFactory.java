@@ -10,10 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+/**
+ * Factory class for initalising ViewModels which require an alternate constructor.
+ */
+
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     private Object[] mParams;
 
+    /**
+     * Constructor for the factory which creates ViewModels with special constructors.
+     * @param params Parameters for the ViewModel.
+     */
     public ViewModelFactory(Object... params) {
 
         super();

@@ -2,6 +2,10 @@ package com.squabbi.iitk.model;
 
 import com.google.firebase.firestore.DocumentReference;
 
+/**
+ * A basic POJO representing an Ingress Portak Key. It contains brief details of the
+ * portal that the Key is reference to.
+ */
 public class PortalKey extends Item {
 
     private String mPortalName;

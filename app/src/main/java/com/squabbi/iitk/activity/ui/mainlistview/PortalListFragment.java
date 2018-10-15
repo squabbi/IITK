@@ -1,6 +1,6 @@
 package com.squabbi.iitk.activity.ui.mainlistview;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,35 +14,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.squabbi.iitk.R;
-import com.squabbi.iitk.activity.ui.portal.view.PortalViewActivity;
 import com.squabbi.iitk._interface.OnFirestoreItemClickListener;
 import com.squabbi.iitk.adapter.PortalListAdapter;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A fragment sub-class for dispaying a list of user's portals in a RecyclerView.
+ * This fragment's parent must implement an {@link OnFirestoreItemClickListener}.
  */
-public class PortalListFragment extends Fragment implements OnFirestoreItemClickListener {
-
-    public static final String PORTAL_REFERENCE_KEY = "portal_ref";
+public class PortalListFragment extends Fragment {
 
     private MainActivityViewModel mViewModel;
     private PortalListAdapter mAdapter;
+    private OnFirestoreItemClickListener mListner;
 
     @BindView(R.id.portal_recycler)
     RecyclerView mPortalRecycler;
 
-    public PortalListFragment() {
-        // Required empty public constructor
-    }
+    /**
+     * Empty constructor for PortalListFragment
+     */
+    public PortalListFragment() {}
 
     private void initRecycler() {
 
         mAdapter = new PortalListAdapter(mViewModel.getBasePortalFirestoreRecyclerBuilder()
-            .setLifecycleOwner(this).build());
+                .setLifecycleOwner(this).build());
 
-        mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnItemClickListener(mListner);
 
         mPortalRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mPortalRecycler.setHasFixedSize(true);
@@ -50,11 +49,15 @@ public class PortalListFragment extends Fragment implements OnFirestoreItemClick
         mPortalRecycler.setAdapter(mAdapter);
     }
 
-    private void openPortalDetail(DocumentSnapshot documentSnapshot) {
-
-        Intent intent = new Intent(getContext(), PortalViewActivity.class);
-        intent.putExtra(PORTAL_REFERENCE_KEY, documentSnapshot.getReference().getPath());
-        startActivity(intent);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFirestoreItemClickListener) {
+            mListner = (OnFirestoreItemClickListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFirestoreItemClickListeners");
+        }
     }
 
     @Override
@@ -70,11 +73,5 @@ public class PortalListFragment extends Fragment implements OnFirestoreItemClick
         initRecycler();
 
         return view;
-    }
-
-    @Override
-    public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, int position) {
-        // Show new activity of Portal Details
-        openPortalDetail(documentSnapshot);
     }
 }

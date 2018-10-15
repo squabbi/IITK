@@ -2,6 +2,11 @@ package com.squabbi.iitk.model;
 
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+/**
+ * Super-class which represents all items within Ingress. Contains common fields and their
+ * respective getter and setter methods.
+ */
+
 @IgnoreExtraProperties
 public class Item {
 
@@ -12,6 +17,12 @@ public class Item {
     // Empty constructor for Firestore
     Item() {}
 
+    /**
+     * Item POJO representing an Ingress item.
+     * @param itemType Type of the item.
+     * @param rarity Rarity of the item.
+     * @param level Item level. O for non-leveled items.
+     */
     Item (ItemType itemType,  Rarity rarity, Integer level) {
 
         this.mItemType = itemType;
@@ -19,6 +30,7 @@ public class Item {
         this.mLevel = level;
     }
 
+    /** Basic enums for different Item types, and overriden toString methods. */
     public enum ItemType {
         WEAPON {
             @Override
@@ -63,6 +75,7 @@ public class Item {
         }
     }
 
+    /** More specific enums of all Items in Ingress */
     public enum DetailItemType {
 
         RESONATOR,
@@ -95,6 +108,7 @@ public class Item {
         BEACON
     }
 
+    /** Enum of all Rarities in Ingress with overriden toString methods */
     public enum Rarity {
         VERY_COMMON {
             @Override

@@ -16,6 +16,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+/**
+ * ViewModel for Viewing inventory contents, holds inventoryID and provides access to the Query
+ * required to populate the recycler view based of the InventoryID.
+ */
+
 public class InventoryViewViewModel extends ViewModel {
 
     private static final String TAG = "InventoryViewViewModel";
@@ -29,8 +34,15 @@ public class InventoryViewViewModel extends ViewModel {
 
     private FirestoreRecyclerOptions.Builder<FirestoreItem> mBaseInventoryItemFirestoreRecyclerBuilder;
 
+    /**
+     * Constructor for InventoryViewViewModel, requires to be constructed via a ViewModel Factory.
+     * Takes in an Firestore document path and ID acting as the inventory which will be viewed.
+     * @param inventoryPath Path to the Inventory document.
+     * @param inventoryId ID of the Inventory document.
+     */
     public InventoryViewViewModel(String inventoryPath, String inventoryId) {
 
+        // Assign inventory details
         this.mInventoryPath = inventoryPath;
         this.mInventoryId = inventoryId;
 
@@ -42,6 +54,10 @@ public class InventoryViewViewModel extends ViewModel {
                 .addSnapshotListener(mInventoryListener);
     }
 
+    /**
+     * Overridden DocumentListener class to set the title of the Toolbar as the currently selected
+     * Inventory name.
+     */
     private class DocumentListener implements EventListener<DocumentSnapshot> {
 
         @Override
@@ -63,12 +79,13 @@ public class InventoryViewViewModel extends ViewModel {
         }
     }
 
+    /**
+     * Returns pre-filled FirestoreRecyclerOptions with the Query preset to be built by the
+     * Recycler initaliser.
+     * @return preset FirestoreOptionsBuilder with Inventory Query.
+     */
     public FirestoreRecyclerOptions.Builder<FirestoreItem> getBaseItemFirestoreRecyclerBuilder() {
         return mBaseInventoryItemFirestoreRecyclerBuilder;
-    }
-
-    public void addItem(Item item) {
-        mRepository.addItemToInventory(mInventoryId, item);
     }
 
     public LiveData<String> getInventoryName() {

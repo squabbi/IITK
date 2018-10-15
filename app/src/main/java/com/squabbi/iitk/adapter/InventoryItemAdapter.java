@@ -17,22 +17,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Adapter class for Inventory Items, this class uses a pre-defined set of {@link InventoryItem}
+ * to be populated by the ViewHolder.
+ */
 public class InventoryItemAdapter extends RecyclerView.Adapter<InventoryItemAdapter.ViewHolder> {
 
     private List<InventoryItem> mInventoryItemList;
     private OnModItemClickListener mListener;
 
+    /** Public interface for listening to item's OnClicks */
     public interface OnModItemClickListener {
-
+        /**
+         * Method for getting the selected {@link InventoryItem} and it's position in the adapter.
+         * @param item Selected {@link InventoryItem} item.
+         * @param position Selected item's position in the array/adapter.
+         */
         void onModClicked(InventoryItem item, int position);
     }
 
+    /**
+     * Public constructor for the inventory list. Sets the listener for item clicks in addition to the
+     * pre-cofigured list of InventoryItems to display.
+     * @param inventoryItemList List of {@link InventoryItem} items to display in the adapter.
+     * @param listener The parent's OnModItemClickListener to listen and react to item OnClicks.
+     */
     public InventoryItemAdapter(List<InventoryItem> inventoryItemList, OnModItemClickListener listener) {
 
         this.mInventoryItemList = inventoryItemList;
         this.mListener = listener;
     }
 
+    /** Inner-class for configuring the ViewHolder to be used with the RecyclerView. */
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_inventoryitem_name_textview)
@@ -44,6 +60,11 @@ public class InventoryItemAdapter extends RecyclerView.Adapter<InventoryItemAdap
         @BindView(R.id.item_inventoryitem_imageview)
         ImageView mImageView;
 
+        /**
+         * Constructor for ViewHolder which binds views to fields and sets the
+         * onClick listener for the view.
+         * @param itemView Inflated item view.
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

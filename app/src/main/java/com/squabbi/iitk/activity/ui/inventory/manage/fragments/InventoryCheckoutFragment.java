@@ -33,12 +33,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * A fragment sub-class which shows the contents of the current inventory cart and allows the user
+ * to remove items from the cart.
+ * This is a part of the {@link com.squabbi.iitk.activity.ui.inventory.manage.ManageInventoryActivity}
+ * Use the {@link InventoryCheckoutFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+
 public class InventoryCheckoutFragment extends DialogFragment {
 
     private OnInventoryItemClickListener mListener;
     private ManageInventoryViewModel mViewModel;
     private InventoryCheckoutAdapter mAdapter;
 
+    // View binds
     @BindView(R.id.checkout_recycler)
     RecyclerView mRecyclerView;
 
@@ -54,6 +63,7 @@ public class InventoryCheckoutFragment extends DialogFragment {
     // Required empty constructor
     public InventoryCheckoutFragment() {}
 
+    /** Public factory method that creates a new instance of the fragment */
     public static InventoryCheckoutFragment newInstance() {
         return new InventoryCheckoutFragment();
     }
