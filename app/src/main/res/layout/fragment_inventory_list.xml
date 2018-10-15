@@ -22,7 +22,6 @@
             android:id="@+id/inventory_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             tools:listitem="@layout/item_inventory"/>
 
         <TextView
@@ -32,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:visibility="gone"
             android:text="@string/empty_inventories" />
     </LinearLayout>
 </layout>
