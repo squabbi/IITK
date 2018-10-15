@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center"
         android:id="@+id/inventory_view_root_layout">
 
         <!-- Place filter fragment here -->
@@ -21,6 +22,16 @@
             android:id="@+id/inventory_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             tools:listitem="@layout/item_inventory"/>
+
+        <TextView
+            android:id="@+id/empty_inventory_list_textview"
+            android:drawableTint="?attr/colorButtonNormal"
+            android:drawableTop="@drawable/ic_outline_work_off_24px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/empty_inventories" />
     </LinearLayout>
 </layout>
