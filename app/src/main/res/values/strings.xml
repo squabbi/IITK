@@ -77,8 +77,11 @@
     <string name="portal_fracker">Portal Fracker</string>
     <string name="beacon">Beacon</string>
 
+    <string name="all">All</string>
     <string name="store">Store</string>
     <string name="capsules_keys">Capsules &amp; Key</string>
+    <string name="capsules">Capsules</string>
+    <string name="portal_keys">Portal Keys</string>
     <string name="mods">Mods</string>
     <string name="power_cubes">Power Cubes</string>
     <string name="resonators">Resonators</string>
