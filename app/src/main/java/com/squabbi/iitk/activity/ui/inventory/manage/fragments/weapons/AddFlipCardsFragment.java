@@ -25,6 +25,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Fragment which intialises the list of FlipCard items for the user to select and add to the
+ * inventory cart. This is used within the ManageInventory tab view.
+ */
 public class AddFlipCardsFragment extends Fragment {
 
     private OnInventoryItemClickListener mListener;
@@ -37,6 +41,7 @@ public class AddFlipCardsFragment extends Fragment {
     // Required empty constructor
     public AddFlipCardsFragment() {}
 
+    // NewInstance static method for initalising the fragment.
     public static AddFlipCardsFragment newInstance() {
         return new AddFlipCardsFragment();
     }
@@ -64,7 +69,7 @@ public class AddFlipCardsFragment extends Fragment {
 
         List<InventoryItem> inventoryItems = new LinkedList<>();
 
-        // Power Cube items
+        // FlipCard items
         inventoryItems.add(new InventoryItem(Item.DetailItemType.ADA, R.string.flip_ada, Item.Rarity.VERY_RARE, 0, R.drawable.flip_ada));
         inventoryItems.add(new InventoryItem(Item.DetailItemType.JARVIS, R.string.flip_jarvis, Item.Rarity.VERY_RARE, 0, R.drawable.flip_jarvis));
 
