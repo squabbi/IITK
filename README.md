@@ -1,2 +1,2 @@
 # Ingress Integrated Toolkit (IITK)
-*Timers, inventory management and integrated intel*
+*Timers, inventory management and floating intel*
