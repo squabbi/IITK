@@ -80,14 +80,6 @@
                                     android:hint="@string/hint_name"
                                     android:inputType="textPersonName|textCapSentences" />
                             </com.google.android.material.textfield.TextInputLayout>
-
-                            <ImageButton
-                                android:contentDescription="@string/contentDesc_ocrButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_outline_camera_enhance_24px"
-                                android:onClick="launchOcrActivity"
-                                tools:ignore="OnClick" />
                         </LinearLayout>
 
                         <!-- Portal location using Maps SDK -->

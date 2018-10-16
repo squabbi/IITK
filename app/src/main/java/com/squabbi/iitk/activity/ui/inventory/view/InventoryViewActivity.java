@@ -52,12 +52,6 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
 
     private InventoryViewViewModel mViewModel;
 
-    @BindView(R.id.inventory_items_drawerlayout)
-    DrawerLayout mDrawerLayout;
-
-    @BindView(R.id.inventory_items_navigationview)
-    NavigationView mNavigationView;
-
     @BindView(R.id.inventory_items_toolbar)
     Toolbar mToolbar;
 
@@ -76,8 +70,6 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
 
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         // Instantiate fragments
         mItemAllFragment = ItemAllFragment.newInstance();
@@ -85,51 +77,9 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
         mItemViewFragment = ItemViewFragment.newInstance();
         mCapsuleViewFragment = CapsuleViewFragment.newInstance();
 
-        mNavigationView.setNavigationItemSelectedListener(this);
-
-        if (savedInstanceState == null) {
-            // TODO: allow the user to set default page
-            MenuItem item = mNavigationView.getMenu().getItem(0);
-            onNavigationItemSelected(item);
-        }
+        updateFragment(mItemAllFragment);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation drawer selections here
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.nav_inv_all:
-                updateFragment(mItemAllFragment);
-                break;
-        }
-
-        setTitle(item.getTitle());
-        item.setChecked(true);
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                toggleNavigationDrawer();
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void toggleNavigationDrawer() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            mDrawerLayout.openDrawer(GravityCompat.START);
-        }
-    }
 
     private void updateFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -141,17 +91,6 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
     public boolean onCreateOptionsMenu(Menu menu) {
         //getMenuInflater().inflate(R.menu.menu_main_activity, menu);
         return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        // Check if navigation drawer is opened
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            // Close it
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
     }
 
     @OnClick(R.id.inventory_items_fab)
@@ -174,7 +113,11 @@ public class InventoryViewActivity extends AppCompatActivity implements OnFragme
 
     @Override
     public void onFirestoreItemClick(DocumentSnapshot documentSnapshot, @Nullable Integer position) {
-        // Handle opening a new fragment for selected item
-        Toast.makeText(this, documentSnapshot.getId(), Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        return false;
     }
 }

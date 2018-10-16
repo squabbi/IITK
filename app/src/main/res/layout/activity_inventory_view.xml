@@ -10,11 +10,6 @@
             type="com.squabbi.iitk.activity.ui.inventory.view.InventoryViewViewModel"/>
     </data>
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/inventory_items_drawerlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:theme="@style/AppTheme.NoActionBar">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,12 +44,4 @@
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_outline_add_24px" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/inventory_items_navigationview"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:menu="@menu/menu_inventory_drawer"/>
-    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

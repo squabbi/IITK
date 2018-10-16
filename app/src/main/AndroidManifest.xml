@@ -34,7 +34,6 @@
 
         <service android:name=".service.MyHoverMenuService" />
 
-        <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

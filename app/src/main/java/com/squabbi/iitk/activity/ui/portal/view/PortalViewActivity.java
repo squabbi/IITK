@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.TransitionInflater;
 import android.transition.TransitionSet;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.firestore.GeoPoint;
@@ -100,11 +101,6 @@ public class PortalViewActivity extends AppCompatActivity implements PortalViewF
         fragmentTransaction.commitAllowingStateLoss();
     }
 
-    // TODO: finalise portal edit NOW
-    public void launchPlacePicker(View view) {
-
-    }
-
     @Override
     public void onViewPressed(View view) {
         int id = view.getId();
@@ -113,6 +109,11 @@ public class PortalViewActivity extends AppCompatActivity implements PortalViewF
                 // Open intel view with the Portal's details
                 openIntelMap();
         }
+    }
+
+    @Override
+    public void onMenuItemPressed(MenuItem menuItem) {
+
     }
 
     private void openIntelMap() {

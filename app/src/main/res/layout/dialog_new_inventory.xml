@@ -29,28 +29,4 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_description"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        android:text="@string/select_colour"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <View
-            android:id="@+id/dialog_newinv_colourbar_view"
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_weight="2"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_outline_color_lens_24px"
-            android:layout_weight="1"/>
-    </LinearLayout>
 </LinearLayout>

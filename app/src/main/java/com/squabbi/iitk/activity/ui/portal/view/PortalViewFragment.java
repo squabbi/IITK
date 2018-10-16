@@ -148,15 +148,6 @@ public class PortalViewFragment extends Fragment {
                 getActivity().finish();
                 break;
 
-            case R.id.menu_portal_edit:
-                // TODO: Open edit fragment
-                mOnEditSelected.onEditSelected();
-                break;
-
-            case R.id.menu_portal_share:
-                // TODO: Implement share
-                break;
-
             case R.id.menu_portal_delete:
                 String name = mViewModel.getPortalName().getValue();
                 mViewModel.deletePortal(mViewModel.getPortalDocumentPath());

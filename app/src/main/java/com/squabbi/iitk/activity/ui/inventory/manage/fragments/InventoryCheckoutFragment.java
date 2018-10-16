@@ -170,6 +170,8 @@ public class InventoryCheckoutFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK button
                 checkoutCart();
+                // Dismiss dialog
+                dismiss();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
